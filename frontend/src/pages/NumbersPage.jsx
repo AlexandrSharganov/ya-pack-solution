@@ -1,5 +1,7 @@
+import Header from '../components/Header/Header';
+
 function NumbersPage() {
-  return <h1>Hello 2!</h1>;
+  return <Header />;
 }
 
 export default NumbersPage;
