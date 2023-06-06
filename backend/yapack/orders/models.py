@@ -1,9 +1,12 @@
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 
+from users.models import Packer
+
 
 class Cargotype(models.Model):
     '''Модель карготипа.'''
+    
     cargotype_id = models.IntegerField(
         verbose_name='id карготипа',
         unique=True,
@@ -31,6 +34,7 @@ class Cargotype(models.Model):
 
 class Sku(models.Model):
     '''Модель товарной позиции.'''
+    
     sku_id = models.CharField(
         verbose_name='id товара',
         max_length=200,
@@ -95,9 +99,10 @@ class Sku(models.Model):
         return self.sku_id
 
 
-class order_received(models.Model):
+class Order(models.Model):
     '''Модель заказа полученного из системы.'''
-    orderkey = models.CharField(
+    
+    order_key = models.CharField(
         verbose_name='id заказа',
         max_length=200,
         unique=True,
@@ -118,3 +123,80 @@ class order_received(models.Model):
         blank=False,
         help_text='Количество',
     )
+    packman_id = models.ForeignKey(
+        Packer,
+        on_delete=models.SET_NULL,
+        verbose_name='Упаковщик',
+        null=True,
+        blank=True,
+    )
+    recommended_carton  = models.ManyToManyField(
+        'Carton',
+        verbose_name='Рекомендуемая упаковка',
+        related_name='recommended_carton',
+    )
+    selected_carton = models.ManyToManyField(
+        'Carton',
+        verbose_name='Использованная упаковка',
+        related_name='selected_carton',
+    )
+    suggested_carton_match = models.BooleanField(
+        verbose_name='Совпадение используемой и предложенной упаковки',
+        default=False,
+    )
+    
+    
+    def __str__(self):
+        return self.order_key
+    
+    
+class Carton(models.Model):
+    '''Модель упаковки.'''
+    
+    name = models.CharField(
+        verbose_name='Название типа упаковки.',
+        max_length=7,
+    )
+    length = models.FloatField(
+        validators=[
+            MinValueValidator(0.0, message='Размер не может быть меньше нуля'),
+            MaxValueValidator(10000.0,
+                              message='Размер не может быть больше 10000'),
+        ],
+        verbose_name='Длина',
+        blank=False,
+        help_text='Длина товара',
+    )
+    width = models.FloatField(
+        validators=[
+            MinValueValidator(0.0, message='Размер не может быть меньше нуля'),
+            MaxValueValidator(10000.0,
+                              message='Размер не может быть больше 10000'),
+        ],
+        verbose_name='Ширина',
+        blank=False,
+        help_text='Ширина товара',
+    )
+    height = models.FloatField(
+        validators=[
+            MinValueValidator(0.0, message='Размер не может быть меньше нуля'),
+            MaxValueValidator(10000.0,
+                              message='Размер не может быть больше 10000'),
+        ],
+        verbose_name='Высота',
+        blank=False,
+        help_text='Высота товара',
+    )
+    price = models.FloatField(
+        validators=[
+            MinValueValidator(0.0, message='Цена не может быть меньше нуля'),
+            MaxValueValidator(10000.0,
+                              message='Цена не может быть больше 10000'),
+        ],
+        verbose_name='Цена',
+        blank=False,
+        help_text='Цена товара',
+    )
+    
+    def __str__(self):
+        return self.name
