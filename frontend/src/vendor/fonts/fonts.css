@@ -1,0 +1,98 @@
+@font-face {
+  font-family: 'YS Text';
+  src: url('YandexSansText-Thin.woff2') format('woff2'),
+    url('YandexSansText-Thin.woff') format('woff');
+  font-display: swap;
+  font-weight: 100;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'YS Disp';
+  src: url('YandexSansDisplay-Regular.woff2') format('woff2'),
+    url('YandexSansDisplay-Regular.woff') format('woff');
+  font-display: swap;
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'YS Text';
+  src: url('YandexSansText-RegularItalic.woff2') format('woff2'),
+    url('YandexSansText-RegularItalic.woff') format('woff');
+  font-display: swap;
+  font-weight: normal;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'YS Disp';
+  src: url('YandexSansDisplay-RegularItalic.woff2') format('woff2'),
+    url('YandexSansDisplay-RegularItalic.woff') format('woff');
+  font-display: swap;
+  font-weight: normal;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'YS Disp';
+  src: url('YandexSansDisplay-Light.woff2') format('woff2'),
+    url('YandexSansDisplay-Light.woff') format('woff');
+  font-display: swap;
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'YS Text';
+  src: url('YandexSansText-Regular.woff2') format('woff2'),
+    url('YandexSansText-Regular.woff') format('woff');
+  font-display: swap;
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'YS Text';
+  src: url('YandexSansText-Light.woff2') format('woff2'),
+    url('YandexSansText-Light.woff') format('woff');
+  font-display: swap;
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'YS Disp';
+  src: local('YS Disp Bold'), local('YandexSansDisplay-Bold'),
+    url('YandexSansDisplay-Bold.woff2') format('woff2'),
+    url('YandexSansDisplay-Bold.woff') format('woff');
+  font-display: swap;
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'YS Disp';
+  src: url('YandexSansDisplay-Thin.woff2') format('woff2'),
+    url('YandexSansDisplay-Thin.woff') format('woff');
+  font-display: swap;
+  font-weight: 100;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'YS Text';
+  src: url('YandexSansText-Bold.woff2') format('woff2'),
+    url('YandexSansText-Bold.woff') format('woff');
+  font-display: swap;
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'YS Text';
+  src: url('YandexSansText-Medium.woff2') format('woff2'),
+    url('YandexSansText-Medium.woff') format('woff');
+  font-display: swap;
+  font-style: normal;
+}

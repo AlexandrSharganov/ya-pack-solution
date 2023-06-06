@@ -1,7 +1,12 @@
-import Header from '../components/Header/Header';
+import Keyboard from '../components/Keyboard/Keyboard';
 
 function NumbersPage() {
-  return <Header />;
+  return (
+    <>
+      <h1>Hello 2!</h1>
+      <Keyboard />
+    </>
+  );
 }
 
 export default NumbersPage;
