@@ -28,10 +28,10 @@ function Keyboard() {
       <div className={styles.keyboardRow}>
         <button
           type="button"
-          onClick={() => handleButtonClick('9')}
+          onClick={() => handleButtonClick('7')}
           className={styles.button}
         >
-          9
+          7
         </button>
         <button
           type="button"
@@ -42,19 +42,17 @@ function Keyboard() {
         </button>
         <button
           type="button"
-          onClick={() => handleButtonClick('7')}
+          onClick={() => handleButtonClick('9')}
           className={styles.button}
         >
-          7
+          9
         </button>
-      </div>
-      <div className={styles.keyboardRow}>
         <button
           type="button"
-          onClick={() => handleButtonClick('6')}
+          onClick={() => handleButtonClick('4')}
           className={styles.button}
         >
-          6
+          4
         </button>
         <button
           type="button"
@@ -65,19 +63,17 @@ function Keyboard() {
         </button>
         <button
           type="button"
-          onClick={() => handleButtonClick('4')}
+          onClick={() => handleButtonClick('6')}
           className={styles.button}
         >
-          4
+          6
         </button>
-      </div>
-      <div className={styles.keyboardRow}>
         <button
           type="button"
-          onClick={() => handleButtonClick('3')}
+          onClick={() => handleButtonClick('1')}
           className={styles.button}
         >
-          3
+          1
         </button>
         <button
           type="button"
@@ -88,13 +84,11 @@ function Keyboard() {
         </button>
         <button
           type="button"
-          onClick={() => handleButtonClick('1')}
+          onClick={() => handleButtonClick('3')}
           className={styles.button}
         >
-          1
+          3
         </button>
-      </div>
-      <div className={styles.keyboardRow}>
         <button
           type="button"
           onClick={() => handleClearInput()}
