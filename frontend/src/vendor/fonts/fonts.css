@@ -63,8 +63,7 @@
 
 @font-face {
   font-family: 'YS Disp';
-  src: local('YS Disp Bold'), local('YandexSansDisplay-Bold'),
-    url('YandexSansDisplay-Bold.woff2') format('woff2'),
+  src: url('YandexSansDisplay-Bold.woff2') format('woff2'),
     url('YandexSansDisplay-Bold.woff') format('woff');
   font-display: swap;
   font-weight: bold;

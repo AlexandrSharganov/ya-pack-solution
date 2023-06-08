@@ -1,8 +1,24 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useForm } from 'react-hook-form';
 import styles from './Keyboard.module.css';
+import BigButton from '../BigButton/BigButton';
 
 function Keyboard() {
   const [inputValue, setInputValue] = useState('');
+
+  const {
+    register,
+    formState: { errors, isValid },
+    // getValues,
+    reset,
+  } = useForm({
+    mode: 'onChange',
+    criteriaMode: 'all',
+  });
+
+  // onAddProduct({
+  //   product: getValues('product'),
+  // });
 
   const handleButtonClick = (digit) => {
     setInputValue((prevValue) => prevValue + digit);
@@ -16,14 +32,43 @@ function Keyboard() {
     setInputValue('');
   };
 
+  useEffect(() => {
+    reset();
+  }, [reset]);
+
   return (
-    <div className={styles.container}>
+    <form className={styles.container}>
       <h1 className={styles.title}>Введите штрихкод товара</h1>
-      <input
-        type="text"
-        value={inputValue}
-        onChange={handleInputChange}
-        className={styles.inputField}
+      <label htmlFor="number">
+        <input
+          name="number"
+          type="number"
+          value={inputValue}
+          onChange={handleInputChange}
+          className={styles.inputField}
+          placeholder="Номер штрихкода"
+          // eslint-disable-next-line react/jsx-props-no-spreading
+          {...register('product', {
+            required: 'Заполните это поле.',
+            minLength: {
+              value: 16,
+              message: 'Должно быть 16 цифр.',
+            },
+            maxLength: {
+              value: 16,
+              message: 'Должно быть 16 цифр.',
+            },
+          })}
+        />
+        <span className={(styles.inputError, styles.inputErrorActive)}>
+          {errors?.product &&
+            (errors?.product?.message || 'Введите номер штрихкода')}
+        </span>
+      </label>
+      <BigButton
+        isValid={isValid}
+        buttonText="Готово"
+        // onClick={handleBigButtonClick}
       />
       <div className={styles.keyboardRow}>
         <button
@@ -104,7 +149,7 @@ function Keyboard() {
           0
         </button>
       </div>
-    </div>
+    </form>
   );
 }
 
