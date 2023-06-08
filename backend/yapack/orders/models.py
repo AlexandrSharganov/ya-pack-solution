@@ -6,7 +6,7 @@ from users.models import Packer
 
 class Cargotype(models.Model):
     '''Модель карготипа.'''
-    
+
     cargotype_id = models.IntegerField(
         verbose_name='id карготипа',
         unique=True,
@@ -34,7 +34,7 @@ class Cargotype(models.Model):
 
 class Sku(models.Model):
     '''Модель товарной позиции.'''
-    
+
     sku_id = models.CharField(
         verbose_name='id товара',
         max_length=200,
@@ -99,63 +99,52 @@ class Sku(models.Model):
         return self.sku_id
 
 
-class Order(models.Model):
+class OrderReceived(models.Model):
     '''Модель заказа полученного из системы.'''
-    
+
     order_key = models.CharField(
         verbose_name='id заказа',
         max_length=200,
         unique=True,
         db_index=True,
         blank=False,
-        help_text='id заказа',
     )
-    sku = models.ManyToManyField(
+    skus = models.ManyToManyField(
         Sku,
-        verbose_name='SKU',
-        related_name='ordersreceived',
+        related_name='orderreceived',
+        through='OrderReceivedSku',
+        verbose_name='SKU в заказе',
     )
-    count = models.PositiveIntegerField(
-        verbose_name='Количество SKU',
-        validators=[MinValueValidator(
-            1, message='Количество не может быть меньше 1')
-        ],
-        blank=False,
-        help_text='Количество',
-    )
-    packman_id = models.ForeignKey(
+    packer = models.ForeignKey(
         Packer,
         on_delete=models.SET_NULL,
-        verbose_name='Упаковщик',
         null=True,
         blank=True,
+        verbose_name='Упаковщик',
     )
-    recommended_carton  = models.ManyToManyField(
-        'Carton',
-        verbose_name='Рекомендуемая упаковка',
-        related_name='recommended_carton',
-    )
-    selected_carton = models.ManyToManyField(
-        'Carton',
-        verbose_name='Использованная упаковка',
-        related_name='selected_carton',
-    )
-    suggested_carton_match = models.BooleanField(
-        verbose_name='Совпадение используемой и предложенной упаковки',
+    package_match = models.BooleanField(
+        verbose_name='Совпадение предложенной и использованной упаковки',
         default=False,
     )
-    
-    
+
+    class Meta:
+        verbose_name = 'Полученный заказ'
+        verbose_name_plural = 'Полученные заказы'
+        ordering = ['order_key']
+
     def __str__(self):
         return self.order_key
-    
-    
-class Carton(models.Model):
+
+
+class Package(models.Model):
     '''Модель упаковки.'''
-    
-    name = models.CharField(
-        verbose_name='Название типа упаковки.',
-        max_length=7,
+
+    packagetype = models.CharField(
+        max_length=50,
+        unique=True,
+        db_index=True,
+        blank=False,
+        verbose_name='Тип упаковки',
     )
     length = models.FloatField(
         validators=[
@@ -165,7 +154,6 @@ class Carton(models.Model):
         ],
         verbose_name='Длина',
         blank=False,
-        help_text='Длина товара',
     )
     width = models.FloatField(
         validators=[
@@ -175,7 +163,6 @@ class Carton(models.Model):
         ],
         verbose_name='Ширина',
         blank=False,
-        help_text='Ширина товара',
     )
     height = models.FloatField(
         validators=[
@@ -185,7 +172,6 @@ class Carton(models.Model):
         ],
         verbose_name='Высота',
         blank=False,
-        help_text='Высота товара',
     )
     price = models.FloatField(
         validators=[
@@ -195,8 +181,78 @@ class Carton(models.Model):
         ],
         verbose_name='Цена',
         blank=False,
-        help_text='Цена товара',
     )
-    
+
+    class Meta:
+        verbose_name = 'Упаковка'
+        verbose_name_plural = 'Виды упаковок'
+        ordering = ['packagetype']
+
     def __str__(self):
-        return self.name
+        return self.packagetype
+
+
+class PackageRecommended(models.Model):
+    '''Рекомендованная моделью упаковка.'''
+
+    order = models.ForeignKey(
+        OrderReceived,
+        related_name='package',
+        on_delete=models.CASCADE,
+        db_index=True,
+        verbose_name='Заказ',
+    )
+    package = models.ForeignKey(
+        Package,
+        related_name='recomended',
+        on_delete=models.CASCADE,
+        db_index=True,
+        verbose_name='Рекомендованная упаковка',
+    )
+    sku = models.ForeignKey(
+        Sku,
+        related_name='packed',
+        on_delete=models.CASCADE,
+        verbose_name='SKU',
+    )
+    amount = models.SmallIntegerField(
+        blank=False,
+        verbose_name='Количество',
+    )
+
+    class Meta:
+        verbose_name = 'Рекомендованная упаковка'
+        verbose_name_plural = 'Рекомендованные упаковки'
+        ordering = ['order', 'package']
+
+    def __str__(self):
+        return f'{self.order_key} - {self.package}'
+
+
+class OrderReceivedSku(models.Model):
+    '''Модель перечня SKU в заказе.'''
+
+    order_key = models.ForeignKey(
+        OrderReceived,
+        related_name='sku',
+        on_delete=models.CASCADE,
+        verbose_name='Заказ',
+    )
+    sku = models.ForeignKey(
+        Sku,
+        related_name='order',
+        on_delete=models.PROTECT,
+        verbose_name='SKU',
+    )
+    amount = models.SmallIntegerField(
+        blank=False,
+        verbose_name='Количество',
+    )
+
+    class Meta:
+        verbose_name = 'SKU в заказе'
+        verbose_name_plural = 'SKU в заказе'
+        ordering = ['order_key']
+
+    def __str__(self):
+        return f'{self.order_key} - {self.sku}'
