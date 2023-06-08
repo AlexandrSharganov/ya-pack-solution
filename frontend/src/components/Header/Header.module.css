@@ -1,0 +1,79 @@
+.header {
+  display: flex;
+  position: fixed;
+  justify-content: space-between;
+  align-items: center;
+  height: 111px;
+  top: 0;
+  left: 0;
+  right: 0;
+  border-bottom: 1px solid #e8e8e8;
+  padding: 0 57px 0 46px;
+  background: #ffffff;
+}
+
+.headerGroup {
+  display: flex;
+}
+
+.headerButton {
+  border: 0;
+  padding: 0;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  padding-left: 39px;
+}
+
+.logoName {
+  font-size: 38px;
+  font-weight: 900;
+  padding-left: 6.5px;
+  color: #21201f;
+  cursor: default;
+}
+
+.headerTitle {
+  font-size: 28px;
+  font-weight: 500;
+  color: #212121;
+  cursor: default;
+}
+
+.orderStatus {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 297px;
+  height: 65px;
+  padding: 0 8px 0 20px;
+  border: 4px solid #fed42b;
+  border-radius: 28px;
+  margin-right: 31px;
+}
+
+.orderStatus span {
+  font-size: 20px;
+  color: #212121;
+}
+
+.progress {
+  display: flex;
+  align-items: center;
+  height: 50px;
+  padding: 0 24px 0 55px;
+  border-radius: 30px;
+  background: url(../../images/turbo.svg) no-repeat;
+  background-position-x: 24.6px;
+  background-position-y: center;
+  background-color: #2aad2e;
+  font-size: 20px;
+  font-weight: 700;
+  color: #ffffff;
+  cursor: default;
+}

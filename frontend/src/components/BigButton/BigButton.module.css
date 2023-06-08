@@ -24,3 +24,12 @@
 .button:active {
   background-color: #e5b700;
 }
+.buttonInactive {
+  background: #f3f0e9;
+  pointer-events: none;
+  user-select: none;
+}
+
+.buttonInactive:hover {
+  background: #dedede;
+}

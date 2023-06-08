@@ -1,0 +1,42 @@
+.card {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  border-bottom: 1px solid #e8e8e8;
+  padding-bottom: 25px;
+}
+
+.image {
+  width: 100.52px;
+  height: 100.52px;
+  background: #f9f7f3;
+  border-radius: 16px;
+}
+
+.title {
+  width: 433px;
+  margin: 0;
+  padding-bottom: 12px;
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.additionalPackage {
+  width: fit-content;
+  padding: 16px;
+  border-radius: 12px;
+  background: #e0eeff;
+  cursor: default;
+}
+
+.amount {
+  width: fit-content;
+  padding: 12.5px 16px;
+  border-radius: 30px;
+  background: #f3f0e980;
+  cursor: default;
+}
+
+.code {
+  color: #0044ee;
+}

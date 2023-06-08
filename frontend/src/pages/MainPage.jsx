@@ -1,5 +1,14 @@
+import styles from './Pages.module.css';
+import ProductList from '../components/ProductList/ProductList';
+import PackageList from '../components/PackageList/PackageList';
+
 function MainPage() {
-  return <h1>Hello!</h1>;
+  return (
+    <section className={styles.main}>
+      <ProductList />
+      <PackageList />
+    </section>
+  );
 }
 
 export default MainPage;
