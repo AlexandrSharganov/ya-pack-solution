@@ -1,8 +1,11 @@
-.itemList {
+.section {
   display: flex;
   flex-direction: column;
-  width: 895.5px;
+  width: 48%;
+  max-width: 895.5px;
   gap: 25px;
+  border-right: 1px solid #e8e8e8;
+  padding-right: 25px;
 }
 
 .box {

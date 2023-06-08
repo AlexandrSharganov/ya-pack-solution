@@ -4,7 +4,7 @@ import items from '../../utils/items';
 
 function ProductList() {
   return (
-    <section className={styles.itemList}>
+    <section className={styles.section}>
       <div className={styles.box}>
         <h1 className={styles.title}>Ячейка B-09</h1>
         <span className={styles.post}>Почта России</span>

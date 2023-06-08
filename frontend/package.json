@@ -23,8 +23,11 @@
     "lint:fix": "npm run lint -- --fix",
     "format": "prettier --write",
     "prepare": "cd .. && husky install frontend/.husky",
-    "commit": "cz"
+    "commit": "cz",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
+  "homepage": "./",
   "browserslist": {
     "production": [
       ">0.2%",
@@ -48,7 +51,8 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "husky": "^8.0.3",
     "lint-staged": "^13.2.2",
-    "prettier": "^2.8.8"
+    "prettier": "^2.8.8",
+    "gh-pages": "^5.0.0"
   },
   "lint-staged": {
     "*.{js,jsx}": "npm run lint",

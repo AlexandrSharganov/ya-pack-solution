@@ -6,6 +6,10 @@
   padding-bottom: 25px;
 }
 
+.card:last-of-type {
+  border-bottom: 0;
+}
+
 .image {
   width: 100.52px;
   height: 100.52px;
@@ -14,7 +18,7 @@
 }
 
 .title {
-  width: 433px;
+  max-width: 433px;
   margin: 0;
   padding-bottom: 12px;
   font-size: 20px;
