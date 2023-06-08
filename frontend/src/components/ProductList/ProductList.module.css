@@ -1,0 +1,24 @@
+.itemList {
+  display: flex;
+  flex-direction: column;
+  width: 895.5px;
+  gap: 25px;
+}
+
+.box {
+  display: flex;
+  align-items: center;
+  gap: 48px;
+}
+
+.title {
+  font-size: 56px;
+}
+
+.post {
+  font-size: 24px;
+}
+
+.amount {
+  font-size: 28px;
+}
