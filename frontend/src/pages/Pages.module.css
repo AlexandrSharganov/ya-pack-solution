@@ -1,6 +1,5 @@
 .main {
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 100vh;
+  height: calc(100% - 112px - 111px);
+  margin-top: 112px;
 }

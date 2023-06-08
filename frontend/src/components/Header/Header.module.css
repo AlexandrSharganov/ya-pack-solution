@@ -1,10 +1,15 @@
 .header {
   display: flex;
+  position: fixed;
   justify-content: space-between;
   align-items: center;
   height: 111px;
+  top: 0;
+  left: 0;
+  right: 0;
   border-bottom: 1px solid #e8e8e8;
   padding: 0 57px 0 46px;
+  background: #ffffff;
 }
 
 .headerGroup {
@@ -30,12 +35,14 @@
   font-weight: 900;
   padding-left: 6.5px;
   color: #21201f;
+  cursor: default;
 }
 
 .headerTitle {
   font-size: 28px;
   font-weight: 500;
   color: #212121;
+  cursor: default;
 }
 
 .orderStatus {
@@ -68,4 +75,5 @@
   font-size: 20px;
   font-weight: 700;
   color: #ffffff;
+  cursor: default;
 }

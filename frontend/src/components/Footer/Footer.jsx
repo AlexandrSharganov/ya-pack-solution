@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import styles from './Footer.module.css';
 import FooterButton from '../FooterButton/FooterButton';
 
@@ -7,7 +8,9 @@ function Footer() {
       <button type="button" className={styles.problemButton}>
         Есть проблема
       </button>
-      <FooterButton />
+      <Link to="/numbers" className={styles.link}>
+        <FooterButton />
+      </Link>
     </section>
   );
 }
