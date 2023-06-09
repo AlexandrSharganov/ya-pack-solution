@@ -1,0 +1,8 @@
+.done {
+  display: flex;
+  position: fixed;
+  flex-direction: column;
+  align-items: center;
+  left: 50%;
+  transform: translateX(-50%);
+}
