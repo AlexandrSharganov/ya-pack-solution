@@ -2,7 +2,7 @@ import { Routes, Route } from 'react-router-dom';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 import MainPage from '../../pages/MainPage';
-import NumbersPage from '../../pages/NumbersPage';
+import KeyboardPage from '../../pages/KeyboardPage';
 
 function App() {
   return (
@@ -10,7 +10,7 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<MainPage />} />
-        <Route path="/numbers" element={<NumbersPage />} />
+        <Route path="/keyboard" element={<KeyboardPage />} />
       </Routes>
       <Footer />
     </>

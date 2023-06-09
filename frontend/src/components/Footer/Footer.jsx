@@ -8,7 +8,7 @@ function Footer() {
       <button type="button" className={styles.problemButton}>
         Есть проблема
       </button>
-      <Link to="/numbers" className={styles.link}>
+      <Link to="/keyboard" className={styles.link}>
         <FooterButton />
       </Link>
     </section>

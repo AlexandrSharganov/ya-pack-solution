@@ -3,3 +3,7 @@
   height: calc(100% - 112px - 111px);
   margin-top: 112px;
 }
+
+.keyboardPage {
+  justify-content: center;
+}
