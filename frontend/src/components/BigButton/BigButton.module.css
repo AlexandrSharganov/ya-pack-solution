@@ -1,0 +1,24 @@
+.button {
+  /* height: 662px; */
+  height: 562px;
+  width: 296px;
+  position: fixed;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  margin-right: 24px;
+  background: #fed42b;
+  border-radius: 24px;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 48px;
+}
+
+.button:hover {
+  background-color: #f5c400;
+}
+
+.button:active {
+  background-color: #e5b700;
+}

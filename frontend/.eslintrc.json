@@ -18,12 +18,7 @@
   },
   "plugins": ["react", "prettier"],
   "rules": {
-    "prettier/prettier": [
-      "error",
-      {
-        "endOfLine": "auto"
-      }
-    ],
+    "prettier/prettier": "off",
     "react/jsx-filename-extension": [
       1,
       {
@@ -32,6 +27,18 @@
     ],
     "react/react-in-jsx-scope": 0,
     "react/jsx-uses-react": 0,
-    "react/prop-types": 0
+    "react/prop-types": 0,
+    "no-unused-vars": [
+      "error",
+      {
+        "varsIgnorePattern": "^React$"
+      }
+    ],
+    "no-trailing-spaces": [
+      "error",
+      {
+        "skipBlankLines": true
+      }
+    ]
   }
 }

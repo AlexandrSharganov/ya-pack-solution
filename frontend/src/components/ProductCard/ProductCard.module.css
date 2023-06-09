@@ -11,8 +11,8 @@
 }
 
 .image {
-  width: 100.52px;
-  height: 100.52px;
+  width: 105px;
+  height: 105px;
   background: #f9f7f3;
   border-radius: 16px;
 }
@@ -34,13 +34,10 @@
 }
 
 .amount {
-  width: fit-content;
+  text-align: center;
+  min-width: 76px;
   padding: 12.5px 16px;
   border-radius: 30px;
   background: #f3f0e980;
   cursor: default;
-}
-
-.code {
-  color: #0044ee;
 }

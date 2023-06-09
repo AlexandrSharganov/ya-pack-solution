@@ -5,9 +5,11 @@ import FooterButton from '../FooterButton/FooterButton';
 function Footer() {
   return (
     <section className={styles.footer}>
-      <button type="button" className={styles.problemButton}>
-        Есть проблема
-      </button>
+      <Link to="/problem" className={styles.link}>
+        <button type="button" className={styles.problemButton}>
+          Есть проблема
+        </button>
+      </Link>
       <Link to="/numbers" className={styles.link}>
         <FooterButton />
       </Link>
