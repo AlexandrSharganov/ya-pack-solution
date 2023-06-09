@@ -4,7 +4,7 @@ import BigButton from '../components/BigButton/BigButton';
 
 function FinishPage() {
   return (
-    <section className={styles.main}>
+    <section className={styles.centerBlock}>
       <Finish />
       <BigButton buttonText="Готово" />
     </section>

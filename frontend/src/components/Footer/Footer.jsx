@@ -10,7 +10,7 @@ function Footer() {
           Есть проблема
         </button>
       </Link>
-      <Link to="/numbers" className={styles.link}>
+      <Link to="/keyboard" className={styles.link}>
         <FooterButton />
       </Link>
     </section>

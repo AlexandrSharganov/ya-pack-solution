@@ -1,18 +1,20 @@
 .button {
-  /* height: 662px; */
-  height: 562px;
+  height: 662px;
   width: 296px;
   position: fixed;
   top: 50%;
   right: 0;
   transform: translateY(-50%);
-  margin-right: 24px;
+  margin: 0 24px;
   background: #fed42b;
   border-radius: 24px;
   border: none;
   cursor: pointer;
+  font-family: 'YS Disp';
+  font-style: normal;
   font-weight: 500;
   font-size: 48px;
+  line-height: 56px;
 }
 
 .button:hover {
@@ -21,4 +23,14 @@
 
 .button:active {
   background-color: #e5b700;
+}
+
+.buttonInactive {
+  background: #f3f0e9;
+  pointer-events: none;
+  user-select: none;
+}
+
+.buttonInactive:hover {
+  background: #dedede;
 }

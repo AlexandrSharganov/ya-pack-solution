@@ -4,7 +4,7 @@ import Footer from '../Footer/Footer';
 import MainPage from '../../pages/MainPage';
 import FinishPage from '../../pages/FinishPage';
 import ProblemPage from '../../pages/ProblemPage';
-import NumbersPage from '../../pages/NumbersPage';
+import KeyboardPage from '../../pages/KeyboardPage';
 
 function App() {
   const location = useLocation();
@@ -17,7 +17,7 @@ function App() {
         <Route path="/" element={<MainPage />} />
         <Route path="/finish" element={<FinishPage />} />
         <Route path="/problem" element={<ProblemPage />} />
-        <Route path="/numbers" element={<NumbersPage />} />
+        <Route path="/keyboard" element={<KeyboardPage />} />
       </Routes>
       {!hideFooter && <Footer />}
     </>

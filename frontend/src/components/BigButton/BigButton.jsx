@@ -1,10 +1,14 @@
-// import { useState } from 'react';
 import styles from './BigButton.module.css';
 
 function BigButton(props) {
-  const { buttonText, onClick } = props;
+  const { buttonText, onClick, isValid } = props;
   return (
-    <button type="submit" className={styles.button} onClick={onClick}>
+    <button
+      type="submit"
+      className={`${styles.button} ${isValid ? '' : styles.buttonInactive}`}
+      // className={styles.button}
+      onClick={onClick}
+    >
       {buttonText}
     </button>
   );

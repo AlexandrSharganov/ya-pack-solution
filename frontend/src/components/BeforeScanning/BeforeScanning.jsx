@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './BeforeScanning.module.css';
 import ProductCard from '../ProductCard/ProductCard';
 import items from '../../utils/items';
@@ -6,6 +6,18 @@ import items from '../../utils/items';
 
 function BeforeScanning() {
   const [isCopied, setIsCopied] = useState(false);
+
+  useEffect(() => {
+    if (isCopied) {
+      const timeout = setTimeout(() => {
+        setIsCopied(false);
+      }, 1500);
+
+      return () => clearTimeout(timeout);
+    }
+
+    return undefined;
+  }, [isCopied]);
 
   return (
     <section className={styles.section}>
@@ -21,10 +33,10 @@ function BeforeScanning() {
       </div>
       {isCopied && <div className={styles.copyCode}>Штрихкод скопирован</div>}
       {/* <div className={styles.done}>
-       <img src={Done} alt="Готово!" />
-       <p>Отсканировано 4 товара!</p>
-       <p>Упакуйте их и отсканируйте упаковку</p>
-     </div> */}
+        <img src={Done} alt="Готово!" />
+        <p>Отсканировано 4 товара!</p>
+        <p>Упакуйте их и отсканируйте упаковку</p>
+      </div> */}
     </section>
   );
 }
