@@ -1,4 +1,5 @@
-from django.core.validators import MaxValueValidator, MinValueValidator
+from django.core.validators import (
+    MinLengthValidator, MaxValueValidator, MinValueValidator)
 from django.db import models
 
 from users.models import Packer
@@ -88,6 +89,16 @@ class Sku(models.Model):
         verbose_name='Карготипы',
         related_name='sku',
         help_text='Карготипы',
+    )
+    barcode = models.CharField(
+        verbose_name='Штрихкод',
+        max_length=13,
+        unique=True,
+        blank=False,
+        validators=[
+            MinLengthValidator(
+                13, message='Штрихкод не может быть короче 13-ти символов'),
+        ]
     )
 
     class Meta:
@@ -181,6 +192,16 @@ class Package(models.Model):
         ],
         verbose_name='Цена',
         blank=False,
+    )
+    barcode = models.CharField(
+        verbose_name='Штрихкод',
+        max_length=13,
+        unique=True,
+        blank=False,
+        validators=[
+            MinLengthValidator(
+                13, message='Штрихкод не может быть короче 13-ти символов'),
+        ]
     )
 
     class Meta:
