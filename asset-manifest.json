@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "./static/css/main.f94e49c7.css",
-    "main.js": "./static/js/main.56420129.js",
+    "main.css": "./static/css/main.f2d4ccb3.css",
+    "main.js": "./static/js/main.6ba326f7.js",
     "static/media/YandexSansText-RegularItalic.woff": "./static/media/YandexSansText-RegularItalic.d266181fe5e8aa8604eb.woff",
     "static/media/YandexSansText-Light.woff": "./static/media/YandexSansText-Light.f70b7e207ff9d5bd19e0.woff",
     "static/media/YandexSansText-Medium.woff": "./static/media/YandexSansText-Medium.6b83f25f39c3f10cc22e.woff",
@@ -27,6 +27,7 @@
     "static/media/product-2.png": "./static/media/product-2.82357b4195c514593219.png",
     "static/media/product-3.png": "./static/media/product-3.0620691e527526390f14.png",
     "static/media/scan.svg": "./static/media/scan.0860f59880c848d564d0b8f6649400dc.svg",
+    "static/media/done-large.svg": "./static/media/done-large.7ced53b4412b0cbfd172f91d2a45c8ca.svg",
     "static/media/product-4.png": "./static/media/product-4.03c4861e3fb9a1d33656.png",
     "static/media/keyboard.svg": "./static/media/keyboard.696a48dfb8f76980c96dfed9d0c94889.svg",
     "static/media/turbo.svg": "./static/media/turbo.2717edbf0d9c26bf2ffb.svg",
@@ -35,11 +36,11 @@
     "static/media/more.svg": "./static/media/more.1850667dfcdfd058b5d54e555a4ca11e.svg",
     "index.html": "./index.html",
     "static/media/menu.svg": "./static/media/menu.38da97ea0208427504cd333b946cfb9e.svg",
-    "main.f94e49c7.css.map": "./static/css/main.f94e49c7.css.map",
-    "main.56420129.js.map": "./static/js/main.56420129.js.map"
+    "main.f2d4ccb3.css.map": "./static/css/main.f2d4ccb3.css.map",
+    "main.6ba326f7.js.map": "./static/js/main.6ba326f7.js.map"
   },
   "entrypoints": [
-    "static/css/main.f94e49c7.css",
-    "static/js/main.56420129.js"
+    "static/css/main.f2d4ccb3.css",
+    "static/js/main.6ba326f7.js"
   ]
 }
