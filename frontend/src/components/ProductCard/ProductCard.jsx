@@ -1,6 +1,8 @@
+import React from 'react';
 import styles from './ProductCard.module.css';
+import CopyableText from '../CopyableText/CopyableText';
 
-function ProductCard({ item }) {
+function ProductCard({ item, setIsCopied }) {
   return (
     <div className={styles.card}>
       <img src={item.image} alt={item.alt} className={styles.image} />
@@ -9,7 +11,7 @@ function ProductCard({ item }) {
         <div className={styles.additionalPackage}>Пузырчатая плёнка</div>
       </div>
       <div className={styles.amount}>{`${item.amount} шт.`}</div>
-      <span className={styles.code}>{item.code}</span>
+      <CopyableText text={item.code} setIsCopied={setIsCopied} />
     </div>
   );
 }

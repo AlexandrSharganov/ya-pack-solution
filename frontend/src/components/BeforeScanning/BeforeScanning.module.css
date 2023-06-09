@@ -1,0 +1,64 @@
+.section {
+  display: flex;
+  flex-direction: column;
+  width: 48%;
+  max-width: 895.5px;
+  border-right: 1px solid #e8e8e8;
+  padding-right: 25px;
+}
+
+.section:last-of-type {
+  border-right: 0;
+  padding-right: 0;
+}
+
+.box {
+  display: flex;
+  align-items: center;
+  gap: 48px;
+  margin: 24px 0 30px;
+}
+
+.title {
+  font-size: 56px;
+  margin: 0;
+}
+
+.post {
+  font-size: 24px;
+}
+
+.amount {
+  font-size: 28px;
+}
+
+.cardList {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  margin-top: 56px;
+}
+
+.done {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 47vh;
+}
+
+.copyCode {
+  position: fixed;
+  top: 136px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 400px;
+  height: 50px;
+  background: #87d350;
+  border-radius: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 20px;
+}

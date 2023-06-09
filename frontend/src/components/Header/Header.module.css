@@ -1,8 +1,9 @@
 .header {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
   position: fixed;
-  justify-content: space-between;
   align-items: center;
+  text-align: center;
   height: 111px;
   top: 0;
   left: 0;
@@ -12,8 +13,16 @@
   background: #ffffff;
 }
 
+.linkLogo {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  text-decoration: none;
+}
+
 .headerGroup {
   display: flex;
+  gap: 39px;
 }
 
 .headerButton {
@@ -23,19 +32,11 @@
   cursor: pointer;
 }
 
-.logo {
-  display: flex;
-  align-items: center;
-  gap: 3px;
-  padding-left: 39px;
-}
-
 .logoName {
   font-size: 38px;
   font-weight: 900;
   padding-left: 6.5px;
   color: #21201f;
-  cursor: default;
 }
 
 .headerTitle {

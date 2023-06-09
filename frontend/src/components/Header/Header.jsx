@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import styles from './Header.module.css';
 import Menu from '../../images/menu.svg';
 import Yandex from '../../images/yandex.svg';
@@ -11,11 +12,11 @@ function Header() {
         <button type="button" className={styles.headerButton}>
           <img src={Menu} alt="Menu" />
         </button>
-        <div className={styles.logo}>
+        <Link to="/" className={styles.linkLogo}>
           <img src={Yandex} alt="Yandex" />
           <img src={Market} alt="Market" />
           <span className={styles.logoName}>Cклад</span>
-        </div>
+        </Link>
       </div>
       <h1 className={styles.headerTitle}>Упаковка</h1>
       <div className={styles.headerGroup}>

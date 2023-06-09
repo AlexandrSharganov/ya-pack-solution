@@ -6,15 +6,19 @@
   padding-bottom: 25px;
 }
 
+.card:last-of-type {
+  border-bottom: 0;
+}
+
 .image {
-  width: 100.52px;
-  height: 100.52px;
+  width: 105px;
+  height: 105px;
   background: #f9f7f3;
   border-radius: 16px;
 }
 
 .title {
-  width: 433px;
+  max-width: 433px;
   margin: 0;
   padding-bottom: 12px;
   font-size: 20px;
@@ -30,13 +34,10 @@
 }
 
 .amount {
-  width: fit-content;
+  text-align: center;
+  min-width: 76px;
   padding: 12.5px 16px;
   border-radius: 30px;
   background: #f3f0e980;
   cursor: default;
-}
-
-.code {
-  color: #0044ee;
 }
