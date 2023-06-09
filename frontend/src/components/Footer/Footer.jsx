@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import styles from './Footer.module.css';
 import FooterButton from '../FooterButton/FooterButton';
 
-function Footer() {
+function Footer({ onProductEntry }) {
   return (
     <section className={styles.footer}>
       <Link to="/problem" className={styles.link}>
@@ -10,9 +10,9 @@ function Footer() {
           Есть проблема
         </button>
       </Link>
-      <Link to="/keyboard" className={styles.link}>
-        <FooterButton />
-      </Link>
+      {/* <Link to="/keyboard" className={styles.link}> */}
+      <FooterButton onProductEntry={onProductEntry} />
+      {/* </Link> */}
     </section>
   );
 }

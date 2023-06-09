@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import styles from './BeforeScanning.module.css';
 import ProductCard from '../ProductCard/ProductCard';
 import items from '../../utils/items';

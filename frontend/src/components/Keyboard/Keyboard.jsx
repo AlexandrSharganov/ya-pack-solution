@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react';
+import Popup from '../Popup/Popup';
 import styles from './Keyboard.module.css';
 import BigButton from '../BigButton/BigButton';
+import deleteIcon from '../../images/delete.svg';
 
-function Keyboard() {
+function Keyboard({ isOpen, onClose }) {
   const [inputValue, setInputValue] = useState('');
   const [isValid, setIsValid] = useState(false);
   const [showError, setShowError] = useState(false);
@@ -20,19 +22,24 @@ function Keyboard() {
 
   const handleInputChange = (event) => {
     const { value } = event.target;
-
+    setInputValue(value);
+    setShowError(true);
+    setIsValid(false);
     if (inputValue.length === 15) {
       setIsValid(true);
       setShowError(false);
-    } else {
-      setInputValue(value);
-      setShowError(true);
     }
   };
 
   const handleClearInput = () => {
     setInputValue('');
     setShowError(false);
+  };
+
+  const handleDeleteLastCharacter = () => {
+    setInputValue((prevValue) => prevValue.slice(0, -1));
+    setShowError(true);
+    setIsValid(false);
   };
 
   const handleSubmit = (e) => {
@@ -51,55 +58,82 @@ function Keyboard() {
   }, []);
 
   return (
-    <form className={styles.container} onSubmit={handleSubmit}>
-      <h1 className={styles.title}>Введите штрихкод товара</h1>
-      <label htmlFor="barcode">
-        <input
-          name="barcode"
-          type="number"
-          value={inputValue}
-          onChange={handleInputChange}
-          className={styles.inputField}
-          placeholder="Номер штрихкода"
-        />
-        <span
-          className={`${styles.inputError} ${
-            showError ? styles.inputErrorActive : ''
-          }`}
-        >
-          {!isValid && showError && `Введено ${inputValue.length} цифр из 16.`}
-        </span>
-      </label>
-      <BigButton isValid={isValid} buttonText="Готово" onClick={handleSubmit} />
-      <div className={styles.keyboardRow}>
-        {[7, 8, 9, 4, 5, 6, 1, 2, 3].map((digit) => (
-          <button
-            key={digit}
-            type="button"
-            onClick={() => handleButtonClick(String(digit))}
-            className={styles.button}
-            disabled={inputValue.length >= 16}
-          >
-            {digit}
-          </button>
-        ))}
+    <Popup isOpen={isOpen} onClose={onClose}>
+      <form className={styles.container} onSubmit={handleSubmit}>
+        <h1 className={styles.title}>Введите штрихкод товара</h1>
         <button
+          className={styles.close}
+          aria-label="Закрыть"
           type="button"
-          onClick={handleClearInput}
-          className={styles.button}
+          onClick={onClose}
         >
           &#10005;
         </button>
-        <button
-          type="button"
-          onClick={() => handleButtonClick('0')}
-          className={styles.button}
-          disabled={inputValue.length >= 16}
-        >
-          0
-        </button>
-      </div>
-    </form>
+        <label htmlFor="barcode">
+          <input
+            name="barcode"
+            type="number"
+            value={inputValue}
+            onChange={handleInputChange}
+            className={styles.inputField}
+            placeholder="Номер штрихкода"
+          />
+          <span
+            className={`${styles.inputError} ${
+              showError ? styles.inputErrorActive : ''
+            }`}
+          >
+            {!isValid &&
+              showError &&
+              `Введено ${inputValue.length} цифр из 16.`}
+          </span>
+        </label>
+        <BigButton
+          isValid={isValid}
+          buttonText="Готово"
+          onClick={handleSubmit}
+        />
+        <div className={styles.keyboardRow}>
+          {[7, 8, 9, 4, 5, 6, 1, 2, 3].map((digit) => (
+            <button
+              key={digit}
+              type="button"
+              onClick={() => handleButtonClick(String(digit))}
+              className={styles.button}
+              disabled={inputValue.length >= 16}
+            >
+              {digit}
+            </button>
+          ))}
+          <button
+            type="button"
+            onClick={handleClearInput}
+            className={styles.button}
+          >
+            &#10005;
+          </button>
+          <button
+            type="button"
+            onClick={() => handleButtonClick('0')}
+            className={styles.button}
+            disabled={inputValue.length >= 16}
+          >
+            0
+          </button>
+          <button
+            type="button"
+            onClick={handleDeleteLastCharacter}
+            className={styles.button}
+          >
+            <img
+              src={deleteIcon}
+              alt="Delete Icon"
+              className={styles.deleteIcon}
+            />
+          </button>
+        </div>
+      </form>
+    </Popup>
   );
 }
 
