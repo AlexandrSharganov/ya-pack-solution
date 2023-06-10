@@ -32,3 +32,5 @@
 9. **npm run commit:** запускает интерактивный процесс создания коммита с использованием Commitizen.
 10. **npm run predeploy:** выполняет сборку перед развертыванием.
 11. **npm run deploy:** разворачивает приложение с помощью GitHub Pages.
+
+Адрес проекта на Github Pages - https://alexandrsharganov.github.io/ya-pack-solution/

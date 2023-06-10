@@ -5,35 +5,30 @@ import BigButton from '../BigButton/BigButton';
 import deleteIcon from '../../images/delete.svg';
 
 function Keyboard({ isOpen, onClose }) {
-  const [inputValue, setInputValue] = useState('');
+  const [inputValue, setInputValue] = useState(() => '');
   const [isValid, setIsValid] = useState(false);
   const [showError, setShowError] = useState(false);
 
   const handleButtonClick = (digit) => {
-    setInputValue((prevValue) => prevValue + digit);
-    if (inputValue.length === 15) {
-      setIsValid(true);
-      setShowError(false);
-    } else {
-      setIsValid(false);
+    setInputValue((prevValue) => {
+      const newValue = prevValue + digit;
+      setIsValid(newValue.length === 13);
       setShowError(true);
-    }
+      return newValue;
+    });
   };
 
   const handleInputChange = (event) => {
     const { value } = event.target;
     setInputValue(value);
     setShowError(true);
-    setIsValid(false);
-    if (inputValue.length === 15) {
-      setIsValid(true);
-      setShowError(false);
-    }
+    setIsValid(value.length === 13);
   };
 
   const handleClearInput = () => {
     setInputValue('');
-    setShowError(false);
+    setShowError(true);
+    setIsValid(false);
   };
 
   const handleDeleteLastCharacter = () => {
@@ -44,10 +39,12 @@ function Keyboard({ isOpen, onClose }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (inputValue.length === 16) {
+    if (inputValue.length === 13) {
       console.log('data');
+      onClose();
+      setInputValue('');
     } else {
-      console.log(`Введено ${inputValue.length} цифр вместо 16.`);
+      console.log(`Введено ${inputValue.length} цифр вместо 13.`);
     }
   };
 
@@ -85,7 +82,7 @@ function Keyboard({ isOpen, onClose }) {
           >
             {!isValid &&
               showError &&
-              `Введено ${inputValue.length} цифр из 16.`}
+              `Введено ${inputValue.length} цифр из 13.`}
           </span>
         </label>
         <BigButton
@@ -100,7 +97,7 @@ function Keyboard({ isOpen, onClose }) {
               type="button"
               onClick={() => handleButtonClick(String(digit))}
               className={styles.button}
-              disabled={inputValue.length >= 16}
+              disabled={inputValue.length >= 13}
             >
               {digit}
             </button>
@@ -116,7 +113,7 @@ function Keyboard({ isOpen, onClose }) {
             type="button"
             onClick={() => handleButtonClick('0')}
             className={styles.button}
-            disabled={inputValue.length >= 16}
+            disabled={inputValue.length >= 13}
           >
             0
           </button>
