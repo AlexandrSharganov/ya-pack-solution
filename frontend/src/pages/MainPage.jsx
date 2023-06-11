@@ -3,10 +3,12 @@ import BeforeScanning from '../components/BeforeScanning/BeforeScanning';
 import AfterScanning from '../components/AfterScanning/AfterScanning';
 
 function MainPage() {
+  const scannedItems = [];
+
   return (
     <section className={styles.main}>
       <BeforeScanning />
-      <AfterScanning />
+      <AfterScanning scannedItems={scannedItems} />
     </section>
   );
 }
