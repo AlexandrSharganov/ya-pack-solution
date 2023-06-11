@@ -27,8 +27,13 @@
   border-radius: 12px;
   background: #f3f0e9;
   cursor: default;
-
   margin-bottom: 56px;
+  border: none;
+  cursor: pointer;
+}
+
+.package:hover {
+  background-color: #dedede;
 }
 
 figure {

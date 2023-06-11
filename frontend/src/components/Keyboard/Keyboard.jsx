@@ -44,7 +44,7 @@ function Keyboard({ isOpen, onClose }) {
       onClose();
       setInputValue('');
     } else {
-      console.log(`Введено ${inputValue.length} цифр вместо 13.`);
+      console.log(`Введено ${inputValue.length} цифр из 13.`);
     }
   };
 
@@ -66,7 +66,7 @@ function Keyboard({ isOpen, onClose }) {
         >
           &#10005;
         </button>
-        <label htmlFor="barcode">
+        <label htmlFor="barcode" className={styles.label}>
           <input
             name="barcode"
             type="number"
@@ -84,12 +84,19 @@ function Keyboard({ isOpen, onClose }) {
               showError &&
               `Введено ${inputValue.length} цифр из 13.`}
           </span>
+          <button
+            type="button"
+            onClick={handleDeleteLastCharacter}
+            className={styles.deleteBtn}
+          >
+            <img
+              src={deleteIcon}
+              alt="Delete Icon"
+              className={styles.deleteIcon}
+            />
+          </button>
         </label>
-        <BigButton
-          isValid={isValid}
-          buttonText="Готово"
-          onClick={handleSubmit}
-        />
+        <BigButton isValid={isValid} buttonText="Готово" />
         <div className={styles.keyboardRow}>
           {[7, 8, 9, 4, 5, 6, 1, 2, 3].map((digit) => (
             <button
@@ -116,17 +123,6 @@ function Keyboard({ isOpen, onClose }) {
             disabled={inputValue.length >= 13}
           >
             0
-          </button>
-          <button
-            type="button"
-            onClick={handleDeleteLastCharacter}
-            className={styles.button}
-          >
-            <img
-              src={deleteIcon}
-              alt="Delete Icon"
-              className={styles.deleteIcon}
-            />
           </button>
         </div>
       </form>

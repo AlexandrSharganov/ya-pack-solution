@@ -29,6 +29,10 @@
   cursor: pointer;
 }
 
+.problemButton:hover {
+  background-color: #dedede;
+}
+
 .link {
   text-decoration: none;
 }
