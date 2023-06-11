@@ -48,14 +48,18 @@
   background-color: #b0b0b0;
 }
 
+.label {
+  position: relative;
+}
+
 .inputField {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 585px;
+  width: 405px;
   height: 100px;
   margin: 0 0 30px 0;
-  padding: 0;
+  padding: 0 90px;
   font-style: normal;
   font-weight: 400;
   font-size: 44px;
@@ -93,6 +97,26 @@
 
 .inputErrorActive {
   opacity: 1;
+}
+
+.deleteBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  width: 36px;
+  height: 24px;
+  top: 17px;
+  right: 10px;
+  padding: 40px;
+  border-radius: 10px;
+  background: #ffffff;
+  border: none;
+  cursor: pointer;
+}
+
+.deleteIcon {
+  width: 36px;
 }
 
 .keyboardRow {
@@ -136,7 +160,4 @@
 
 .button:active {
   background-color: #b0b0b0;
-}
-.deleteIcon {
-  width: 35px;
 }
