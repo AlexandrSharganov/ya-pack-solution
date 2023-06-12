@@ -47,6 +47,20 @@
   height: 47vh;
 }
 
+.doneTitle {
+  font-weight: 500;
+  font-size: 28px;
+  line-height: 31px;
+  margin: 16px 0;
+}
+
+.doneSubtitle {
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 23px;
+  margin: 0;
+}
+
 .copyCode {
   position: fixed;
   top: 136px;
