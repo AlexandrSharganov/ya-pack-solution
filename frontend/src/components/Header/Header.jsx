@@ -19,7 +19,7 @@ function Header() {
         </Link>
       </div>
       <h1 className={styles.headerTitle}>Упаковка</h1>
-      <div className={styles.headerGroup}>
+      <div className={`${styles.headerGroup} ${styles.rightPath}`}>
         <div className={styles.orderStatus}>
           <span>sof-natgemokee</span>
           <div className={styles.progress}>79%</div>

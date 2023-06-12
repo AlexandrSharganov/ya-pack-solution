@@ -46,6 +46,10 @@
   cursor: default;
 }
 
+.rightPath {
+  justify-content: flex-end;
+}
+
 .orderStatus {
   display: flex;
   justify-content: space-between;

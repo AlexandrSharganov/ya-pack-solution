@@ -13,6 +13,10 @@
   background: #ffffff;
 }
 
+.footerYellow {
+  background: #ffa200;
+}
+
 .problemButton {
   width: 296px;
   height: 72px;
@@ -23,6 +27,10 @@
   font-weight: 500;
   color: #212121;
   cursor: pointer;
+}
+
+.problemButton:hover {
+  background-color: #dedede;
 }
 
 .link {

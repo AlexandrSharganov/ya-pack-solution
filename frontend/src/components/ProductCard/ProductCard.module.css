@@ -22,10 +22,14 @@
   margin: 0;
   padding-bottom: 12px;
   font-size: 20px;
+  line-height: 22px;
   font-weight: 400;
 }
 
 .additionalPackage {
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 23px;
   width: fit-content;
   padding: 16px;
   border-radius: 12px;
@@ -34,6 +38,8 @@
 }
 
 .amount {
+  font-size: 20px;
+  line-height: 23px;
   text-align: center;
   min-width: 76px;
   padding: 12.5px 16px;

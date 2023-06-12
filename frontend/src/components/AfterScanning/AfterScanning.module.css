@@ -6,26 +6,41 @@
 }
 
 .title {
+  font-family: 'YS Disp';
   font-size: 28px;
+  line-height: 32px;
 }
 
 .text {
   margin: 24px 0 16px;
   font-size: 20px;
+  line-height: 23px;
   color: #2aad2e;
 }
 
 .package {
+  font-weight: 500;
+  font-size: 28px;
+  line-height: 31px;
   width: fit-content;
   padding: 20.5px 63px;
   border-radius: 12px;
   background: #f3f0e9;
   cursor: default;
-
   margin-bottom: 56px;
+  border: none;
+  cursor: pointer;
+}
+
+.package:hover {
+  background-color: #dedede;
 }
 
 figure {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 28px;
+  line-height: 31px;
   display: flex;
   flex-direction: column;
   align-items: center;

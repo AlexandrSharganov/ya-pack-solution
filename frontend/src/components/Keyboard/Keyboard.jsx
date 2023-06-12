@@ -143,10 +143,8 @@ import styles from './Keyboard.module.css';
 import BigButton from '../BigButton/BigButton';
 import deleteIcon from '../../images/delete.svg';
 
-const MAX_INPUT_LENGTH = 13;
-
-function Keyboard({ isOpen, onClose, onScan }) {
-  const [inputValue, setInputValue] = useState('');
+function Keyboard({ isOpen, onClose }) {
+  const [inputValue, setInputValue] = useState(() => '');
   const [isValid, setIsValid] = useState(false);
   const [showError, setShowError] = useState(false);
 
@@ -157,23 +155,25 @@ function Keyboard({ isOpen, onClose, onScan }) {
   }, []);
 
   const handleButtonClick = (digit) => {
-    if (inputValue.length < MAX_INPUT_LENGTH) {
-      setInputValue((prevValue) => prevValue + digit);
-      setIsValid(inputValue.length === MAX_INPUT_LENGTH - 1);
-      setShowError(false);
-    }
+    setInputValue((prevValue) => {
+      const newValue = prevValue + digit;
+      setIsValid(newValue.length === 13);
+      setShowError(true);
+      return newValue;
+    });
   };
 
   const handleInputChange = (event) => {
     const { value } = event.target;
     setInputValue(value);
     setShowError(true);
-    setIsValid(value.length === MAX_INPUT_LENGTH);
+    setIsValid(value.length === 13);
   };
 
   const handleClearInput = () => {
     setInputValue('');
-    setShowError(false);
+    setShowError(true);
+    setIsValid(false);
   };
 
   const handleDeleteLastCharacter = () => {
@@ -184,12 +184,12 @@ function Keyboard({ isOpen, onClose, onScan }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (inputValue.length === MAX_INPUT_LENGTH) {
-      onScan(inputValue);
+    if (inputValue.length === 13) {
+      console.log('data');
+      onClose();
+      setInputValue('');
     } else {
-      console.log(
-        `Введено ${inputValue.length} цифр вместо ${MAX_INPUT_LENGTH}.`
-      );
+      console.log(`Введено ${inputValue.length} цифр из 13.`);
     }
   };
 
@@ -205,7 +205,7 @@ function Keyboard({ isOpen, onClose, onScan }) {
         >
           ✕
         </button>
-        <label htmlFor="barcode">
+        <label htmlFor="barcode" className={styles.label}>
           <input
             name="barcode"
             type="number"
@@ -221,15 +221,21 @@ function Keyboard({ isOpen, onClose, onScan }) {
           >
             {!isValid &&
               showError &&
-              `Введено ${inputValue.length} цифр из ${MAX_INPUT_LENGTH}.`}
+              `Введено ${inputValue.length} цифр из 13.`}
           </span>
+          <button
+            type="button"
+            onClick={handleDeleteLastCharacter}
+            className={styles.deleteBtn}
+          >
+            <img
+              src={deleteIcon}
+              alt="Delete Icon"
+              className={styles.deleteIcon}
+            />
+          </button>
         </label>
-        <BigButton
-          isValid={isValid}
-          buttonText="Готово"
-          onClick={handleSubmit}
-          onScan={onScan}
-        />
+        <BigButton isValid={isValid} buttonText="Готово" />
         <div className={styles.keyboardRow}>
           {[7, 8, 9, 4, 5, 6, 1, 2, 3].map((digit) => (
             <button
@@ -237,7 +243,7 @@ function Keyboard({ isOpen, onClose, onScan }) {
               type="button"
               onClick={() => handleButtonClick(String(digit))}
               className={styles.button}
-              disabled={inputValue.length >= MAX_INPUT_LENGTH}
+              disabled={inputValue.length >= 13}
             >
               {digit}
             </button>
@@ -253,20 +259,9 @@ function Keyboard({ isOpen, onClose, onScan }) {
             type="button"
             onClick={() => handleButtonClick('0')}
             className={styles.button}
-            disabled={inputValue.length >= MAX_INPUT_LENGTH}
+            disabled={inputValue.length >= 13}
           >
             0
-          </button>
-          <button
-            type="button"
-            onClick={handleDeleteLastCharacter}
-            className={styles.button}
-          >
-            <img
-              src={deleteIcon}
-              alt="Delete Icon"
-              className={styles.deleteIcon}
-            />
           </button>
         </div>
       </form>

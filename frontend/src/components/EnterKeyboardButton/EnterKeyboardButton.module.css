@@ -14,3 +14,7 @@
   color: #ffffff;
   cursor: pointer;
 }
+
+.mainButton:hover {
+  background-color: #000;
+}

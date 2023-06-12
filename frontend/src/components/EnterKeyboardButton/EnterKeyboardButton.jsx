@@ -1,7 +1,7 @@
-import styles from './FooterButton.module.css';
+import styles from './EnterKeyboardButton.module.css';
 import Keyboard from '../../images/keyboard.svg';
 
-function FooterButton({ onProductEntry }) {
+function EnterKeyboardButton({ onProductEntry }) {
   const handleProductEntryClick = () => onProductEntry(true);
   return (
     <button
@@ -15,4 +15,4 @@ function FooterButton({ onProductEntry }) {
   );
 }
 
-export default FooterButton;
+export default EnterKeyboardButton;
