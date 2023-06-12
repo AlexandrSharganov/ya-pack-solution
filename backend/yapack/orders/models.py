@@ -120,7 +120,7 @@ class OrderReceived(models.Model):
     )
     skus = models.ManyToManyField(
         Sku,
-        related_name='orderreceived',
+        # related_name='orderreceived',
         through='OrderReceivedSku',
         verbose_name='SKU в заказе',
     )
@@ -230,7 +230,7 @@ class PackageRecommended(models.Model):
     )
     sku = models.ForeignKey(
         Sku,
-        related_name='packed',
+        # related_name='packed',
         on_delete=models.CASCADE,
         verbose_name='SKU',
     )
@@ -245,7 +245,7 @@ class PackageRecommended(models.Model):
         ordering = ['order', 'package']
 
     def __str__(self):
-        return f'{self.order_key} - {self.package}'
+        return f'{self.order} - {self.package}'
 
 
 class OrderReceivedSku(models.Model):
@@ -253,13 +253,13 @@ class OrderReceivedSku(models.Model):
 
     order = models.ForeignKey(
         OrderReceived,
-        related_name='sku',
+        # related_name='sku',
         on_delete=models.CASCADE,
         verbose_name='Заказ',
     )
     sku = models.ForeignKey(
         Sku,
-        related_name='order',
+        # related_name='order',
         on_delete=models.PROTECT,
         verbose_name='SKU',
     )
