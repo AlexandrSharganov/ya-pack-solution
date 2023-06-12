@@ -18,8 +18,6 @@ class Cargotype(models.Model):
     description = models.CharField(
         verbose_name='Описание карготипа',
         max_length=200,
-        unique=True,
-        db_index=True,
         blank=False,
         help_text='Описание',
     )
@@ -253,7 +251,7 @@ class PackageRecommended(models.Model):
 class OrderReceivedSku(models.Model):
     '''Модель перечня SKU в заказе.'''
 
-    order_key = models.ForeignKey(
+    order = models.ForeignKey(
         OrderReceived,
         related_name='sku',
         on_delete=models.CASCADE,
@@ -273,7 +271,7 @@ class OrderReceivedSku(models.Model):
     class Meta:
         verbose_name = 'SKU в заказе'
         verbose_name_plural = 'SKU в заказе'
-        ordering = ['order_key']
+        ordering = ['order']
 
     def __str__(self):
-        return f'{self.order_key} - {self.sku}'
+        return f'{self.order} - {self.sku}'

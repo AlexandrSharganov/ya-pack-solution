@@ -26,7 +26,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         model = options['model'][0]
-        file = options["file"][0]
+        file = options['file'][0]
         models = {
             'cargotype': Cargotype,
             'package': Package,
