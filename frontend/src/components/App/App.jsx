@@ -6,36 +6,65 @@ import MainPage from '../../pages/MainPage';
 import FinishPage from '../../pages/FinishPage';
 import ProblemPage from '../../pages/ProblemPage';
 import Keyboard from '../Keyboard/Keyboard';
-import KeyboardPackage from '../KeyboardPackage/KeyboardPackage';
-import items from '../../utils/items';
+// import KeyboardPackage from '../KeyboardPackage/KeyboardPackage';
+// import { getOrder } from '../../utils/api';
+// import items from '../../utils/items';
+const orderJson = require('../../utils/order.json');
 
 function App() {
   const location = useLocation();
   const hideFooter = location.pathname === '/finish';
   const [isProductEntryPopupOpen, setIsProductEntryPopupOpen] = useState(false);
-  const [isPackageEntryPopupOpen, setIsPackageEntryPopupOpen] = useState(false);
-  const [products, setProducts] = useState([]);
+  // const [isPackageEntryPopupOpen, setIsPackageEntryPopupOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [order, setOrder] = useState({});
+  // const [products, setProducts] = useState([]);
+  // const [packages, setPackages] = useState([]);
   const [scanProduct, setScanProduct] = useState('');
 
-  const handleCloseAllPopups = () => {
+  const closeAllPopups = () => {
     setIsProductEntryPopupOpen(false);
-    setIsPackageEntryPopupOpen(false);
+    // setIsPackageEntryPopupOpen(false);
   };
 
   useEffect(() => {
-    const itemsString = JSON.stringify(items);
-    localStorage.setItem('products', itemsString);
+    // getOrder()
+    //   .then((res) => {
+    //     localStorage.setItem('packages', res);
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
 
-    const storedArrayString = localStorage.getItem('products');
-    const storedArray = JSON.parse(storedArrayString);
-    setProducts(storedArray);
+    setOrder(JSON.parse(JSON.stringify(orderJson)));
+
+    // const itemsString = JSON.stringify(items.sku_list);
+    // localStorage.setItem('products', itemsString);
+
+    // const productsArrayString = localStorage.getItem('products');
+    // const productsArray = JSON.parse(productsArrayString);
+
+    // setProducts(productsArray);
   }, []);
 
   function checkBarcode(data) {
-    const matchingProduct = products.find((product) => product.id === data);
+    setIsLoading(true);
+    const matchingProduct = order.skus.find(
+      (product) => product.barcode === data
+    );
     if (matchingProduct) {
       setScanProduct(data);
+      console.log(data);
+      closeAllPopups();
     }
+
+    const matchingPackage = order.package.find((obj) => obj.package === data);
+    if (matchingPackage) {
+      setScanProduct(data);
+      console.log(data);
+      closeAllPopups();
+    }
+    setIsLoading(false);
   }
 
   return (
@@ -46,8 +75,9 @@ function App() {
           path="/"
           element={
             <MainPage
+              order={order}
               scanProduct={scanProduct}
-              onPackageEntry={setIsPackageEntryPopupOpen}
+              onPackageEntry={setIsProductEntryPopupOpen}
             />
           }
         />
@@ -56,14 +86,15 @@ function App() {
       </Routes>
       {!hideFooter && <Footer onProductEntry={setIsProductEntryPopupOpen} />}
       <Keyboard
-        onClose={handleCloseAllPopups}
+        onClose={closeAllPopups}
         isOpen={isProductEntryPopupOpen}
+        isLoading={isLoading}
         onScanProduct={(data) => checkBarcode(data)}
       />
-      <KeyboardPackage
-        onClose={handleCloseAllPopups}
+      {/* <KeyboardPackage
+        onClose={closeAllPopups}
         isOpen={isPackageEntryPopupOpen}
-      />
+      /> */}
     </>
   );
 }

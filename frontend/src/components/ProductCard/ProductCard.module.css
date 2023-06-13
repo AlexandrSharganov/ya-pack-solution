@@ -39,18 +39,15 @@
   font-weight: 400;
 }
 
-.additionalPackage {
+.cargotypes {
   display: flex;
-  align-items: center;
-  font-weight: 500;
-  font-size: 20px;
-  width: 214px;
-  max-width: fit-content;
-  height: 48px;
-  padding: 0 16px;
-  border-radius: 12px;
-  background: #e0eeff;
-  cursor: default;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.cargotype {
+  width: 46px;
+  height: 46px;
 }
 
 .amount {

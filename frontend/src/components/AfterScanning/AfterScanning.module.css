@@ -1,4 +1,8 @@
 .section {
+  /* display: flex;
+  flex-direction: column; */
+  flex: 1;
+  max-width: 50%;
   /* width: 48%;
   max-width: 895.5px; */
   margin: 0;

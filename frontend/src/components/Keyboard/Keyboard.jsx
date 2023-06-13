@@ -143,8 +143,9 @@ import styles from './Keyboard.module.css';
 import BigButton from '../BigButton/BigButton';
 import deleteIcon from '../../images/delete.svg';
 
-function Keyboard({ isOpen, onClose, onScanProduct }) {
+function Keyboard({ isOpen, onClose, onScanProduct, isLoading }) {
   const [inputValue, setInputValue] = useState(() => '');
+  const [noBarcodeError, setNoBarcodeError] = useState('');
   const [isValid, setIsValid] = useState(false);
   const [showError, setShowError] = useState(false);
 
@@ -157,7 +158,7 @@ function Keyboard({ isOpen, onClose, onScanProduct }) {
   const handleButtonClick = (digit) => {
     setInputValue((prevValue) => {
       const newValue = prevValue + digit;
-      setIsValid(newValue.length === 13);
+      setIsValid(newValue.length >= 3 && newValue.length <= 13);
       setShowError(true);
       return newValue;
     });
@@ -167,7 +168,7 @@ function Keyboard({ isOpen, onClose, onScanProduct }) {
     const { value } = event.target;
     setInputValue(value);
     setShowError(true);
-    setIsValid(value.length === 13);
+    setIsValid(value.length >= 3 && value.length <= 13);
   };
 
   const handleClearInput = () => {
@@ -184,19 +185,28 @@ function Keyboard({ isOpen, onClose, onScanProduct }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (inputValue.length === 13) {
+    if (inputValue.length >= 3 && inputValue.length <= 13) {
       onScanProduct(inputValue);
-      onClose();
-      setInputValue('');
+
+      setTimeout(() => {
+        setNoBarcodeError('Данный штрихкод или упаковка не найдены в заказе.');
+      }, 100);
     } else {
       console.log(`Введено ${inputValue.length} цифр из 13.`);
     }
   };
 
+  useEffect(() => {
+    setInputValue('');
+    setIsValid(false);
+    setShowError(false);
+    setNoBarcodeError('');
+  }, [isOpen]);
+
   return (
     <Popup isOpen={isOpen} onClose={onClose}>
       <form className={styles.container} onSubmit={handleSubmit}>
-        <h1 className={styles.title}>Введите штрихкод товара</h1>
+        <h1 className={styles.title}>Введите штрихкод</h1>
         <button
           className={styles.close}
           aria-label="Закрыть"
@@ -208,7 +218,7 @@ function Keyboard({ isOpen, onClose, onScanProduct }) {
         <label htmlFor="barcode" className={styles.label}>
           <input
             name="barcode"
-            type="number"
+            type="text"
             value={inputValue}
             onChange={handleInputChange}
             className={styles.inputField}
@@ -219,9 +229,8 @@ function Keyboard({ isOpen, onClose, onScanProduct }) {
               showError ? styles.inputErrorActive : ''
             }`}
           >
-            {!isValid &&
-              showError &&
-              `Введено ${inputValue.length} цифр из 13.`}
+            {!isValid && showError && 'Неправильное количество символов.'}
+            {noBarcodeError}
           </span>
           <button
             type="button"
@@ -235,7 +244,11 @@ function Keyboard({ isOpen, onClose, onScanProduct }) {
             />
           </button>
         </label>
-        <BigButton isValid={isValid} buttonText="Готово" />
+        <BigButton
+          isValid={isValid}
+          isLoading={isLoading}
+          buttonText="Готово"
+        />
         <div className={styles.keyboardRow}>
           {[7, 8, 9, 4, 5, 6, 1, 2, 3].map((digit) => (
             <button
@@ -270,263 +283,3 @@ function Keyboard({ isOpen, onClose, onScanProduct }) {
 }
 
 export default Keyboard;
-
-// ------------------------------react-hook-form---------------------
-
-// import { useState, useEffect } from 'react';
-// import { useForm } from 'react-hook-form';
-// import styles from './Keyboard.module.css';
-// import BigButton from '../BigButton/BigButton';
-
-// function Keyboard() {
-//   const [inputValue, setInputValue] = useState('');
-
-//   const {
-//     register,
-//     formState: { errors, isValid },
-//     reset,
-//     trigger,
-//   } = useForm({
-//     mode: 'all',
-//     criteriaMode: 'all',
-//   });
-
-//   const handleButtonClick = (digit) => {
-//     setInputValue((prevValue) => prevValue + digit);
-//     trigger('product');
-//   };
-
-//   const handleInputChange = (event) => {
-//     const { value } = event.target;
-//     setInputValue(value);
-//     trigger('product');
-//   };
-
-//   const handleClearInput = () => {
-//     setInputValue('');
-//     trigger('product');
-//   };
-
-//   const handleSubmit = (e) => {
-//     e.preventDefault();
-//   };
-
-//   useEffect(() => {
-//     reset();
-//   }, [reset]);
-
-//   return (
-//     <form className={styles.container} onSubmit={handleSubmit}>
-//       <h1 className={styles.title}>Введите штрихкод товара</h1>
-//       <label htmlFor="barcode">
-//         <input
-//           name="barcode"
-//           type="number"
-//           value={inputValue}
-//           onChange={handleInputChange}
-//           className={styles.inputField}
-//           placeholder="Номер штрихкода"
-//           {...register('product', {
-//             minLength: {
-//               value: 16,
-//               message: `Введено ${inputValue.length + 1} цифр вместо 16.`,
-//             },
-//           })}
-//         />
-//         <span
-//           className={`${styles.inputError} ${
-//             !isValid && styles.inputErrorActive
-//           }`}
-//         >
-//           {errors?.product?.message}
-//         </span>
-//       </label>
-//       <BigButton isValid={isValid} buttonText="Готово" onClick={handleSubmit} />
-//       <div className={styles.keyboardRow}>
-//         {[7, 8, 9, 4, 5, 6, 1, 2, 3].map((digit) => (
-//           <button
-//             key={digit}
-//             type="button"
-//             onClick={() => handleButtonClick(String(digit))}
-//             className={styles.button}
-//             disabled={inputValue.length >= 16}
-//           >
-//             {digit}
-//           </button>
-//         ))}
-//         <button
-//           type="button"
-//           onClick={handleClearInput}
-//           className={`${styles.button} ${styles.clearButton}`}
-//         >
-//           &#10005;
-//         </button>
-//         <button
-//           type="button"
-//           onClick={() => handleButtonClick('0')}
-//           className={styles.button}
-//           disabled={inputValue.length >= 16}
-//         >
-//           0
-//         </button>
-//       </div>
-//     </form>
-//   );
-// }
-
-// export default Keyboard;
-
-// --------------------------БЕЗ ОТКЛЮЧЕНИЯ КНОПКИ И ВЫВОД ОШИБКИ ВАЛИДАЦИИ ПРИ НАЖАТИИ НА ГОТОВО--------
-
-// import { useState, useEffect } from 'react';
-// import styles from './Keyboard.module.css';
-// import BigButton from '../BigButton/BigButton';
-
-// function Keyboard() {
-//   const [inputValue, setInputValue] = useState('');
-//   const [isValid, setIsValid] = useState(false);
-//   const [showError, setShowError] = useState(false);
-
-//   const handleButtonClick = (digit) => {
-//     setInputValue((prevValue) => prevValue + digit);
-//   };
-
-//   const handleInputChange = (event) => {
-//     const { value } = event.target;
-//     setInputValue(value);
-//   };
-
-//   const handleClearInput = () => {
-//     setInputValue('');
-//   };
-
-//   const handleSubmit = (e) => {
-//     e.preventDefault();
-//     if (inputValue.length === 16) {
-//       setIsValid(true);
-//       setShowError(false);
-//       console.log('data');
-//     } else {
-//       setIsValid(false);
-//       setShowError(true);
-//       console.log(`Введено ${inputValue.length} цифр вместо 16.`);
-//     }
-//   };
-
-//   useEffect(() => {
-//     setInputValue('');
-//   }, []);
-
-//   return (
-//     <form className={styles.container} onSubmit={handleSubmit}>
-//       <h1 className={styles.title}>Введите штрихкод товара</h1>
-//       <label htmlFor="barcode">
-//         <input
-//           name="barcode"
-//           type="number"
-//           value={inputValue}
-//           onChange={handleInputChange}
-//           className={styles.inputField}
-//           placeholder="Номер штрихкода"
-//         />
-//         <span
-//           className={`${styles.inputError} ${
-//             showError ? styles.inputErrorActive : ''
-//           }`}
-//         >
-//           {!isValid && `Введено ${inputValue.length} цифр вместо 16.`}
-//         </span>
-//       </label>
-//       <BigButton buttonText="Готово" onClick={handleSubmit} />
-//       <div className={styles.keyboardRow}>
-//         {[7, 8, 9, 4, 5, 6, 1, 2, 3].map((digit) => (
-//           <button
-//             key={digit}
-//             type="button"
-//             onClick={() => handleButtonClick(String(digit))}
-//             className={styles.button}
-//             disabled={inputValue.length >= 16}
-//           >
-//             {digit}
-//           </button>
-//         ))}
-//         <button
-//           type="button"
-//           onClick={handleClearInput}
-//           className={`${styles.button} ${styles.clearButton}`}
-//         >
-//           &#10005;
-//         </button>
-//         <button
-//           type="button"
-//           onClick={() => handleButtonClick('0')}
-//           className={styles.button}
-//           disabled={inputValue.length >= 16}
-//         >
-//           0
-//         </button>
-//       </div>
-//     </form>
-//   );
-// }
-
-// export default Keyboard;
-
-// --------------------------БЕЗ ВИРТУАЛЬНОЙ КЛАВИАТУРЫ------------------------------------
-
-// import { useEffect } from 'react';
-// import { useForm } from 'react-hook-form';
-// import styles from './Keyboard.module.css';
-// import BigButton from '../BigButton/BigButton';
-
-// function Keyboard() {
-//   const {
-//     register,
-//     formState: { errors, isValid },
-//     // getValues,
-//     reset,
-//   } = useForm({ mode: 'onChange', criteriaMode: 'all' });
-
-//   const handleSubmit = (e) => {
-//     e.preventDefault();
-//   };
-
-//   useEffect(() => {
-//     reset();
-//   }, [reset]);
-
-//   return (
-//     <form className={styles.container} onSubmit={handleSubmit}>
-//       <h1 className={styles.title}>Введите штрихкод товара</h1>
-//       <label htmlFor="number">
-//         <input
-//           name="number"
-//           type="text"
-//           className={styles.inputField}
-//           placeholder="Номер штрихкода"
-//             {...register('product', {
-//             required: 'Заполните это поле.',
-//             minLength: {
-//               value: 16,
-//               message: 'Введено меньше 16 цифр',
-//             },
-//             maxLength: {
-//               value: 16,
-//               message: 'Введено больше 16 цифр.',
-//             },
-//           })}
-//         />
-//         <span
-//           className={`${styles.inputError} ${
-//             !isValid && styles.inputErrorActive
-//           }`}
-//         >
-//           {errors?.product?.message}
-//         </span>
-//       </label>
-//       <BigButton isValid={isValid} buttonText="Готово" onClick={handleSubmit} />
-//     </form>
-//   );
-// }
-
-// export default Keyboard;
