@@ -3,7 +3,7 @@ import styles from './BeforeScanning.module.css';
 import ProductCard from '../ProductCard/ProductCard';
 import Done from '../../images/done-small.svg';
 
-function BeforeScanning({ scanProduct }) {
+function BeforeScanning({ order, scanProduct }) {
   const [isCopied, setIsCopied] = useState(false);
   const [matchingProducts, setMatchingProducts] = useState([]);
   const [scanProducts, setScanProducts] = useState([]);
@@ -13,14 +13,15 @@ function BeforeScanning({ scanProduct }) {
   }, [scanProduct]);
 
   useEffect(() => {
-    const storedProductsString = localStorage.getItem('products');
-    const storedProducts = JSON.parse(storedProductsString);
+    // const storedProductsString = localStorage.getItem('products');
+    // const storedProducts = JSON.parse(storedProductsString);
+    if (order.skus !== undefined) {
+      const filteredProducts = order.skus.filter(
+        (item) => !scanProducts.includes(item.barcode)
+      );
 
-    const filteredProducts = storedProducts.filter(
-      (item) => !scanProducts.includes(item.code)
-    );
-
-    setMatchingProducts(filteredProducts);
+      setMatchingProducts(filteredProducts);
+    }
   }, [scanProducts]);
 
   useEffect(() => {
@@ -47,7 +48,7 @@ function BeforeScanning({ scanProduct }) {
   const renderProductCards = () => (
     <div className={styles.cardList}>
       {matchingProducts.map((item) => (
-        <ProductCard key={item.code} item={item} setIsCopied={setIsCopied} />
+        <ProductCard key={item.barcode} item={item} setIsCopied={setIsCopied} />
       ))}
     </div>
   );
