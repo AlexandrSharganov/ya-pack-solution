@@ -1,56 +1,27 @@
-// import { useState, useEffect } from 'react';
-// import styles from './BeforeScanning.module.css';
-// import ProductCard from '../ProductCard/ProductCard';
-// import items from '../../utils/items';
-// // import Done from '../../images/done-small.svg';
-
-// function BeforeScanning() {
-//   const [isCopied, setIsCopied] = useState(false);
-
-//   useEffect(() => {
-//     if (isCopied) {
-//       const timeout = setTimeout(() => {
-//         setIsCopied(false);
-//       }, 1500);
-
-//       return () => clearTimeout(timeout);
-//     }
-
-//     return undefined;
-//   }, [isCopied]);
-
-//   return (
-//     <section className={styles.section}>
-//       <div className={styles.box}>
-//         <h1 className={styles.title}>Ячейка B-09</h1>
-//         <span className={styles.post}>Почта России</span>
-//       </div>
-//       <span className={styles.amount}>4 товара</span>
-//       <div className={styles.cardList}>
-//         {items.map((item) => (
-//           <ProductCard key={item.code} item={item} setIsCopied={setIsCopied} />
-//         ))}
-//       </div>
-//       {isCopied && <div className={styles.copyCode}>Штрихкод скопирован</div>}
-//       {/* <div className={styles.done}>
-//         <img src={Done} alt="Готово!" />
-//         <p>Отсканировано 4 товара!</p>
-//         <p>Упакуйте их и отсканируйте упаковку</p>
-//       </div> */}
-//     </section>
-//   );
-// }
-
-// export default BeforeScanning;
-
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import styles from './BeforeScanning.module.css';
 import ProductCard from '../ProductCard/ProductCard';
-import items from '../../utils/items';
-import Keyboard from '../Keyboard/Keyboard';
+import Done from '../../images/done-small.svg';
 
-function BeforeScanning() {
+function BeforeScanning({ scanProduct }) {
   const [isCopied, setIsCopied] = useState(false);
+  const [matchingProducts, setMatchingProducts] = useState([]);
+  const [scanProducts, setScanProducts] = useState([]);
+
+  useEffect(() => {
+    setScanProducts((prevScanProducts) => [...prevScanProducts, scanProduct]);
+  }, [scanProduct]);
+
+  useEffect(() => {
+    const storedProductsString = localStorage.getItem('products');
+    const storedProducts = JSON.parse(storedProductsString);
+
+    const filteredProducts = storedProducts.filter(
+      (item) => !scanProducts.includes(item.id)
+    );
+
+    setMatchingProducts(filteredProducts);
+  }, [scanProducts]);
 
   useEffect(() => {
     if (isCopied) {
@@ -64,15 +35,38 @@ function BeforeScanning() {
     return undefined;
   }, [isCopied]);
 
-  const handleScan = (barcode) => {
-    const foundItemIndex = items.findIndex((item) => item.code === barcode);
-    if (foundItemIndex !== -1) {
-      const newItems = [...items];
-      newItems.splice(foundItemIndex, 1);
-      setIsCopied(true);
-    } else {
-      console.log('Товар не найден');
+  const renderAmount = () => {
+    if (matchingProducts.length !== 0) {
+      return (
+        <span className={styles.amount}>{matchingProducts.length} товара</span>
+      );
     }
+    return null;
+  };
+
+  const renderProductCards = () => (
+    <div className={styles.cardList}>
+      {matchingProducts.map((item) => (
+        <ProductCard key={item.id} item={item} setIsCopied={setIsCopied} />
+      ))}
+    </div>
+  );
+
+  const renderDone = () => {
+    if (matchingProducts.length === 0) {
+      return (
+        <div className={styles.done}>
+          <img src={Done} alt="Готово!" />
+          <p className={styles.doneTitle}>
+            Отсканировано {scanProducts.length - 2} товара!
+          </p>
+          <p className={styles.doneSubtitle}>
+            Упакуйте их и отсканируйте упаковку
+          </p>
+        </div>
+      );
+    }
+    return null;
   };
 
   return (
@@ -81,14 +75,10 @@ function BeforeScanning() {
         <h1 className={styles.title}>Ячейка B-09</h1>
         <span className={styles.post}>Почта России</span>
       </div>
-      <span className={styles.amount}>{`${items.length} товара`}</span>
-      <div className={styles.cardList}>
-        {items.map((item) => (
-          <ProductCard key={item.code} item={item} setIsCopied={setIsCopied} />
-        ))}
-      </div>
+      {renderAmount()}
+      {renderProductCards()}
       {isCopied && <div className={styles.copyCode}>Штрихкод скопирован</div>}
-      <Keyboard isOpen={false} onClose={() => {}} onScan={handleScan} />
+      {renderDone()}
     </section>
   );
 }

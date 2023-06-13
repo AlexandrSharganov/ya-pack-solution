@@ -1,6 +1,7 @@
 .card {
   display: flex;
-  align-items: center;
+  justify-content: space-between;
+  align-items: start;
   gap: 24px;
   border-bottom: 1px solid #e8e8e8;
   padding-bottom: 25px;
@@ -10,40 +11,72 @@
   border-bottom: 0;
 }
 
+.figure {
+  display: flex;
+  flex-direction: row;
+  margin: 0;
+}
+
+.figcaption {
+  display: flex;
+  flex-direction: column;
+  margin-left: 24px;
+}
+
 .image {
-  width: 105px;
-  height: 105px;
+  width: 100px;
+  height: 100px;
+  padding: 9px;
   background: #f9f7f3;
   border-radius: 16px;
 }
 
 .title {
   max-width: 433px;
-  margin: 0;
-  padding-bottom: 12px;
+  margin-top: 10px;
   font-size: 20px;
   line-height: 22px;
   font-weight: 400;
 }
 
 .additionalPackage {
+  display: flex;
+  align-items: center;
   font-weight: 500;
   font-size: 20px;
-  line-height: 23px;
-  width: fit-content;
-  padding: 16px;
+  width: 214px;
+  max-width: fit-content;
+  height: 48px;
+  padding: 0 16px;
   border-radius: 12px;
   background: #e0eeff;
   cursor: default;
 }
 
 .amount {
+  display: flex;
+  align-items: center;
+  width: 76px;
+  max-width: fit-content;
+  height: 48px;
+  padding: 0 16px;
   font-size: 20px;
   line-height: 23px;
   text-align: center;
-  min-width: 76px;
-  padding: 12.5px 16px;
   border-radius: 30px;
   background: #f3f0e980;
   cursor: default;
+}
+
+.showMoreButton {
+  border: 0;
+  padding: 0;
+  min-width: 152px;
+  margin: auto;
+  background: url(../../images/down-button.svg) no-repeat;
+  padding-right: 12.5px;
+  background-position: right;
+  background-color: transparent;
+  color: #0044ee;
+  font-size: 20px;
 }

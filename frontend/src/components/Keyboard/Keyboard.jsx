@@ -143,7 +143,7 @@ import styles from './Keyboard.module.css';
 import BigButton from '../BigButton/BigButton';
 import deleteIcon from '../../images/delete.svg';
 
-function Keyboard({ isOpen, onClose }) {
+function Keyboard({ isOpen, onClose, onScanProduct }) {
   const [inputValue, setInputValue] = useState(() => '');
   const [isValid, setIsValid] = useState(false);
   const [showError, setShowError] = useState(false);
@@ -185,7 +185,7 @@ function Keyboard({ isOpen, onClose }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (inputValue.length === 13) {
-      console.log('data');
+      onScanProduct(inputValue);
       onClose();
       setInputValue('');
     } else {
