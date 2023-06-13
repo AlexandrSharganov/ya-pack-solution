@@ -8,9 +8,10 @@ class Item(BaseModel):
     dimention_b: float
     dimention_c: float
     sku_wght: float
+    cargotypes: list[str]
 
 
 class Order(BaseModel):
-    order_id: str
+    order_key: str
     skus: list[Item]
     status: str
