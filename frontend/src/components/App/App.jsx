@@ -6,7 +6,7 @@ import MainPage from '../../pages/MainPage';
 import FinishPage from '../../pages/FinishPage';
 import ProblemPage from '../../pages/ProblemPage';
 import Keyboard from '../Keyboard/Keyboard';
-import KeyboardPackage from '../KeyboardPackage/KeyboardPackage';
+// import KeyboardPackage from '../KeyboardPackage/KeyboardPackage';
 // import { getOrder } from '../../utils/api';
 // import items from '../../utils/items';
 const orderJson = require('../../utils/order.json');
@@ -15,7 +15,7 @@ function App() {
   const location = useLocation();
   const hideFooter = location.pathname === '/finish';
   const [isProductEntryPopupOpen, setIsProductEntryPopupOpen] = useState(false);
-  const [isPackageEntryPopupOpen, setIsPackageEntryPopupOpen] = useState(false);
+  // const [isPackageEntryPopupOpen, setIsPackageEntryPopupOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [order, setOrder] = useState({});
   // const [products, setProducts] = useState([]);
@@ -24,7 +24,7 @@ function App() {
 
   const closeAllPopups = () => {
     setIsProductEntryPopupOpen(false);
-    setIsPackageEntryPopupOpen(false);
+    // setIsPackageEntryPopupOpen(false);
   };
 
   useEffect(() => {
@@ -77,7 +77,7 @@ function App() {
             <MainPage
               order={order}
               scanProduct={scanProduct}
-              onPackageEntry={setIsPackageEntryPopupOpen}
+              onPackageEntry={setIsProductEntryPopupOpen}
             />
           }
         />
@@ -91,10 +91,10 @@ function App() {
         isLoading={isLoading}
         onScanProduct={(data) => checkBarcode(data)}
       />
-      <KeyboardPackage
+      {/* <KeyboardPackage
         onClose={closeAllPopups}
         isOpen={isPackageEntryPopupOpen}
-      />
+      /> */}
     </>
   );
 }

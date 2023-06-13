@@ -1,12 +1,20 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styles from './BeforeScanning.module.css';
 import ProductCard from '../ProductCard/ProductCard';
-import Done from '../../images/done-small.svg';
+import DoneBlock from '../DoneBlock/DoneBlock';
+import BigButton from '../BigButton/BigButton';
+
+// const doneBlock = {
+//   position: "fixed",
+//   left: "28px"
+// }
 
 function BeforeScanning({ order, scanProduct }) {
   const [isCopied, setIsCopied] = useState(false);
   const [matchingProducts, setMatchingProducts] = useState([]);
   const [scanProducts, setScanProducts] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     setScanProducts((prevScanProducts) => [...prevScanProducts, scanProduct]);
@@ -53,18 +61,25 @@ function BeforeScanning({ order, scanProduct }) {
     </div>
   );
 
+  const isValid = true;
+
+  const handleButtonClick = () => {
+    if (isValid) {
+      navigate('/finish');
+    }
+  };
+
   const renderDone = () => {
     if (matchingProducts.length === 0) {
       return (
-        <div className={styles.done}>
-          <img src={Done} alt="Готово!" />
-          <p className={styles.doneTitle}>
-            Отсканировано {scanProducts.length - 2} товара!
-          </p>
-          <p className={styles.doneSubtitle}>
-            Упакуйте их и отсканируйте упаковку
-          </p>
-        </div>
+        <>
+          <DoneBlock scanProducts={scanProducts} />
+          <BigButton
+            isValid={isValid}
+            buttonText="Закрыть посылку"
+            onClick={handleButtonClick}
+          />
+        </>
       );
     }
     return null;

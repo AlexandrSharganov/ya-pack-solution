@@ -1,6 +1,7 @@
-.code {
+.id {
   font-size: 20px;
   line-height: 26px;
+  margin-top: 10px;
   min-width: 152px;
   color: #0044ee;
   cursor: pointer;

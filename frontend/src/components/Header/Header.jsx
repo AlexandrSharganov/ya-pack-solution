@@ -10,22 +10,22 @@ function Header() {
     <section className={styles.header}>
       <div className={styles.headerGroup}>
         <button type="button" className={styles.headerButton}>
-          <img src={Menu} alt="Menu" />
+          <img src={Menu} alt="Меню" />
         </button>
-        <Link to="/" className={styles.linkLogo}>
+        <Link to="/" className={styles.logo}>
           <img src={Yandex} alt="Yandex" />
           <img src={Market} alt="Market" />
-          <span className={styles.logoName}>Cклад</span>
+          <span className={styles.stock}>Cклад</span>
         </Link>
       </div>
-      <h1 className={styles.headerTitle}>Упаковка</h1>
+      <h1 className={styles.title}>Упаковка</h1>
       <div className={`${styles.headerGroup} ${styles.rightPath}`}>
         <div className={styles.orderStatus}>
-          <span>sof-natgemokee</span>
+          <p>sof-natgemokee</p>
           <div className={styles.progress}>79%</div>
         </div>
         <button type="button" className={styles.headerButton}>
-          <img src={More} alt="More" />
+          <img src={More} alt="Больше" />
         </button>
       </div>
     </section>

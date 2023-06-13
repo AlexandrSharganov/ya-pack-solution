@@ -22,7 +22,7 @@ function AfterScanning({ order, onPackageEntry, scanProduct }) {
   }, [scanProduct]);
 
   const renderScanInstructions = () => (
-    <figure>
+    <figure className={styles.figure}>
       <img src={ScanImage} alt="Сканер" />
       <figcaption>Сканируйте товары из ячейки</figcaption>
     </figure>
