@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "./static/css/main.57dce790.css",
-    "main.js": "./static/js/main.92c8623c.js",
+    "main.css": "./static/css/main.4e61a2b4.css",
+    "main.js": "./static/js/main.8d7b388f.js",
     "static/media/YS Disp-Heavy.woff2": "./static/media/YS Disp-Heavy.b4bd208f5ebcdc2433c1.woff2",
     "static/media/YS Disp-Medium.woff2": "./static/media/YS Disp-Medium.64cad9c574ed021006ae.woff2",
     "static/media/YS Disp-Bold.woff2": "./static/media/YS Disp-Bold.1d07683c7daecf95ae2a.woff2",
@@ -16,25 +16,29 @@
     "static/media/YS Text-Fat.woff2": "./static/media/YS Text-Fat.ccbeab70a2b94271ce11.woff2",
     "static/media/YS Text-Regular.woff2": "./static/media/YS Text-Regular.1567d2ea09745a5bc790.woff2",
     "static/media/YS Disp-Regular.woff2": "./static/media/YS Disp-Regular.c20ac5041709f4168465.woff2",
-    "static/media/done-small.svg": "./static/media/done-small.745000f79936883e1bd6ecbaeeba1668.svg",
-    "static/media/product-2.png": "./static/media/product-2.82357b4195c514593219.png",
-    "static/media/product-3.png": "./static/media/product-3.0620691e527526390f14.png",
-    "static/media/scan.svg": "./static/media/scan.01355ad711e1394a8f30beaa74a80749.svg",
-    "static/media/done-large.svg": "./static/media/done-large.84b6d52d4054db3074c1c048182bf8e4.svg",
-    "static/media/product-4.png": "./static/media/product-4.03c4861e3fb9a1d33656.png",
-    "static/media/keyboard.svg": "./static/media/keyboard.31f2f941986b8f4970038a07f3191f64.svg",
-    "static/media/turbo.svg": "./static/media/turbo.308288afe6abd1bfb9a3.svg",
-    "static/media/market.svg": "./static/media/market.e1055270b7c0bf42346108d2f01c7f5d.svg",
-    "static/media/yandex.svg": "./static/media/yandex.a4e74bcf403ea5f0d91afb0e7cb8b18a.svg",
-    "static/media/more.svg": "./static/media/more.46ad5a8ae6c0cf9ec19f99db0c0b7079.svg",
+    "static/media/done-small.svg": "./static/media/done-small.43cbec25029d926b13d9cda8c9ce6cf3.svg",
+    "static/media/scan.svg": "./static/media/scan.0860f59880c848d564d0b8f6649400dc.svg",
+    "static/media/done-large.svg": "./static/media/done-large.7ced53b4412b0cbfd172f91d2a45c8ca.svg",
+    "static/media/perishable-product.svg": "./static/media/perishable-product.8cd13fb81b1f9acea6fb472d1e496b4c.svg",
+    "static/media/technique.svg": "./static/media/technique.7ea2a8384283a445583e8a1335a2c872.svg",
+    "static/media/liquid.svg": "./static/media/liquid.859968af949412a6b0572d54863a6eb6.svg",
+    "static/media/keyboard.svg": "./static/media/keyboard.696a48dfb8f76980c96dfed9d0c94889.svg",
+    "static/media/chemicals.svg": "./static/media/chemicals.11140c5e1f7e0f01f2c4ee3a5ed1e15b.svg",
+    "static/media/bulk-product.svg": "./static/media/bulk-product.2c8c57d22132f740bd7ff355ffbdf83f.svg",
+    "static/media/turbo.svg": "./static/media/turbo.2717edbf0d9c26bf2ffb.svg",
+    "static/media/market.svg": "./static/media/market.c1d59b9b7276ca3038e1218d90370fad.svg",
+    "static/media/fragile.svg": "./static/media/fragile.2b7374713ecbc6f20d2dd25c8768a0a0.svg",
+    "static/media/yandex.svg": "./static/media/yandex.0ac1774d4f65795d4820a3c7de6a1074.svg",
+    "static/media/more.svg": "./static/media/more.1850667dfcdfd058b5d54e555a4ca11e.svg",
     "index.html": "./index.html",
     "static/media/delete.svg": "./static/media/delete.49bcfab711b0b01cb2d9c7bed0e3fb40.svg",
-    "static/media/menu.svg": "./static/media/menu.60b720847a5f79a698072c78bd3710c1.svg",
-    "main.57dce790.css.map": "./static/css/main.57dce790.css.map",
-    "main.92c8623c.js.map": "./static/js/main.92c8623c.js.map"
+    "static/media/menu.svg": "./static/media/menu.38da97ea0208427504cd333b946cfb9e.svg",
+    "static/media/down-button.svg": "./static/media/down-button.b0a7af5bdebf9c8fb109.svg",
+    "main.4e61a2b4.css.map": "./static/css/main.4e61a2b4.css.map",
+    "main.8d7b388f.js.map": "./static/js/main.8d7b388f.js.map"
   },
   "entrypoints": [
-    "static/css/main.57dce790.css",
-    "static/js/main.92c8623c.js"
+    "static/css/main.4e61a2b4.css",
+    "static/js/main.8d7b388f.js"
   ]
 }
