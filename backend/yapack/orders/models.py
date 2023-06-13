@@ -110,6 +110,15 @@ class Sku(models.Model):
 
 class OrderReceived(models.Model):
     '''Модель заказа полученного из системы.'''
+    
+    NO_REC = 'no_rec'
+    IN_WORK = 'in_work'
+    READY = 'ready'
+    STATUS = [
+        (NO_REC, 'no_rec'),
+        (IN_WORK, 'in_work'),
+        (READY, 'ready'),
+    ]
 
     order_key = models.CharField(
         verbose_name='id заказа',
@@ -126,6 +135,7 @@ class OrderReceived(models.Model):
     )
     packer = models.ForeignKey(
         Packer,
+        related_name='orders',
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -134,6 +144,11 @@ class OrderReceived(models.Model):
     package_match = models.BooleanField(
         verbose_name='Совпадение предложенной и использованной упаковки',
         default=False,
+    )
+    status = models.CharField(
+        max_length=max(len(status) for status, _ in STATUS),
+        choices=STATUS,
+        default=NO_REC,
     )
 
     class Meta:
@@ -216,7 +231,7 @@ class PackageRecommended(models.Model):
 
     order = models.ForeignKey(
         OrderReceived,
-        related_name='package',
+        related_name='packages',
         on_delete=models.CASCADE,
         db_index=True,
         verbose_name='Заказ',
@@ -228,12 +243,12 @@ class PackageRecommended(models.Model):
         db_index=True,
         verbose_name='Рекомендованная упаковка',
     )
-    sku = models.ForeignKey(
-        Sku,
-        # related_name='packed',
-        on_delete=models.CASCADE,
-        verbose_name='SKU',
-    )
+    # sku = models.ForeignKey(
+    #     Sku,
+    #     # related_name='packed',
+    #     on_delete=models.CASCADE,
+    #     verbose_name='SKU',
+    # )
     amount = models.SmallIntegerField(
         blank=False,
         verbose_name='Количество',

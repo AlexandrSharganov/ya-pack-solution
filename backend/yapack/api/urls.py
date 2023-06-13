@@ -5,7 +5,9 @@ from .views import (
     PackageViewSet,
     OrderViewSet,
     SkuViewSet,
-    SkuAmountViewSet
+    SkuAmountViewSet,
+    ds_order_view,
+    front_order_view
 )
 
 app_name = 'api'
@@ -18,5 +20,7 @@ router.register('skuamount', SkuAmountViewSet, basename='skuamount')
 
 
 urlpatterns = [
+    path('order/ds/', ds_order_view, name='ds_order_view'),
+    path('order/front/', front_order_view, name='front_order_view'),
     path('', include(router.urls)),
 ]

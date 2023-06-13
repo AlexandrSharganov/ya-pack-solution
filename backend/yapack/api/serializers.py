@@ -1,3 +1,4 @@
+from django.shortcuts import get_object_or_404
 from rest_framework import serializers
 
 from orders.models import (
@@ -8,6 +9,7 @@ from orders.models import (
     Cargotype,
     OrderReceivedSku,
 )
+from users.models import Packer
 
 
 
@@ -78,20 +80,52 @@ class PackageRecommendedSerializer(serializers.ModelSerializer):
         )
 
 
-class OrderReceivedSerializer(serializers.ModelSerializer):
+class PackerSerializer(serializers.ModelSerializer):
     
+    class Meta:
+        model = Packer
+        fields = ('packer_num',)
+
+
+class OrderReceivedSerializer(serializers.ModelSerializer):
+
     skus = OrderReceivedSkuSerializer(
         many=True,
-        source='orderreceivedsku_set'
+        source='orderreceivedsku_set',  
+        read_only=True
     )
-    package = PackageRecommendedSerializer(many=True)
-    
+    packages = PackageRecommendedSerializer(many=True)
     class Meta:
         model = OrderReceived
         fields = (
+            'id',
             'order_key',
             'skus',
-            'package',
+            'packages',
             'packer',
             'package_match',
+            'status',
         )
+
+    def update(self, instance, validated_data):
+        instance.package_match = validated_data.get('package_match', instance.package_match)
+        instance.status = validated_data.get('status', instance.status)
+        if validated_data.get('packages', None):
+            packages = validated_data['packages']
+            packages_in_order = [
+                PackageRecommended(
+                    package=get_object_or_404(
+                        Package,
+                        packagetype=package['package']['packagetype']
+                    ),
+                    order=instance,
+                    amount=package['amount']
+                )
+                for package in packages
+            ]
+            PackageRecommended.objects.filter(order=instance).delete()
+            PackageRecommended.objects.bulk_create(packages_in_order)
+            instance.save()
+            return instance
+        instance.save()
+        return instance
