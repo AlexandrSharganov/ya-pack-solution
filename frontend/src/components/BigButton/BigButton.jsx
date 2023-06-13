@@ -1,14 +1,14 @@
+import Loader from '../Loader/Loader';
 import styles from './BigButton.module.css';
 
-function BigButton({ buttonText, onClick, isValid }) {
+function BigButton({ buttonText, onClick, isValid, isLoading }) {
   return (
     <button
       type="submit"
       className={`${styles.button} ${isValid ? '' : styles.buttonInactive}`}
-      // className={styles.button}
       onClick={onClick}
     >
-      {buttonText}
+      {isLoading ? <Loader /> : buttonText}
     </button>
   );
 }

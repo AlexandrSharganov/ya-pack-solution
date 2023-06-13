@@ -3,21 +3,22 @@ import styles from './AfterScanning.module.css';
 import ScanImage from '../../images/scan.svg';
 import ProductCard from '../ProductCard/ProductCard';
 
-function AfterScanning({ onPackageEntry, scanProduct }) {
+function AfterScanning({ order, onPackageEntry, scanProduct }) {
   const [matchingProducts, setMatchingProducts] = useState([]);
 
   useEffect(() => {
-    const storedProductsString = localStorage.getItem('products');
-    const storedProducts = JSON.parse(storedProductsString);
+    // const storedProductsString = localStorage.getItem('products');
+    // const storedProducts = JSON.parse(storedProductsString);
+    if (order.skus !== undefined) {
+      const filteredProducts = order.skus.filter(
+        (item) => scanProduct === item.barcode
+      );
 
-    const filteredProducts = storedProducts.filter(
-      (item) => scanProduct === item.code
-    );
-
-    setMatchingProducts((prevMatchingProducts) => [
-      ...prevMatchingProducts,
-      ...filteredProducts,
-    ]);
+      setMatchingProducts((prevMatchingProducts) => [
+        ...prevMatchingProducts,
+        ...filteredProducts,
+      ]);
+    }
   }, [scanProduct]);
 
   const renderScanInstructions = () => (
@@ -30,7 +31,7 @@ function AfterScanning({ onPackageEntry, scanProduct }) {
   const renderProductCards = () => (
     <div className={styles.cardList}>
       {matchingProducts.map((item) => (
-        <ProductCard key={item.code} item={item} />
+        <ProductCard key={item.barcode} item={item} />
       ))}
     </div>
   );
