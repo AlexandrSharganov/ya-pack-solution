@@ -11,7 +11,8 @@ from .serializers import (
     PackageSerializer,
     OrderReceivedSerializer,
     SkuSerializer,
-    OrderReceivedSkuSerializer
+    OrderReceivedSkuSerializer,
+    FrontOrderReceivedSerializer
 )
 
 
@@ -24,7 +25,13 @@ class PackageViewSet(viewsets.ReadOnlyModelViewSet):
 class OrderViewSet(viewsets.GenericViewSet, UpdateModelMixin, RetrieveModelMixin, ListModelMixin):
     
     queryset = OrderReceived.objects.all()
-    serializer_class = OrderReceivedSerializer
+    serializer_class = FrontOrderReceivedSerializer
+    
+    def get_serializer_class(self):
+        
+        if self.request.data.get('packer', None):
+            return FrontOrderReceivedSerializer
+        return OrderReceivedSerializer
 
 
 # class OrderViewSet(viewsets.ReadOnlyModelViewSet):
@@ -58,11 +65,12 @@ class SkuAmountViewSet(viewsets.ReadOnlyModelViewSet):
 @api_view(['GET'])
 def ds_order_view(request):
     order = get_list_or_404(OrderReceived, status='no_rec')[0]
+    # order = OrderReceived.objects.filter(order_is_packed=False).first()
     serializer = OrderReceivedSerializer(order)
     return Response(serializer.data)
 
 @api_view(['GET'])
 def front_order_view(request):
     order = get_list_or_404(OrderReceived, status='in_work')[0]
-    serializer = OrderReceivedSerializer(order)
+    serializer = FrontOrderReceivedSerializer(order)
     return Response(serializer.data)

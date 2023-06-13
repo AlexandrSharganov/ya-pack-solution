@@ -290,3 +290,23 @@ class OrderReceivedSku(models.Model):
 
     def __str__(self):
         return f'{self.order} - {self.sku}'
+
+
+class PackageSelected(models.Model):
+    
+    order = models.ForeignKey(
+        OrderReceived,
+        related_name='packages_sel',
+        on_delete=models.CASCADE,
+        verbose_name='Заказ',
+    )
+    package = models.ForeignKey(
+        Package,
+        on_delete=models.CASCADE,
+        db_index=True,
+        verbose_name='Выбранная упаковка',
+    )
+    amount = models.SmallIntegerField(
+        blank=False,
+        verbose_name='Количество',
+    )
