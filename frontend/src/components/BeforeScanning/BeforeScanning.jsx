@@ -23,7 +23,7 @@ function BeforeScanning({ order, scanProduct }) {
 
       setMatchingProducts(filteredProducts);
     }
-  }, [scanProducts]);
+  }, [order.skus, scanProducts]);
 
   const removeProduct = (barcode) => {
     setMatchingProducts((prevMatchingProducts) =>

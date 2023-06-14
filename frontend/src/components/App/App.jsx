@@ -6,7 +6,8 @@ import MainPage from '../../pages/MainPage';
 import FinishPage from '../../pages/FinishPage';
 import ProblemPage from '../../pages/ProblemPage';
 import Keyboard from '../Keyboard/Keyboard';
-
+// import { getOrder } from '../../utils/api';
+// import items from '../../utils/items';
 const orderJson = require('../../utils/order.json');
 
 function App() {
@@ -16,6 +17,8 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [order, setOrder] = useState({});
   const [scanProduct, setScanProduct] = useState('');
+  const [scanNotRecommendedPackage, setScanNotRecommendedPackage] =
+    useState('');
 
   const closeAllPopups = () => {
     setIsProductEntryPopupOpen(false);
@@ -32,14 +35,15 @@ function App() {
     );
     if (matchingProduct) {
       setScanProduct(data);
-      console.log(data);
       closeAllPopups();
     }
 
     const matchingPackage = order.package.find((obj) => obj.package === data);
     if (matchingPackage) {
       setScanProduct(data);
-      console.log(data);
+      closeAllPopups();
+    } else if (data.length <= 3) {
+      setScanNotRecommendedPackage(data);
       closeAllPopups();
     }
     setIsLoading(false);
@@ -55,7 +59,7 @@ function App() {
             <MainPage
               order={order}
               scanProduct={scanProduct}
-              onPackageEntry={setIsProductEntryPopupOpen}
+              scanNotRecommendedPackage={scanNotRecommendedPackage}
             />
           }
         />
