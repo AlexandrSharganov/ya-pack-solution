@@ -16,7 +16,7 @@ function CopyableText({ text, setIsCopied }) {
     <div
       role="button"
       tabIndex={0}
-      className={styles.code}
+      className={styles.id}
       onClick={copyText}
       onKeyDown={copyText}
     >

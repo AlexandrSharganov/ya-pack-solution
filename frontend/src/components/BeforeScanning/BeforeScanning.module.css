@@ -1,10 +1,11 @@
 .section {
-  display: flex;
-  flex-direction: column;
-  width: 48%;
-  max-width: 895.5px;
+  flex: 1;
+  max-width: 50%;
+  /* width: 48%; */
+  /* width: fit-content;
+  max-width: 895.5px; */
   border-right: 1px solid #e8e8e8;
-  padding-right: 25px;
+  padding-right: 28px;
 }
 
 .section:last-of-type {
@@ -15,12 +16,14 @@
 .box {
   display: flex;
   align-items: center;
-  gap: 48px;
-  margin: 24px 0 30px;
+  gap: 40px;
+  margin: 24px 0 25px;
+  cursor: default;
 }
 
 .title {
   font-size: 56px;
+  line-height: 68px;
   margin: 0;
 }
 
@@ -30,35 +33,15 @@
 
 .amount {
   font-size: 28px;
+  font-weight: 700;
+  cursor: default;
 }
 
 .cardList {
   display: flex;
   flex-direction: column;
   gap: 25px;
-  margin-top: 56px;
-}
-
-.done {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 47vh;
-}
-
-.doneTitle {
-  font-weight: 500;
-  font-size: 28px;
-  line-height: 31px;
-  margin: 16px 0;
-}
-
-.doneSubtitle {
-  font-weight: 400;
-  font-size: 20px;
-  line-height: 23px;
-  margin: 0;
+  margin-top: 48px;
 }
 
 .copyCode {

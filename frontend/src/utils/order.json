@@ -7,13 +7,13 @@
       "barcode": "9943587515741",
       "cargotypes": [
         {
-          "cargotype_id": 291
+          "cargotype_id": 320
         },
         {
-          "cargotype_id": 340
+          "cargotype_id": 485
         },
         {
-          "cargotype_id": 950
+          "cargotype_id": 700
         }
       ]
     },
@@ -23,13 +23,13 @@
       "barcode": "9943587515742",
       "cargotypes": [
         {
-          "cargotype_id": 291
+          "cargotype_id": 520
         },
         {
-          "cargotype_id": 340
+          "cargotype_id": 310
         },
         {
-          "cargotype_id": 950
+          "cargotype_id": 200
         }
       ]
     },
@@ -39,13 +39,13 @@
       "barcode": "9943587515743",
       "cargotypes": [
         {
-          "cargotype_id": 291
+          "cargotype_id": 485
         },
         {
-          "cargotype_id": 340
+          "cargotype_id": 320
         },
         {
-          "cargotype_id": 950
+          "cargotype_id": 310
         }
       ]
     }

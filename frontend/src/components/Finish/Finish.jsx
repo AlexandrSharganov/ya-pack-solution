@@ -5,8 +5,8 @@ function Finish() {
   return (
     <div className={styles.done}>
       <img src={DoneLImage} alt="Готово!" />
-      <p>Отличная работа!</p>
-      <p>Поставьте посылку на конвейер</p>
+      <h1 className={styles.title}>Отличная работа!</h1>
+      <p className={styles.text}>Поставьте посылку на конвейер</p>
     </div>
   );
 }
