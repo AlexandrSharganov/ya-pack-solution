@@ -52,11 +52,11 @@
   ],
   "package": [
     {
-      "package": "KSD",
+      "package": 127,
       "amount": 2
     },
     {
-      "package": "MYC",
+      "package": 113,
       "amount": 5
     }
   ],
