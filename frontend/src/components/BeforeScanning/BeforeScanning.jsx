@@ -1,15 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import styles from './BeforeScanning.module.css';
 import ProductCard from '../ProductCard/ProductCard';
 import DoneBlock from '../DoneBlock/DoneBlock';
-import BigButton from '../BigButton/BigButton';
 
 function BeforeScanning({ order, scanProduct }) {
   const [isCopied, setIsCopied] = useState(false);
   const [matchingProducts, setMatchingProducts] = useState([]);
   const [scanProducts, setScanProducts] = useState([]);
-  const navigate = useNavigate();
 
   useEffect(() => {
     setScanProducts((prevScanProducts) => [...prevScanProducts, scanProduct]);
@@ -51,13 +48,6 @@ function BeforeScanning({ order, scanProduct }) {
     return null;
   };
 
-  const handleButtonClick = () => {
-    const isValid = true;
-    if (isValid) {
-      navigate('/finish');
-    }
-  };
-
   const renderProductCards = () => (
     <div className={styles.cardList}>
       {matchingProducts.map((item) => (
@@ -73,16 +63,7 @@ function BeforeScanning({ order, scanProduct }) {
 
   const renderDone = () => {
     if (matchingProducts.length === 0) {
-      return (
-        <>
-          <DoneBlock scanProducts={scanProducts} />
-          <BigButton
-            isValid
-            buttonText="Закрыть посылку"
-            onClick={handleButtonClick}
-          />
-        </>
-      );
+      return <DoneBlock order={order} />;
     }
     return null;
   };

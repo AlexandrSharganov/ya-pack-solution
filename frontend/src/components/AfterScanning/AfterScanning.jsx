@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styles from './AfterScanning.module.css';
 import ScanImage from '../../images/scan.svg';
 import ProductCard from '../ProductCard/ProductCard';
+import BigButton from '../BigButton/BigButton';
 
 function AfterScanning({ order, scanProduct, scanNotRecommendedPackage }) {
   const [matchingProducts, setMatchingProducts] = useState([]);
   const [matchingPackage, setMatchingPackage] = useState(new Set());
   const [notMatchingPackages, setNotMatchingPackages] = useState(new Set());
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (
@@ -21,7 +24,7 @@ function AfterScanning({ order, scanProduct, scanNotRecommendedPackage }) {
         ...filteredProducts,
       ]);
 
-      if (scanProduct && scanProduct.length === 3) {
+      if (scanProduct && scanProduct.length === 3 && !Number(scanProduct)) {
         setMatchingPackage((prevMatchingPackage) =>
           prevMatchingPackage.add(scanProduct)
         );
@@ -34,6 +37,13 @@ function AfterScanning({ order, scanProduct, scanNotRecommendedPackage }) {
       }
     }
   }, [order.skus, scanProduct, scanNotRecommendedPackage]);
+
+  const handleButtonClick = () => {
+    const isValid = true;
+    if (isValid) {
+      navigate('/finish');
+    }
+  };
 
   const removeProduct = (barcode) => {
     setMatchingProducts((prevMatchingProducts) =>
@@ -62,7 +72,7 @@ function AfterScanning({ order, scanProduct, scanNotRecommendedPackage }) {
 
   return (
     <section className={styles.section}>
-      <h1 className={styles.title}>Посылка 1</h1>
+      <h1 className={styles.title}>Посылка</h1>
       <div className={styles.text}>Рекомендованный вид упаковки</div>
       <div className={styles.packages}>
         {order.package &&
@@ -74,9 +84,7 @@ function AfterScanning({ order, scanProduct, scanNotRecommendedPackage }) {
       </div>
       {(matchingPackage.size !== 0 || notMatchingPackages.size !== 0) && (
         <>
-          <div className={`${styles.text} ${styles.textOrange}`}>
-            Выбранный вид упаковки
-          </div>
+          <div className={styles.text}>Выбранный вид упаковки</div>
           <div className={styles.packages}>
             {[...matchingPackage].map((item) => (
               <div
@@ -99,6 +107,15 @@ function AfterScanning({ order, scanProduct, scanNotRecommendedPackage }) {
       )}
       {!scanProduct && renderScanInstructions()}
       {scanProduct && renderProductCards()}
+      {order.skus &&
+        (matchingPackage.size !== 0 || notMatchingPackages.size !== 0) &&
+        matchingProducts.length === order.skus.length && (
+          <BigButton
+            isValid
+            buttonText="Закрыть посылку"
+            onClick={handleButtonClick}
+          />
+        )}
     </section>
   );
 }

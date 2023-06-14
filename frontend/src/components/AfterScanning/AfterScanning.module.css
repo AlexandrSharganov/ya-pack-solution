@@ -9,6 +9,10 @@
   padding-left: 25px;
 }
 
+.sectionFinish {
+  margin: 0 0 120px 0;
+}
+
 .title {
   font-family: 'YS Disp';
   font-size: 28px;
@@ -19,9 +23,9 @@
 
 .text {
   margin: 24px 0 16px 8px;
-  font-size: 20px;
-  line-height: 23px;
-  color: #2aad2e;
+  font-size: 22px;
+  line-height: 25px;
+  color: rgba(0, 0, 0, 0.6);
   cursor: default;
 }
 
@@ -44,19 +48,18 @@
   font-weight: 500;
   font-size: 28px;
   line-height: 31px;
-  max-width: 200px;
-  min-width: 100px;
-  border: 3px solid #000000;
+  max-width: fit-content;
+  border: 2px solid #000000;
   border-radius: 42px;
   margin: 0;
 }
 
 .packageRecommended {
-  background: #2aad2e;
+  border: 2px solid #2aad2e;
 }
 
 .packageNotRecommended {
-  background: #ffa200;
+  border: 2px solid #ffa200;
 }
 
 .figure {
