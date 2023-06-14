@@ -1,4 +1,5 @@
 {
+  "id": 1,
   "order_key": "0049e38b3ee32d2dad52405e217c6dd2",
   "skus": [
     {
@@ -50,16 +51,20 @@
       ]
     }
   ],
-  "package": [
+  "packages": [
     {
       "package": "KSD",
-      "amount": 2
+      "amount": 2,
+      "barcode": "8461366316150"
     },
     {
       "package": "MYC",
-      "amount": 5
+      "amount": 5,
+      "barcode": "8461366316151"
     }
   ],
-  "packer": null,
-  "package_match": false
+  "packages_sel": [],
+  "packer": "0987654321",
+  "package_match": true,
+  "status": "in_work"
 }
