@@ -6,7 +6,6 @@ import MainPage from '../../pages/MainPage';
 import FinishPage from '../../pages/FinishPage';
 import ProblemPage from '../../pages/ProblemPage';
 import Keyboard from '../Keyboard/Keyboard';
-import KeyboardPackage from '../KeyboardPackage/KeyboardPackage';
 // import { getOrder } from '../../utils/api';
 // import items from '../../utils/items';
 const orderJson = require('../../utils/order.json');
@@ -15,16 +14,16 @@ function App() {
   const location = useLocation();
   const hideFooter = location.pathname === '/finish';
   const [isProductEntryPopupOpen, setIsProductEntryPopupOpen] = useState(false);
-  const [isPackageEntryPopupOpen, setIsPackageEntryPopupOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [order, setOrder] = useState({});
   // const [products, setProducts] = useState([]);
   // const [packages, setPackages] = useState([]);
   const [scanProduct, setScanProduct] = useState('');
+  const [scanNotRecommendedPackage, setScanNotRecommendedPackage] =
+    useState('');
 
   const closeAllPopups = () => {
     setIsProductEntryPopupOpen(false);
-    setIsPackageEntryPopupOpen(false);
   };
 
   useEffect(() => {
@@ -54,14 +53,15 @@ function App() {
     );
     if (matchingProduct) {
       setScanProduct(data);
-      console.log(data);
       closeAllPopups();
     }
 
     const matchingPackage = order.package.find((obj) => obj.package === data);
     if (matchingPackage) {
       setScanProduct(data);
-      console.log(data);
+      closeAllPopups();
+    } else if (data.length <= 3) {
+      setScanNotRecommendedPackage(data);
       closeAllPopups();
     }
     setIsLoading(false);
@@ -77,7 +77,7 @@ function App() {
             <MainPage
               order={order}
               scanProduct={scanProduct}
-              onPackageEntry={setIsPackageEntryPopupOpen}
+              scanNotRecommendedPackage={scanNotRecommendedPackage}
             />
           }
         />
@@ -90,10 +90,6 @@ function App() {
         isOpen={isProductEntryPopupOpen}
         isLoading={isLoading}
         onScanProduct={(data) => checkBarcode(data)}
-      />
-      <KeyboardPackage
-        onClose={closeAllPopups}
-        isOpen={isPackageEntryPopupOpen}
       />
     </>
   );
