@@ -24,18 +24,19 @@ def get_package(orders_num: int):
         order = OrderReceived.objects.filter(status='no_rec').first()
         if order:
             request = get_data_for_ds(order)
-            response = requests.post(url_recommend, json=request).json()
+            response = requests.post(url_recommend, json=request) # .json()
+            response = response.json()
         else:
             return 'Заказы закончились.'
         order = OrderReceived.objects.get_or_create(
             order_key=response['order_key'])[0]
         for package_recomend in response['package']:
-            package = Package.objects.get(packagetype=package_recomend['package'])
+            package = Package.objects.get(
+                packagetype=package_recomend['package'])
             PackageRecommended.objects.get_or_create(
                 order=order,
                 package=package,
-                amount=1
-                # amount=package_recomend['amount']
+                amount=package_recomend['amount']
             )
         order.status = order.IN_WORK
         order.save()
