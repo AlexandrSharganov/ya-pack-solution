@@ -27,7 +27,7 @@ def recommend_pack(order: Order):
     # pack = predict(order)
     # order["package"] = pack
     # order['status'] = "in_work"
-    out = {"order_id": order["order_id"]}
+    out = {"order_key": order["order_key"]}
     out['package'] = predict(order)
     out['status'] = "in_work"
 
