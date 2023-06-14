@@ -1,10 +1,6 @@
 .section {
   flex: 1;
   max-width: 50%;
-  /* width: 48%; */
-  /* width: fit-content;
-  max-width: 895.5px; */
-  border-right: 1px solid #e8e8e8;
   padding-right: 28px;
 }
 

@@ -53,14 +53,12 @@
   ],
   "packages": [
     {
-      "package": "KSD",
-      "amount": 2,
-      "barcode": "8461366316150"
+      "package": 127,
+      "amount": 2
     },
     {
-      "package": "MYC",
-      "amount": 5,
-      "barcode": "8461366316151"
+      "package": 113,
+      "amount": 5
     }
   ],
   "packages_sel": [],

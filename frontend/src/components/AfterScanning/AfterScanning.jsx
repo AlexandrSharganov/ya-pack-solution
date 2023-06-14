@@ -128,6 +128,11 @@ import styles from './AfterScanning.module.css';
 import ScanImage from '../../images/scan.svg';
 import ProductCard from '../ProductCard/ProductCard';
 import BigButton from '../BigButton/BigButton';
+import getPackageLetterValue from '../../utils/package';
+
+const amountStyle = {
+  background: '#2aad2e',
+};
 
 function AfterScanning({
   order,
@@ -136,7 +141,7 @@ function AfterScanning({
   scanNotRecommendedPackage,
 }) {
   const [matchingProducts, setMatchingProducts] = useState([]);
-  const [matchingPackage, setMatchingPackage] = useState(new Set());
+  const [matchingPackage, setMatchingPackage] = useState('');
   const [notMatchingPackages, setNotMatchingPackages] = useState(new Set());
   const navigate = useNavigate();
 
@@ -186,6 +191,15 @@ function AfterScanning({
     );
   };
 
+  const removeNotRecommendedPackage = (packageItem) => {
+    setNotMatchingPackages(
+      (prevNotMatchingPackages) =>
+        new Set(
+          [...prevNotMatchingPackages].filter((item) => item !== packageItem)
+        )
+    );
+  };
+
   const renderScanInstructions = () => (
     <figure className={styles.figure}>
       <img src={ScanImage} alt="Сканер" />
@@ -200,10 +214,15 @@ function AfterScanning({
           key={item.barcode}
           item={item}
           removeProduct={removeProduct}
+          removeNotRecommendedPackage={removeNotRecommendedPackage}
+          amountStyle={amountStyle}
+          isAfterScanning
         />
       ))}
     </div>
   );
+
+  const isMatchingPackageNumeric = Number(matchingPackage);
 
   return (
     <section className={styles.section}>
@@ -217,24 +236,28 @@ function AfterScanning({
             </div>
           ))}
       </div>
-      {(matchingPackage.size !== 0 || notMatchingPackages.size !== 0) && (
+      {(isMatchingPackageNumeric === 123 || notMatchingPackages.size !== 0) && (
         <>
           <div className={styles.text}>Выбранный вид упаковки</div>
           <div className={styles.packages}>
-            {[...matchingPackage].map((item) => (
-              <div
-                key={item}
-                className={`${styles.package} ${styles.packageRecommended}`}
-              >
-                {item}
+            {isMatchingPackageNumeric === 123 && (
+              <div className={`${styles.package} ${styles.packageRecommended}`}>
+                {getPackageLetterValue(matchingPackage) || matchingPackage}
               </div>
-            ))}
+            )}
             {[...notMatchingPackages].map((item) => (
               <div
                 key={item}
                 className={`${styles.package} ${styles.packageNotRecommended}`}
               >
-                {item}
+                {getPackageLetterValue(item) || item}
+                <button
+                  type="button"
+                  className={styles.notRecButton}
+                  onClick={() => removeNotRecommendedPackage(item)}
+                >
+                  ✕
+                </button>
               </div>
             ))}
           </div>
@@ -243,7 +266,7 @@ function AfterScanning({
       {!scanProduct && renderScanInstructions()}
       {scanProduct && renderProductCards()}
       {order.skus &&
-        (matchingPackage.size !== 0 || notMatchingPackages.size !== 0) &&
+        (isMatchingPackageNumeric === 123 || notMatchingPackages.size !== 0) &&
         matchingProducts.length === order.skus.length && (
           <BigButton
             isValid
