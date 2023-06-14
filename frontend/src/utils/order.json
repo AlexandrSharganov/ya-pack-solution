@@ -1,4 +1,5 @@
 {
+  "id": 1,
   "order_key": "0049e38b3ee32d2dad52405e217c6dd2",
   "skus": [
     {
@@ -50,7 +51,7 @@
       ]
     }
   ],
-  "package": [
+  "packages": [
     {
       "package": 127,
       "amount": 2
@@ -60,6 +61,8 @@
       "amount": 5
     }
   ],
-  "packer": null,
-  "package_match": false
+  "packages_sel": [],
+  "packer": "0987654321",
+  "package_match": true,
+  "status": "in_work"
 }

@@ -159,7 +159,7 @@ function Keyboard({ isOpen, onClose, onScanProduct, isLoading }) {
   const handleButtonClick = (digit) => {
     setInputValue((prevValue) => {
       const newValue = prevValue + digit;
-      setIsValid(newValue.length >= 3 && newValue.length <= 13);
+      setIsValid(newValue.length === 13);
       setShowError(true);
       return newValue;
     });
@@ -167,9 +167,11 @@ function Keyboard({ isOpen, onClose, onScanProduct, isLoading }) {
 
   const handleInputChange = (event) => {
     const { value } = event.target;
-    setInputValue(value.toUpperCase());
-    setShowError(true);
-    setIsValid(value.length >= 3 && value.length <= 13);
+    if (value.length <= 13) {
+      setInputValue(value.toUpperCase());
+      setShowError(true);
+      setIsValid(value.length === 13);
+    }
   };
 
   const handleClearInput = () => {
@@ -190,7 +192,9 @@ function Keyboard({ isOpen, onClose, onScanProduct, isLoading }) {
       onScanProduct(inputValue);
 
       setTimeout(() => {
-        setNoBarcodeError('Данный штрихкод или упаковка не найдены в заказе.');
+        setNoBarcodeError(
+          'Упс, неверный штрихкод. Проверьте данные и попробуйте ёщё раз.'
+        );
       }, 100);
     } else {
       console.log(`Введено ${inputValue.length} цифр из 13.`);
@@ -220,7 +224,7 @@ function Keyboard({ isOpen, onClose, onScanProduct, isLoading }) {
           <input
             id="barcode"
             name="barcode"
-            type="text"
+            type="number"
             value={inputValue}
             onChange={handleInputChange}
             className={styles.inputField}
@@ -231,7 +235,9 @@ function Keyboard({ isOpen, onClose, onScanProduct, isLoading }) {
               showError ? styles.inputErrorActive : ''
             }`}
           >
-            {!isValid && showError && 'Неправильное количество символов.'}
+            {/* {!isValid &&
+              showError &&
+              `Введено ${inputValue.length} цифр из 13.`} */}
             {noBarcodeError}
           </span>
           <button
