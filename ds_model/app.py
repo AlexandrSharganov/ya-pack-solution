@@ -31,7 +31,7 @@ def recommend_pack(order: Order):
     out['package'] = predict(order)
     out['status'] = "in_work"
 
-    return order
+    return out
 
 
 if __name__ == '__main__':
