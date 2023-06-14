@@ -17,6 +17,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [order, setOrder] = useState({});
   const [scanProduct, setScanProduct] = useState('');
+  const [scanRecommendedPackage, setScanRecommendedPackage] = useState('');
   const [scanNotRecommendedPackage, setScanNotRecommendedPackage] =
     useState('');
 
@@ -38,11 +39,11 @@ function App() {
       closeAllPopups();
     }
 
-    const matchingPackage = order.package.find((obj) => obj.package === data);
+    const matchingPackage = order.packages.find((obj) => obj.barcode === data);
     if (matchingPackage) {
-      setScanProduct(data);
+      setScanRecommendedPackage(data);
       closeAllPopups();
-    } else if (data.length <= 3) {
+    } else {
       setScanNotRecommendedPackage(data);
       closeAllPopups();
     }
@@ -59,6 +60,7 @@ function App() {
             <MainPage
               order={order}
               scanProduct={scanProduct}
+              scanRecommendedPackage={scanRecommendedPackage}
               scanNotRecommendedPackage={scanNotRecommendedPackage}
             />
           }
@@ -139,7 +141,7 @@ export default App;
 //       closeAllPopups();
 //     }
 
-//     const matchingPackage = order.package.find((obj) => obj.package === data);
+//     const matchingPackage = order.packages.find((obj) => obj.package === data);
 //     if (matchingPackage) {
 //       setScanProduct(data);
 //       console.log(data);
