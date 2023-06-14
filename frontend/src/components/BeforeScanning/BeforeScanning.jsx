@@ -30,7 +30,7 @@ function BeforeScanning({ order, scanProduct }) {
 
       setMatchingProducts(filteredProducts);
     }
-  }, [scanProducts]);
+  }, [order.skus, scanProducts]);
 
   useEffect(() => {
     if (isCopied) {
