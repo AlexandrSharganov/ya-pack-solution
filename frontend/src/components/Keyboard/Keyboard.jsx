@@ -167,7 +167,7 @@ function Keyboard({ isOpen, onClose, onScanProduct, isLoading }) {
 
   const handleInputChange = (event) => {
     const { value } = event.target;
-    setInputValue(value);
+    setInputValue(value.toUpperCase());
     setShowError(true);
     setIsValid(value.length >= 3 && value.length <= 13);
   };
