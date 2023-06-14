@@ -8,7 +8,11 @@ import LiquidImage from '../../images/label/liquid.svg';
 import PerishableImage from '../../images/label/perishable-product.svg';
 import TechniqueImage from '../../images/label/technique.svg';
 
-function ProductCard({ item, setIsCopied }) {
+function ProductCard({ item, setIsCopied, removeProduct }) {
+  const handleRemove = () => {
+    removeProduct(item.barcode);
+  };
+
   const getImageByCargoType = (cargotypeId) => {
     switch (cargotypeId) {
       case 320:
@@ -69,6 +73,10 @@ function ProductCard({ item, setIsCopied }) {
       </figure>
       <div className={styles.amount}>{`${item.amount} шт.`}</div>
       <CopyableText text={item.barcode} setIsCopied={setIsCopied} />
+
+      <button type="button" onClick={handleRemove} className={styles.delete}>
+        {' '}
+      </button>
     </div>
   );
 }

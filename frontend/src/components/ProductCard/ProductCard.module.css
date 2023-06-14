@@ -77,3 +77,14 @@
   color: #0044ee;
   font-size: 20px;
 }
+
+.delete {
+  width: 38px;
+  height: 38px;
+  border: 0;
+  border-radius: 50%;
+  background: url(../../images/delete-item.svg) no-repeat;
+  background-position: center;
+  background-color: #fed42b;
+  cursor: pointer;
+}
