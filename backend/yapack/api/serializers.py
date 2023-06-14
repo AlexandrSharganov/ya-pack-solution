@@ -92,12 +92,13 @@ class PackageSerializer(serializers.ModelSerializer):
 class PackageRecommendedSerializer(serializers.ModelSerializer):
     
     package = serializers.CharField(source='package.packagetype')
-    
+    barcode = serializers.CharField(source='package.barcode')
     class Meta:
         model = PackageRecommended
         fields = (
             'package',
-            'amount'
+            'amount',
+            'barcode'
         )
         
         
