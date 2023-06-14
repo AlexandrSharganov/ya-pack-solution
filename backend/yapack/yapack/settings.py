@@ -21,6 +21,8 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',
     'orders.apps.OrdersConfig',
     'api.apps.ApiConfig',
+    'ds_exchange.apps.DsExchangeConfig',
+
 ]
 
 MIDDLEWARE = [
