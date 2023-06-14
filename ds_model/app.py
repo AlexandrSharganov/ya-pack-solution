@@ -1,8 +1,10 @@
+import uvicorn
 from fastapi import FastAPI
 from model import predict
 from pydantic_val import Order
 
 app = FastAPI()
+
 
 @app.get("/")
 def index():
@@ -31,7 +33,7 @@ def recommend_pack(order: Order):
 
 
 if __name__ == '__main__':
-    uvicorn.run(app, host='127.0.0.1', port=8000)
+    uvicorn.run(app, host='127.0.0.1', port=8100)
 
 
-#uvicorn app:app --reload
+# uvicorn app:app --reload

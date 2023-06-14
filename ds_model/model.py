@@ -1,5 +1,6 @@
 from utils import prep_json
 
+
 def predict(order: dict) -> list:
 
     order_d, n_goods = prep_json(order)

@@ -5,9 +5,9 @@ def prep_json(order: dict) -> dict:
     """Get new dict with right keys names and total items amount"""
     init_atts = ['sku_id',
                  'sku_wght',
-                 'dimention_a',
-                 'dimention_b',
-                 'dimention_c',
+                 'dimension_a',
+                 'dimension_b',
+                 'dimension_c',
                  'cargotypes',
                  'amount']
     new_atts = ['sku',

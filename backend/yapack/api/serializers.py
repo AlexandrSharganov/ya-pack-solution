@@ -123,7 +123,7 @@ class OrderReceivedSerializer(serializers.ModelSerializer):
 
     skus = OrderReceivedSkuSerializer(
         many=True,
-        source='orderreceivedsku_set',  
+        source='orderreceivedsku_set',
         read_only=True
     )
     packages = PackageRecommendedSerializer(many=True)
