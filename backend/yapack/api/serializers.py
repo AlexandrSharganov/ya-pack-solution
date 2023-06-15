@@ -86,7 +86,7 @@ class PackageSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Package
-        fields = '__all__'
+        fields = ('barcode', 'packagetype')
 
 
 class PackageRecommendedSerializer(serializers.ModelSerializer):
