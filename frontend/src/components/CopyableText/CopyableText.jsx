@@ -1,6 +1,6 @@
 import styles from './CopyableText.module.css';
 
-function CopyableText({ text, setIsCopied }) {
+function CopyableText({ text, setIsCopied, style }) {
   const copyText = () => {
     navigator.clipboard
       .writeText(text)
@@ -19,6 +19,7 @@ function CopyableText({ text, setIsCopied }) {
       className={styles.id}
       onClick={copyText}
       onKeyDown={copyText}
+      style={style}
     >
       {text}
     </div>

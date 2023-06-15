@@ -7,8 +7,15 @@ import CopyableText from '../CopyableText/CopyableText';
 // import LiquidImage from '../../images/label/liquid.svg';
 // import PerishableImage from '../../images/label/perishable-product.svg';
 // import TechniqueImage from '../../images/label/technique.svg';
+// import getImageByCargoType from '../../utils/cargotype';
 
-function ProductCard({ item, setIsCopied, removeProduct }) {
+function ProductCard({
+  item,
+  setIsCopied,
+  removeProduct,
+  amountStyle,
+  isAfterScanning,
+}) {
   const handleRemove = () => {
     removeProduct(item.barcode);
   };
@@ -57,6 +64,13 @@ function ProductCard({ item, setIsCopied, removeProduct }) {
   //     <img key={cargotypeId} src={src} alt={alt} className={styles.cargotype} />
   //   );
   // });
+  // const cargoTypes = item.cargotypes.map((cargotype) => cargotype.cargotype_id);
+  // const images = cargoTypes.map((cargotypeId) => {
+  //   const { src, alt } = getImageByCargoType(cargotypeId);
+  //   return (
+  //     <img key={cargotypeId} src={src} alt={alt} className={styles.cargotype} />
+  //   );
+  // });
 
   return (
     <div className={styles.card}>
@@ -71,12 +85,16 @@ function ProductCard({ item, setIsCopied, removeProduct }) {
           {/* <div className={styles.cargotypes}>{images}</div> */}
         </figcaption>
       </figure>
-      <div className={styles.amount}>{`${item.amount} шт.`}</div>
+      <div
+        className={styles.amount}
+        style={amountStyle}
+      >{`${item.amount} шт.`}</div>
       <CopyableText text={item.barcode} setIsCopied={setIsCopied} />
-
-      <button type="button" onClick={handleRemove} className={styles.delete}>
-        {' '}
-      </button>
+      {isAfterScanning && (
+        <button type="button" onClick={handleRemove} className={styles.delete}>
+          ✕
+        </button>
+      )}
     </div>
   );
 }

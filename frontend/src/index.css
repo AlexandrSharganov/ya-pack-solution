@@ -2,15 +2,15 @@
 @import url(./vendor/fonts/fonts.css);
 
 body {
-  display: flex;
+  /* display: flex;
   flex-direction: column;
   justify-content: space-between;
   width: 100vw;
-  margin: 0;
+  margin: 0; */
   font-family: 'YS Text', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-style: normal;
+  /* font-style: normal; */
 }
 
 code {

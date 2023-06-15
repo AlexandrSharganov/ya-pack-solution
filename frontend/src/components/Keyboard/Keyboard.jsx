@@ -222,6 +222,7 @@ function Keyboard({ isOpen, onClose, onScanProduct, isLoading }) {
         </button>
         <label htmlFor="barcode" className={styles.label}>
           <input
+            id="barcode"
             name="barcode"
             type="number"
             value={inputValue}

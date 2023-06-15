@@ -1,6 +1,7 @@
 .main {
   display: flex;
-  justify-content: center;
+  justify-content: start;
+  /* justify-content: center; */
   /* display: grid;
   grid-template-columns: 1fr 1fr; */
   height: calc(100% - 112px - 112px);
