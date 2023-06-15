@@ -8,10 +8,10 @@ class Item(BaseModel):
     dimension_b: float
     dimension_c: float
     sku_wght: float
-    cargotypes: list[str]
+    cargotypes: list
 
 
 class Order(BaseModel):
     order_key: str
-    skus: list[Item]
+    skus: list
     status: str

@@ -3,7 +3,7 @@ from one_item import predict_one_item
 from two_three_items import predict_two_three
 
 
-def predict(order: dict) -> list[dict]:
+def predict(order: dict) -> list:
     """Main prediction manager"""
     order_d, n_goods = prep_json(order)
 

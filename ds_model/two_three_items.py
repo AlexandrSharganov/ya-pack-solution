@@ -1,5 +1,6 @@
 from utils import cook_features, get_packed, get_cheapest
 import pickle
+import os
 
 
 def ml_two_three(query: dict, n_goods: int, top_k=3) -> list:
@@ -9,7 +10,7 @@ def ml_two_three(query: dict, n_goods: int, top_k=3) -> list:
 
     # нужные модели в зависимости от кол-ва товаров
     file = "two" if n_goods == 2 else "three"
-    with open(f'models/{file}_goods_models.pkl', 'rb') as handler:
+    with open(f'{os.getcwd()}/ds_model/models/{file}_goods_models.pkl', 'rb') as handler:
         tools = pickle.load(handler)
 
     # классификатор для определения входит ли в самые популярные
