@@ -158,10 +158,10 @@ function AfterScanning({
           prevMatchingPackage.add(scanRecommendedPackage)
         );
       }
-
       if (scanNotRecommendedPackage) {
+        console.log(scanNotRecommendedPackage);
         setNotMatchingPackages((prevNotMatchingPackages) =>
-          prevNotMatchingPackages.add(scanNotRecommendedPackage)
+          prevNotMatchingPackages.add(scanNotRecommendedPackage.packagetype)
         );
       }
       console.log(matchingPackage);
