@@ -8,6 +8,7 @@ import CopyableText from '../CopyableText/CopyableText';
 // import PerishableImage from '../../images/label/perishable-product.svg';
 // import TechniqueImage from '../../images/label/technique.svg';
 // import getImageByCargoType from '../../utils/cargotype';
+// import getImageByCargoType from '../../utils/cargotype';
 
 function ProductCard({
   item,
@@ -57,6 +58,13 @@ function ProductCard({
   //   }
   // };
 
+  // const cargoTypes = item.cargotypes.map((cargotype) => cargotype.cargotype_id);
+  // const images = cargoTypes.map((cargotypeId) => {
+  //   const { src, alt } = getImageByCargoType(cargotypeId);
+  //   return (
+  //     <img key={cargotypeId} src={src} alt={alt} className={styles.cargotype} />
+  //   );
+  // });
   // const cargoTypes = item.cargotypes.map((cargotype) => cargotype.cargotype_id);
   // const images = cargoTypes.map((cargotypeId) => {
   //   const { src, alt } = getImageByCargoType(cargotypeId);
