@@ -10,16 +10,17 @@ function requestResult(res) {
 }
 
 export const getOrder = async () => {
-  const res = await fetch(`${BASE_URL}/front/`, {
+  const res = await fetch(`${BASE_URL}front/`, {
     headers: {
       'Content-Type': 'application/json',
     },
+    credentials: 'include',
   });
   return requestResult(res);
 };
 
 export const postOrder = async (order) => {
-  const res = await fetch(`${BASE_URL}/front/`, {
+  const res = await fetch(`${BASE_URL}front/`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
