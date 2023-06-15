@@ -6,9 +6,9 @@ import MainPage from '../../pages/MainPage';
 import FinishPage from '../../pages/FinishPage';
 import ProblemPage from '../../pages/ProblemPage';
 import Keyboard from '../Keyboard/Keyboard';
-// import { getOrder } from '../../utils/api';
+import { getOrder } from '../../utils/api';
 // import items from '../../utils/items';
-const orderJson = require('../../utils/order.json');
+// const orderJson = require('../../utils/order.json');
 
 function App() {
   const location = useLocation();
@@ -26,7 +26,13 @@ function App() {
   };
 
   useEffect(() => {
-    setOrder(JSON.parse(JSON.stringify(orderJson)));
+    getOrder()
+      .then((res) => {
+        setOrder(JSON.parse(JSON.stringify(res)));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }, []);
 
   const checkBarcode = (data) => {

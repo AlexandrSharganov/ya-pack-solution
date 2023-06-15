@@ -1,4 +1,4 @@
-export const BASE_URL = 'https://api';
+export const BASE_URL = 'http://127.0.0.1:8000/api/order/';
 
 function requestResult(res) {
   if (res.ok) {
@@ -10,7 +10,7 @@ function requestResult(res) {
 }
 
 export const getOrder = async () => {
-  const res = await fetch(`${BASE_URL}/order`, {
+  const res = await fetch(`${BASE_URL}/front/`, {
     headers: {
       'Content-Type': 'application/json',
     },
@@ -19,7 +19,7 @@ export const getOrder = async () => {
 };
 
 export const postOrder = async (order) => {
-  const res = await fetch(`${BASE_URL}/order`, {
+  const res = await fetch(`${BASE_URL}/front/`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
