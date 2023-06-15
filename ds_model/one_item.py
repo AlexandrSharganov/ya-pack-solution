@@ -1,3 +1,4 @@
+import os
 import pickle
 import pandas as pd
 import numpy as np
@@ -22,7 +23,7 @@ def cook_features_one(query: dict, dataframe:bool = True) -> pd.DataFrame:
     """Prepares the features for models.
     Return a pandas DataFrame for catboost and KNN
     """
-    with open('models/cargotypes_dict.pkl', 'rb') as handler:
+    with open(f'{os.getcwd()}\\ds_model\\models\\cargotypes_dict.pkl', 'rb') as handler:
         cargotype_dict = pickle.load(handler)
     cargotypes = list(set(cargotype_dict.values()))
     item = query['items'][0].copy()
@@ -51,7 +52,7 @@ def cook_features_one(query: dict, dataframe:bool = True) -> pd.DataFrame:
 def get_knn_top(sample: np.array, k: int = 3, th: float = 0.2) -> list:
     """Gets features of sku and returns top k appropriate packs
     """
-    with open('models/knn_scaler_dict.pkl', 'rb') as handler:
+    with open(f'{os.getcwd()}\\ds_model\\models\\knn_scaler_dict.pkl', 'rb') as handler:
         knn_clf, std_scaler, pack_dict_inv = pickle.load(handler)
     sample_for_knn = std_scaler.transform(sample.values)
     preds_knn_probas = knn_clf.predict_proba(sample_for_knn)[0]
@@ -89,7 +90,7 @@ def predict_one_item(query: dict, n_goods:int == 1) -> str:
     # если по первичным карготипам считаем что упаковка не нужна, то
     # запускаем классификатор
     if not pack_need:
-        with open('models/catboost_pack_nonpack.pkl', 'rb') as handler:
+        with open(f'{os.getcwd()}\\ds_model\\models\\catboost_pack_nonpack.pkl', 'rb') as handler:
             cb = pickle.load(handler)
         pack_need_cb = cb.predict(sample[cb_features])
         if not pack_need_cb:
