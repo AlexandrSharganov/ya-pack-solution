@@ -4,11 +4,11 @@ from two_three_items import predict_two_three
 
 
 def predict(order: dict) -> list:
-
+    """Main prediction manager"""
     order_d, n_goods = prep_json(order)
 
     if n_goods == 1:
-        return [{"package": predict_one_item(order_d),
+        return [{"package": predict_one_item(order_d, n_goods),
                  "amount": 1}]
 
     elif n_goods in [2,3]:

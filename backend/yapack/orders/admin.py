@@ -5,7 +5,21 @@ from .models import (
 )
 
 
+@admin.register(OrderReceived)
+class OrderReceivedAdmin(admin.ModelAdmin):
+    list_display = ['order_key', 'status']
+
+
+@admin.register(PackageRecommended)
+class PackageRecommendedAdmin(admin.ModelAdmin):
+    list_display = ['order', 'package', 'amount']
+
+
+@admin.register(OrderReceivedSku)
+class OrderReceivedSkuAdmin(admin.ModelAdmin):
+    list_display = ['order', 'sku', 'amount']
+
+
 admin.site.register(
-    (Cargotype, Sku, OrderReceived, Package, PackageRecommended,
-        OrderReceivedSku, PackageSelected)
+    (Cargotype, Sku, Package, PackageSelected)
 )

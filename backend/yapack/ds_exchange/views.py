@@ -1,4 +1,4 @@
-import json
+# import json
 import requests
 from django.http import HttpResponse
 from django.shortcuts import render
@@ -6,7 +6,7 @@ from django.shortcuts import render
 from .forms import OrdersNumForm
 from .serializers import OrderReceivedSerializer
 from orders.models import (
-    OrderReceived, OrderReceivedSku, Package, PackageRecommended, Sku)
+    OrderReceived, Package, PackageRecommended,)
 
 
 def get_data_for_ds(order: OrderReceived) -> dict:
@@ -24,7 +24,10 @@ def get_package(orders_num: int):
         order = OrderReceived.objects.filter(status='no_rec').first()
         if order:
             request = get_data_for_ds(order)
-            response = requests.post(url_recommend, json=request) # .json()
+            for sku in request['skus']:
+                sku['cargotypes'] = [
+                    ctype['cargotype_id'] for ctype in sku['cargotypes']]
+            response = requests.post(url_recommend, json=request)  # .json()
             response = response.json()
         else:
             return 'Заказы закончились.'
@@ -40,7 +43,7 @@ def get_package(orders_num: int):
             )
         order.status = order.IN_WORK
         order.save()
-        orders.append(order)
+        orders.append(order.order_key)
     return orders
 
 
