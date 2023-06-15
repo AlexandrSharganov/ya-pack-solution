@@ -1,3 +1,4 @@
+import os
 import numpy as np
 import json
 import pickle
@@ -63,7 +64,7 @@ def get_cheapest(s:set) -> str:
     if not s:
         return 'NONPACK'
 
-    with open('models/prices_dict.pkl', 'rb') as handler:
+    with open(f'{os.getcwd()}\\ds_model\\models\\prices_dict.pkl', 'rb') as handler:
         prices = pickle.load(handler)
 
     return sorted(s, key=lambda x: prices.get(x, 1e10))[0]
@@ -74,7 +75,7 @@ def get_packed(jsn: dict, count:int = 1):
     works for 1-2-3 items in one order"""
     if count > 3:
         return None
-    dt = json.load(open('models/borders_data.json', 'r'))['data'][count]
+    dt = json.load(open(f'{os.getcwd()}\\ds_model\\models\\borders_data.json', 'r'))['data'][count]
     rec_pack = []
     sorted_abc_temp = []
     # собираем все товары в виде списка [a, b, c]
