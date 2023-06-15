@@ -17,7 +17,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [order, setOrder] = useState({});
   const [scanProduct, setScanProduct] = useState('');
-  const [scanRecommendedPackage, setScanRecommendedPackage] = useState('');
+  const [scanRecommendedPackage, setScanRecommendedPackage] = useState({});
   const [scanNotRecommendedPackage, setScanNotRecommendedPackage] = useState(
     {}
   );
@@ -52,13 +52,19 @@ function App() {
 
     const matchingPackage = order.packages.find((obj) => obj.barcode === data);
     if (matchingPackage) {
-      setScanRecommendedPackage(data);
-      closeAllPopups();
-    } else {
+      getPackage(data)
+        .then((res) => {
+          setScanRecommendedPackage(res);
+          closeAllPopups();
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+    if (!matchingProduct && !matchingPackage) {
       getPackage(data)
         .then((res) => {
           setScanNotRecommendedPackage(res);
-          console.log(scanNotRecommendedPackage);
           closeAllPopups();
         })
         .catch((err) => {
