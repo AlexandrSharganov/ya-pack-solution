@@ -61,6 +61,22 @@ function AfterScanning({
     );
   };
 
+  const removeRecommendedPackage = (packageItem) => {
+    setMatchingPackage(
+      (prevMatchingPackage) =>
+        new Set([...prevMatchingPackage].filter((item) => item !== packageItem))
+    );
+  };
+
+  const removeNotRecommendedPackage = (packageItem) => {
+    setNotMatchingPackages(
+      (prevNotMatchingPackages) =>
+        new Set(
+          [...prevNotMatchingPackages].filter((item) => item !== packageItem)
+        )
+    );
+  };
+
   const renderScanInstructions = () => (
     <figure className={styles.figure}>
       <img src={ScanImage} alt="Сканер" />
@@ -83,6 +99,7 @@ function AfterScanning({
             key={item.barcode}
             item={item}
             removeProduct={removeProduct}
+            isAfterScanning
           />
         ))}
     </div>
@@ -110,6 +127,13 @@ function AfterScanning({
                 className={`${styles.package} ${styles.packageRecommended}`}
               >
                 {item}
+                <button
+                  type="button"
+                  className={styles.notRecButton}
+                  onClick={() => removeRecommendedPackage(item)}
+                >
+                  ✕
+                </button>
               </div>
             ))}
             {[...notMatchingPackages].map((item) => (
@@ -118,6 +142,13 @@ function AfterScanning({
                 className={`${styles.package} ${styles.packageNotRecommended}`}
               >
                 {item}
+                <button
+                  type="button"
+                  className={styles.notRecButton}
+                  onClick={() => removeNotRecommendedPackage(item)}
+                >
+                  ✕
+                </button>
               </div>
             ))}
           </div>
@@ -127,7 +158,8 @@ function AfterScanning({
       {scanProduct && renderProductCards()}
       {order.skus &&
         (matchingPackage.size !== 0 || notMatchingPackages.size !== 0) &&
-        matchingProducts.length === order.skus.length && (
+        matchingProducts.length &&
+        order.skus.length && (
           <BigButton
             isValid
             buttonText="Закрыть посылку"

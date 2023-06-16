@@ -4,20 +4,25 @@ import FragileImage from '../images/label/fragile.svg';
 import LiquidImage from '../images/label/liquid.svg';
 import PerishableImage from '../images/label/perishable-product.svg';
 import TechniqueImage from '../images/label/technique.svg';
+// import Null from '../images/null.png';
+import Null from '../images/lost.gif';
 
 const getImageByCargoType = (cargotypeId) => {
   switch (cargotypeId) {
     case 320:
+      // 291 сейчас на бэке
       return {
         src: BulkImage,
         alt: 'Сыпучее',
       };
     case 485:
+      // 340 сейчас на бэке
       return {
         src: ChemicalsImage,
         alt: 'Химия',
       };
     case 310:
+      // 950 сейчас на бэке
       return {
         src: FragileImage,
         alt: 'Хрупкое',
@@ -38,7 +43,10 @@ const getImageByCargoType = (cargotypeId) => {
         alt: 'Техника',
       };
     default:
-      return null;
+      return {
+        src: Null,
+        alt: 'Null',
+      };
   }
 };
 
