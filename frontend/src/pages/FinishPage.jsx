@@ -1,0 +1,28 @@
+import { useNavigate } from 'react-router-dom';
+import styles from './Pages.module.css';
+import Finish from '../components/Finish/Finish';
+import BigButton from '../components/BigButton/BigButton';
+
+function FinishPage() {
+  const navigate = useNavigate();
+  const isValid = true;
+
+  const handleButtonClick = () => {
+    if (isValid) {
+      navigate('/');
+    }
+  };
+
+  return (
+    <section className={styles.centerBlock}>
+      <Finish />
+      <BigButton
+        buttonText="Готово"
+        isValid={isValid}
+        onClick={handleButtonClick}
+      />
+    </section>
+  );
+}
+
+export default FinishPage;

@@ -1,0 +1,111 @@
+@font-face {
+  font-family: 'YS Disp';
+  src: url('YS Disp-Thin.woff2') format('woff2');
+  font-display: swap;
+  font-weight: 100;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'YS Disp';
+  src: url('YS Disp-Light.woff2') format('woff2');
+  font-display: swap;
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'YS Disp';
+  src: url('YS Disp-Regular.woff2') format('woff2');
+  font-display: swap;
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'YS Disp';
+  src: url('YS Disp-Medium.woff2') format('woff2');
+  font-display: swap;
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'YS Disp';
+  src: url('YS Disp-Bold.woff2') format('woff2');
+  font-display: swap;
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'YS Disp';
+  src: url('YS Disp-Heavy.woff2') format('woff2');
+  font-display: swap;
+  font-weight: 900;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'YS Disp';
+  src: url('YS Disp-Fat.woff2') format('woff2');
+  font-display: swap;
+  font-weight: 1000;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'YS Text';
+  src: url('YS Text-Thin.woff2') format('woff2');
+  font-display: swap;
+  font-weight: 100;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'YS Text';
+  src: url('YS Text-Light.woff2') format('woff2');
+  font-display: swap;
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'YS Text';
+  src: url('YS Text-Regular.woff2') format('woff2');
+  font-display: swap;
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'YS Text';
+  src: url('YS Text-Medium.woff2') format('woff2');
+  font-display: swap;
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'YS Text';
+  src: url('YS Text-Bold.woff2') format('woff2');
+  font-display: swap;
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'YS Text';
+  src: url('YS Text-Heavy.woff2') format('woff2');
+  font-display: swap;
+  font-weight: 900;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'YS Text';
+  src: url('YS Text-Fat.woff2') format('woff2');
+  font-display: swap;
+  font-weight: 1000;
+  font-style: normal;
+}
