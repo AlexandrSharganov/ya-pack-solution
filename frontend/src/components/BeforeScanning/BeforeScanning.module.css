@@ -4,6 +4,11 @@
   padding-right: 28px;
 }
 
+.flexNone {
+  flex: none;
+  max-width: 28%;
+}
+
 .section:last-of-type {
   border-right: 0;
   padding-right: 0;

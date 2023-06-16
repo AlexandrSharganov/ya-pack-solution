@@ -70,7 +70,11 @@ function BeforeScanning({ order, scanProduct }) {
   };
 
   return (
-    <section className={styles.section}>
+    <section
+      className={
+        renderDone() ? `${styles.section} ${styles.flexNone}` : styles.section
+      }
+    >
       <div className={styles.box}>
         <h1 className={styles.title}>Ячейка B-09</h1>
         <span className={styles.post}>Почта России</span>

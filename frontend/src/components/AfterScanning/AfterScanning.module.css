@@ -5,6 +5,10 @@
   padding-left: 25px;
 }
 
+.newWidth {
+  max-width: 49%;
+}
+
 .sectionFinish {
   margin: 0 0 120px 0;
 }
