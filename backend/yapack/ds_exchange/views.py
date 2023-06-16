@@ -46,7 +46,14 @@ def get_package(orders_num: int):
         order = OrderReceived.objects.filter(status='no_rec').first()
         if order:
             request = get_data_for_ds(order)
-            response = requests.post(url_recommend, json=request).json()
+            try:
+                response = requests.post(
+                    url_recommend, json=request, timeout=3).json()
+            except requests.exceptions.ReadTimeout:
+                orders.append('Упаковка не получена!')
+                order.status = order.IN_WORK
+                order.save()
+                continue
         else:
             orders.append('Заказы закончились.')
             return orders
