@@ -5,6 +5,7 @@ import uvicorn
 
 app = FastAPI()
 
+
 @app.get("/")
 def index():
     return {"team_7": "ds_model"}
@@ -33,7 +34,7 @@ def recommend_pack(order: Order) -> dict:
 
 
 if __name__ == '__main__':
-    uvicorn.run(app, host='127.0.0.1', port=8000)
+    uvicorn.run(app, host='127.0.0.1', port=8100)
 
 
 #uvicorn app:app --reload
