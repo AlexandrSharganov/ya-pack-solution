@@ -1,0 +1,101 @@
+.section {
+  flex: 1;
+  max-width: 50%;
+  margin: 0;
+  padding-left: 25px;
+}
+
+.newWidth {
+  max-width: 49%;
+}
+
+.sectionFinish {
+  margin: 0 0 120px 0;
+}
+
+.title {
+  font-family: 'YS Disp';
+  font-size: 28px;
+  line-height: 32px;
+  margin: 24px 0 0 8px;
+  cursor: default;
+}
+
+.text {
+  margin: 12px 0 13px 8px;
+  font-size: 20px;
+  line-height: 25px;
+  color: rgba(0, 0, 0, 0.6);
+  cursor: default;
+}
+
+.textOrange {
+  color: #ffa200;
+}
+
+.packages {
+  display: flex;
+  gap: 12px;
+  margin: 0 0 0 8px;
+}
+
+.package {
+  box-sizing: border-box;
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  padding: 6px 14px;
+  font-weight: 500;
+  font-size: 28px;
+  line-height: 31px;
+  max-width: fit-content;
+  border: 2px solid #000000;
+  border-radius: 42px;
+  margin: 0;
+  cursor: default;
+}
+
+.packageRecommended {
+  border: 2px solid #2aad2e;
+}
+
+.packageNotRecommended {
+  border: 2px solid #ffa200;
+}
+
+.figure {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 143px 0 0;
+  gap: 33px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 28px;
+  line-height: 31px;
+  cursor: default;
+}
+
+.cardList {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  margin-top: 48px;
+}
+
+.cardList {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  margin-top: 56px;
+}
+
+.notRecButton {
+  border: 0;
+  background-color: transparent;
+  font-size: 20px;
+  padding: 0;
+  margin-left: 10px;
+  cursor: pointer;
+}

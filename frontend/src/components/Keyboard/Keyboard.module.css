@@ -1,0 +1,165 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  max-width: 608px;
+  background: #ffffff;
+  border-radius: 24px;
+  padding: 20px 30px;
+  margin: 0;
+}
+
+.container > :last-child {
+  align-self: flex-start;
+}
+
+.title {
+  font-family: 'YS Text';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 56px;
+  line-height: 68px;
+  text-align: center;
+  margin: 10px 0 35px 0;
+}
+
+.close {
+  position: absolute;
+  width: 72px;
+  height: 72px;
+  font-size: 36px;
+  border: none;
+  outline: none;
+  padding: 0;
+  top: 0;
+  right: -84px;
+  background: #f3f0e9;
+  border-radius: 36px;
+  cursor: pointer;
+  transition: all 0.3s ease 0s;
+}
+
+.close:hover {
+  background-color: #dedede;
+}
+
+.close:active {
+  background-color: #b0b0b0;
+}
+
+.label {
+  position: relative;
+}
+
+.inputField {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 405px;
+  height: 100px;
+  margin: 0 0 20px 0;
+  padding: 0 90px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 44px;
+  line-height: 46px;
+  border-radius: 30px;
+  border: 8px solid #fed42b;
+  outline: none;
+  text-align: center;
+  -moz-appearance: textfield;
+}
+
+.inputField::-webkit-inner-spin-button,
+.inputField::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.inputField:focus {
+  border-color: #f5c400;
+}
+
+.inputError {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  max-width: 600px;
+  min-height: 40px;
+  margin: 0;
+  font-weight: 400;
+  font-size: 23px;
+  line-height: 30px;
+  color: #ff0000;
+  opacity: 0;
+  transition: 0.3s all;
+}
+
+.inputErrorActive {
+  opacity: 1;
+}
+
+.deleteBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  width: 36px;
+  height: 24px;
+  top: 17px;
+  right: 10px;
+  padding: 40px;
+  border-radius: 10px;
+  background: #ffffff;
+  border: none;
+  cursor: pointer;
+}
+
+.deleteIcon {
+  width: 36px;
+}
+
+.keyboardRow {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 603px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.button {
+  display: inline-block;
+  width: 185px;
+  height: 82.25px;
+  margin: 12px;
+  padding: 0;
+  font-family: 'YS Text';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 28px;
+  line-height: 31px;
+  background: #f3f0e9;
+  border-radius: 24px;
+  border: none;
+  cursor: pointer;
+}
+
+.button:nth-child(3n),
+.button:last-child {
+  margin-right: 0;
+}
+
+.button:nth-child(3n-2),
+.button:first-child {
+  margin-left: 0;
+}
+
+.button:hover {
+  background-color: #dedede;
+}
+
+.button:active {
+  background-color: #b0b0b0;
+}

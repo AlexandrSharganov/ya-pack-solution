@@ -1,0 +1,38 @@
+.footer {
+  display: grid;
+  position: fixed;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: center;
+  height: 112px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  box-shadow: 0px 5px 46px rgba(0, 0, 0, 0.12), 0px 7px 15px rgba(0, 0, 0, 0.12);
+  padding: 0 24px;
+  background: #ffffff;
+}
+
+.footerYellow {
+  background: #ffa200;
+}
+
+.problemButton {
+  width: 296px;
+  height: 72px;
+  border: 0;
+  border-radius: 24px;
+  background: #f3f0e9;
+  font-size: 28px;
+  font-weight: 500;
+  color: #212121;
+  cursor: pointer;
+}
+
+.problemButton:hover {
+  background-color: #dedede;
+}
+
+.link {
+  text-decoration: none;
+  cursor: default;
+}

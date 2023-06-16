@@ -1,5 +1,4 @@
 from django.http import HttpResponse
-# from django.template import RequestContext
 from django.shortcuts import get_object_or_404, redirect, render
 from .forms import PackerForm
 from .models import Packer
@@ -11,7 +10,7 @@ def login_view(request):
     '''
     form = PackerForm()
     if request.method == 'POST':
-        form = PackerForm(request.POST)
+        form = form(request.POST)
     if form.is_valid():
         packer_num = form.cleaned_data['packer_num']
         return redirect('users:worktable', packer_num)

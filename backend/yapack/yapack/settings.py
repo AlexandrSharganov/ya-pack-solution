@@ -25,6 +25,8 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',
     'orders.apps.OrdersConfig',
     'api.apps.ApiConfig',
+    'ds_exchange.apps.DsExchangeConfig',
+
 ]
 
 MIDDLEWARE = [
@@ -102,3 +104,8 @@ USE_TZ = True
 
 
 STATIC_URL = '/static/'
+
+DS_URL = {
+    'STATUS': 'http://127.0.0.1:8100/health',
+    'RECOMEND': 'http://127.0.0.1:8100/recommend',
+}

@@ -1,0 +1,68 @@
+{
+  "id": 1,
+  "order_key": "0049e38b3ee32d2dad52405e217c6dd2",
+  "skus": [
+    {
+      "sku_id": "04444811d5ed0d4bd4ca154acdbc1bd2",
+      "amount": 1,
+      "barcode": "9943587515741",
+      "cargotypes": [
+        {
+          "cargotype_id": 320
+        },
+        {
+          "cargotype_id": 485
+        },
+        {
+          "cargotype_id": 700
+        }
+      ]
+    },
+    {
+      "sku_id": "04444811d5ed0d4bd4ca154acdbc1bd2",
+      "amount": 1,
+      "barcode": "9943587515742",
+      "cargotypes": [
+        {
+          "cargotype_id": 520
+        },
+        {
+          "cargotype_id": 310
+        },
+        {
+          "cargotype_id": 200
+        }
+      ]
+    },
+    {
+      "sku_id": "04444811d5ed0d4bd4ca154acdbc1bd2",
+      "amount": 1,
+      "barcode": "9943587515743",
+      "cargotypes": [
+        {
+          "cargotype_id": 485
+        },
+        {
+          "cargotype_id": 320
+        },
+        {
+          "cargotype_id": 310
+        }
+      ]
+    }
+  ],
+  "packages": [
+    {
+      "package": 127,
+      "amount": 2
+    },
+    {
+      "package": 113,
+      "amount": 5
+    }
+  ],
+  "packages_sel": [],
+  "packer": "0987654321",
+  "package_match": true,
+  "status": "in_work"
+}

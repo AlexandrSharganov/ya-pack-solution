@@ -1,0 +1,5 @@
+<form method="post" action="{% url 'ds_exchange:get_orders' %}">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <input type="submit" value="Отправить">
+</form> 
