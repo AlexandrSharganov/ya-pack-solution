@@ -21,6 +21,7 @@ function App() {
   const [scanNotRecommendedPackage, setScanNotRecommendedPackage] = useState(
     {}
   );
+  const [removeElement, setRemoveElement] = useState('');
 
   const closeAllPopups = () => {
     setIsProductEntryPopupOpen(false);
@@ -31,6 +32,9 @@ function App() {
   // }, []);
 
   useEffect(() => {
+    if (removeElement) {
+      setScanProduct('');
+    }
     getOrder()
       .then((res) => {
         setOrder(JSON.parse(JSON.stringify(res)));
@@ -38,7 +42,7 @@ function App() {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [removeElement]);
 
   const checkBarcode = (data) => {
     setIsLoading(true);
@@ -86,6 +90,8 @@ function App() {
               scanProduct={scanProduct}
               scanRecommendedPackage={scanRecommendedPackage}
               scanNotRecommendedPackage={scanNotRecommendedPackage}
+              removeElement={removeElement}
+              setRemoveElement={setRemoveElement}
             />
           }
         />
