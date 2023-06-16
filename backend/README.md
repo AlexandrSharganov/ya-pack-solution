@@ -28,6 +28,8 @@ pip install djangorestframework==3.12
 
 pip install drf_yasg
 
+pip install django-cors-headers
+
 ```
 
 ### 6 Перейти в папку yapack в которой есть файл manage.py и выполнить команду
