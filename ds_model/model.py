@@ -5,7 +5,7 @@ from packer import form_output
 
 
 def predict(order: dict) -> list:
-    """Main prediction manager"""
+    """Main prediction manager """
     order_d, n_goods = prep_json(order)
 
     if n_goods == 1:
