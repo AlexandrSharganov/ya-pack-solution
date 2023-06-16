@@ -70,7 +70,7 @@ def get_cheapest(s:set) -> str:
 
     return sorted(s, key=lambda x: prices.get(x, 1e10))[0]
 
-
+"""
 def get_packed(jsn: dict, count:int = 1):
     """Get a packages where goods will fit in
     works for 1-2-3 items in one order"""
@@ -103,4 +103,4 @@ def get_packed(jsn: dict, count:int = 1):
              and (dt[pack]['vol_borders'][0] <= total_volume <= dt[pack]['vol_borders'][1])):
             rec_pack.append(pack)
     return tuple(rec_pack)
-
+"""

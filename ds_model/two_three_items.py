@@ -1,11 +1,14 @@
-from utils import cook_features, get_packed, get_cheapest
+from utils import cook_features, get_cheapest
+from packer import get_packed
 import pickle
 import os
 
 
-def ml_two_three(query: dict, n_goods: int, top_k=3) -> list:
+def ml_two_three(query: dict, 
+                 n_goods: int, 
+                 top_k=3) -> list:
     """Get predictions for two or three goods in order"""
-    # делаю фичи и считаю количество товаров в заказе
+    # делаю фичи
     features = cook_features(query)
 
     # нужные модели в зависимости от кол-ва товаров
@@ -31,7 +34,12 @@ def ml_two_three(query: dict, n_goods: int, top_k=3) -> list:
                           reverse=True)[:top_k]
     return [pack[0] for pack in result_packs]
 
-def predict_two_three(query: dict, top_k: int = 3, n_goods: int = 2) -> str:
+
+def predict_two_three(query: dict, 
+                      top_k: int = 3, 
+                      n_goods: int = 2) -> str:
+    """Recommend pack for two-three items 
+    Combination of ml predictions and algo sort"""
     #
     # Добавить проверку карготипов
     # Проверить крайние случаи
@@ -40,7 +48,7 @@ def predict_two_three(query: dict, top_k: int = 3, n_goods: int = 2) -> str:
                       for cargo in item['cargotypes']])
 
     ml_preds = ml_two_three (query, n_goods)
-    algo_preds = get_packed(query, n_goods)
+    algo_preds = get_packed(query)[0]
     # проверяю если ml предсказания это не самые популярыне упаковки
     if len(ml_preds)>top_k:
         #прохожусь по результатам алго, они отсортированы по цене
@@ -53,5 +61,3 @@ def predict_two_three(query: dict, top_k: int = 3, n_goods: int = 2) -> str:
     ml_alg = set(ml_preds) & set(algo_preds[:3])
 
     return get_cheapest(ml_alg)
-
-

@@ -23,16 +23,13 @@ def startup_event():
 
 
 @app.post("/recommend")
-def recommend_pack(order: Order):
+def recommend_pack(order: Order) -> dict:
     order = order.dict()
-    # pack = predict(order)
-    # order["package"] = pack
-    # order['status'] = "in_work"
-    out = {"order_key": order["order_key"]}
-    out['package'] = predict(order)
-    out['status'] = "in_work"
 
-    return out
+    return {"order_key": order["order_key"],
+           'package': predict(order),
+           'status': "in_work"}
+
 
 
 if __name__ == '__main__':
