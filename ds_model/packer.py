@@ -2,40 +2,6 @@ import json
 import os
 from utils import get_cheapest
 
-example_1 = {'orderId': 'unique_order_id', 'items': [{'sku': 'unique_sku_4', 'count': 1,
-                                                      'a': 50, 'b': 55, 'c': 53,
-                                                      'goods_wght': '14.2', 'cargotypes': ['12', '10']}]}
-
-example_2 = {'orderId': 'unique_order_id', 'items': [{'sku': 'unique_sku_1', 'count': 1,
-                                                      'a': 5.1, 'b': 2.2, 'c': 5.3,
-                                                      'goods_wght': '7.34', 'cargotypes': ['2']},
-                                                     {'sku': 'unique_sku_2', 'count': 3,
-                                                      'a': 4, 'b': 5.23, 'c': 6.2,
-                                                      'goods_wght': '7.45', 'cargotypes': ['8', '9', '10']}]}
-
-example_3 = {'orderId': 'unique_order_id', 'items': [{'sku': 'unique_sku_1', 'count': 1,
-                                                      'a': 5.1, 'b': 2.2, 'c': 5.3,
-                                                      'goods_wght': '7.34', 'cargotypes': ['2']},
-                                                     {'sku': 'unique_sku_2', 'count': 3,
-                                                      'a': 4, 'b': 5.23, 'c': 6.2,
-                                                      'goods_wght': '7.45', 'cargotypes': ['8', '9', '10']},
-                                                     {'sku': 'unique_sku_3', 'count': 2,
-                                                      'a': 11, 'b': 12.5, 'c': 13.3,
-                                                      'goods_wght': '14.2', 'cargotypes': ['15', '16']}]}
-
-example_4 = {'orderId': 'unique_order_id', 'items': [{'sku': 'unique_sku_1', 'count': 15,
-                                                      'a': 15, 'b': 12, 'c': 15,
-                                                      'goods_wght': '7.34', 'cargotypes': ['2']},
-                                                     {'sku': 'unique_sku_2', 'count': 30,
-                                                      'a': 4, 'b': 5.23, 'c': 6.2,
-                                                      'goods_wght': '7.45', 'cargotypes': ['8', '9', '10']},
-                                                     {'sku': 'unique_sku_3', 'count': 10,
-                                                      'a': 11, 'b': 13, 'c': 25,
-                                                      'goods_wght': '14.2', 'cargotypes': ['15', '16']},
-                                                     {'sku': 'unique_sku_4', 'count': 2,
-                                                      'a': 25, 'b': 26, 'c': 10,
-                                                      'goods_wght': '14.2', 'cargotypes': ['12', '10']}]}
-
 
 def helper(dt: dict,
            sorted_abc: list,
@@ -156,12 +122,3 @@ def form_output(jsn: dict) -> list:
 
     return [{"package": pack,
             "amount": packs[pack]} for pack in packs]
-
-
-
-example_1 = {'orderId': 'unique_order_id', 'items': [{'sku': 'unique_sku_4', 'count': 12,
-                                                      'a': 12, 'b': 23, 'c': 30,
-                                                      'goods_wght': '14.2', 'cargotypes': ['12', '10']}]}
-
-print(get_packed(example_1))
-print(form_output(example_1))
