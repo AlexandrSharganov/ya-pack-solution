@@ -12,7 +12,7 @@ from .serializers import (
     OrderReceivedSerializer,
     SkuSerializer,
     OrderReceivedSkuSerializer,
-    FrontOrderReceivedSerializer
+    FrontOrderReceivedSerializer,
 )
 
 
@@ -73,4 +73,10 @@ def ds_order_view(request):
 def front_order_view(request):
     order = get_list_or_404(OrderReceived, status='in_work')[0]
     serializer = FrontOrderReceivedSerializer(order)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def front_package_view(request, barcode: str):
+    package = get_object_or_404(Package, barcode=barcode)
+    serializer = PackageSerializer(package)
     return Response(serializer.data)
