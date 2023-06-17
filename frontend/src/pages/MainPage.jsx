@@ -7,15 +7,23 @@ function MainPage({
   scanNotRecommendedPackage,
   scanProduct,
   order,
+  removeElement,
+  setRemoveElement,
 }) {
   return (
     <section className={styles.main}>
-      <BeforeScanning order={order} scanProduct={scanProduct} />
+      <BeforeScanning
+        order={order}
+        scanProduct={scanProduct}
+        removeElement={removeElement}
+      />
       <AfterScanning
         order={order}
         scanProduct={scanProduct}
         scanRecommendedPackage={scanRecommendedPackage}
         scanNotRecommendedPackage={scanNotRecommendedPackage}
+        removeElement={removeElement}
+        setRemoveElement={setRemoveElement}
       />
     </section>
   );

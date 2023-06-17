@@ -3,11 +3,10 @@ import styles from './BeforeScanning.module.css';
 import ProductCard from '../ProductCard/ProductCard';
 import DoneBlock from '../DoneBlock/DoneBlock';
 
-function BeforeScanning({ order, scanProduct }) {
+function BeforeScanning({ order, scanProduct, removeElement }) {
   const [isCopied, setIsCopied] = useState(false);
   const [matchingProducts, setMatchingProducts] = useState([]);
   const [scanProducts, setScanProducts] = useState([]);
-
   useEffect(() => {
     setScanProducts((prevScanProducts) => [...prevScanProducts, scanProduct]);
   }, [scanProduct]);
@@ -19,14 +18,21 @@ function BeforeScanning({ order, scanProduct }) {
       );
 
       setMatchingProducts(filteredProducts);
-    }
-  }, [order.skus, scanProducts]);
 
-  const removeProduct = (barcode) => {
-    setMatchingProducts((prevMatchingProducts) =>
-      prevMatchingProducts.filter((item) => item.barcode !== barcode)
-    );
-  };
+      if (removeElement) {
+        const filteredRemoveProducts = order.skus.filter((item) =>
+          removeElement.includes(item.barcode)
+        );
+        setMatchingProducts(filteredRemoveProducts);
+      }
+    }
+  }, [order.skus, scanProducts, removeElement]);
+
+  // const removeProduct = (barcode) => {
+  //   setMatchingProducts((prevMatchingProducts) =>
+  //     prevMatchingProducts.filter((item) => item.barcode !== barcode)
+  //   );
+  // };
 
   useEffect(() => {
     if (isCopied) {
@@ -45,7 +51,7 @@ function BeforeScanning({ order, scanProduct }) {
         <ProductCard
           key={item.barcode}
           item={item}
-          removeProduct={removeProduct}
+          // removeProduct={removeProduct}
           setIsCopied={setIsCopied}
           isAfterScanning={false}
         />
