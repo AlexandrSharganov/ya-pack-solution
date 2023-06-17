@@ -39,15 +39,6 @@ function BeforeScanning({ order, scanProduct }) {
     return undefined;
   }, [isCopied]);
 
-  const renderAmount = () => {
-    if (matchingProducts.length !== 0) {
-      return (
-        <span className={styles.amount}>{matchingProducts.length} товара</span>
-      );
-    }
-    return null;
-  };
-
   const renderProductCards = () => (
     <div className={styles.cardList}>
       {matchingProducts.map((item) => (
@@ -79,7 +70,7 @@ function BeforeScanning({ order, scanProduct }) {
         <h1 className={styles.title}>Ячейка B-09</h1>
         <span className={styles.post}>Почта России</span>
       </div>
-      {renderAmount()}
+      <span className={styles.amount}>{matchingProducts.length} товара</span>
       {renderProductCards()}
       {isCopied && <div className={styles.copyCode}>Штрихкод скопирован</div>}
       {renderDone()}

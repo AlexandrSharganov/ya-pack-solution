@@ -106,7 +106,13 @@ function AfterScanning({
   );
 
   return (
-    <section className={styles.section}>
+    <section
+      className={
+        matchingProducts.length && order.skus.length
+          ? `${styles.section} ${styles.newWidth}`
+          : styles.section
+      }
+    >
       <h1 className={styles.title}>Посылка</h1>
       <div className={styles.text}>Рекомендованный вид упаковки</div>
       <div className={styles.packages}>
