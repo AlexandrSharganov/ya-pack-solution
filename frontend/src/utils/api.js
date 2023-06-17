@@ -27,13 +27,13 @@ export const getPackage = async (data) => {
   return requestResult(res);
 };
 
-export const postOrder = async (order) => {
-  const res = await fetch(`${BASE_URL}front/`, {
-    method: 'POST',
+export const patchOrder = async (id, orderFinish) => {
+  const res = await fetch(`${BASE_URL}${id}/`, {
+    method: 'PATCH',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ order }),
+    body: JSON.stringify(orderFinish),
   });
   return requestResult(res);
 };

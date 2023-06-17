@@ -6,6 +6,7 @@ function MainPage({
   scanRecommendedPackage,
   scanNotRecommendedPackage,
   scanProduct,
+  setScanProduct,
   order,
   removeElement,
   setRemoveElement,
@@ -20,6 +21,7 @@ function MainPage({
       <AfterScanning
         order={order}
         scanProduct={scanProduct}
+        setScanProduct={setScanProduct}
         scanRecommendedPackage={scanRecommendedPackage}
         scanNotRecommendedPackage={scanNotRecommendedPackage}
         removeElement={removeElement}

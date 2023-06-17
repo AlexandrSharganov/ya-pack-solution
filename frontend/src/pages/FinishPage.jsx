@@ -1,3 +1,4 @@
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './Pages.module.css';
 import Finish from '../components/Finish/Finish';
@@ -10,6 +11,7 @@ function FinishPage() {
   const handleButtonClick = () => {
     if (isValid) {
       navigate('/');
+      window.location.reload();
     }
   };
 
