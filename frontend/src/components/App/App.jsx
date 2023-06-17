@@ -33,7 +33,7 @@ function App() {
 
   useEffect(() => {
     if (removeElement) {
-      setScanProduct('');
+      console.log(scanProduct);
     }
     getOrder()
       .then((res) => {
@@ -88,6 +88,7 @@ function App() {
             <MainPage
               order={order}
               scanProduct={scanProduct}
+              setScanProduct={setScanProduct}
               scanRecommendedPackage={scanRecommendedPackage}
               scanNotRecommendedPackage={scanNotRecommendedPackage}
               removeElement={removeElement}
