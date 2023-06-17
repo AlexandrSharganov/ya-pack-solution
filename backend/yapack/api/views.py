@@ -80,3 +80,9 @@ def front_package_view(request, barcode: str):
     package = get_object_or_404(Package, barcode=barcode)
     serializer = PackageSerializer(package)
     return Response(serializer.data)
+
+@api_view(['GET'])
+def front_problem_view(request, order_key: str):
+    order = get_object_or_404(Package, order_key=order_key)
+    order.status = order.PROBLEM
+    return Response(serializer.data)
