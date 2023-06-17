@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react';
 import styles from './BeforeScanning.module.css';
 import ProductCard from '../ProductCard/ProductCard';
 import DoneBlock from '../DoneBlock/DoneBlock';
+import Loader from '../Loader/Loader';
 
-function BeforeScanning({ order, scanProduct, removeElement }) {
+function BeforeScanning({ order, scanProduct, removeElement, hasBigButton }) {
   const [isCopied, setIsCopied] = useState(false);
   const [matchingProducts, setMatchingProducts] = useState([]);
   const [scanProducts, setScanProducts] = useState([]);
@@ -28,12 +29,6 @@ function BeforeScanning({ order, scanProduct, removeElement }) {
     }
   }, [order.skus, scanProducts, removeElement]);
 
-  // const removeProduct = (barcode) => {
-  //   setMatchingProducts((prevMatchingProducts) =>
-  //     prevMatchingProducts.filter((item) => item.barcode !== barcode)
-  //   );
-  // };
-
   useEffect(() => {
     if (isCopied) {
       const timeout = setTimeout(() => {
@@ -51,7 +46,6 @@ function BeforeScanning({ order, scanProduct, removeElement }) {
         <ProductCard
           key={item.barcode}
           item={item}
-          // removeProduct={removeProduct}
           setIsCopied={setIsCopied}
           isAfterScanning={false}
         />
@@ -66,10 +60,14 @@ function BeforeScanning({ order, scanProduct, removeElement }) {
     return null;
   };
 
+  if (!order.skus) {
+    return <Loader />;
+  }
+
   return (
     <section
       className={
-        renderDone() ? `${styles.section} ${styles.flexNone}` : styles.section
+        hasBigButton ? `${styles.section} ${styles.flexNone}` : styles.section
       }
     >
       <div className={styles.box}>
