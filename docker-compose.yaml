@@ -1,0 +1,43 @@
+# версия docker-compose
+version: '3.8'
+
+services:
+  web:
+    build: ./backend
+    restart: always
+    volumes:
+      - static_value:/yapack/static/
+      - media_value:/yapack/media/ 
+    # ports:
+    #  - "8000:8000"
+    # env_file:
+    #   - ./.env
+  ds:
+    build: ./ds_model
+    restart: always
+    ports:
+     - "8080:8080"
+    depends_on:
+      - web
+    # env_file:
+    #   - ./.env
+  nginx:
+    image: nginx:1.21.3-alpine
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+      - ./static_value:/var/html/static/
+      - ./media_value:/var/html/media/ 
+      # - ./media_value:/var/html/media
+      # - ../frontend/build:/usr/share/nginx/html/
+      # - ../docs/:/usr/share/nginx/html/api/docs/
+    restart: always
+    depends_on:
+      - ds
+
+volumes:
+  # Новые тома 
+  static_value:
+  media_value:

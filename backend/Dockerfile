@@ -1,13 +1,12 @@
 FROM python:3.8.10-slim
 
-RUN mkdir /app
 
-COPY requirements.txt /app
+COPY . .
 
-RUN pip3 install -r /app/requirements.txt --no-cache-dir
+RUN pip3 install -r requirements.txt --no-cache-dir
 
-COPY yapack/ /app
+WORKDIR /yapack
 
-WORKDIR /app
+CMD ["gunicorn", "yapack.wsgi:application", "--bind", "0:8000"]
 
-CMD ["python3", "manage.py", "runserver", "0:8000"] 
+# CMD ["python", "manage.py", "runserver", "0:8000"] 
