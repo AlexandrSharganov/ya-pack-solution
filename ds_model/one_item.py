@@ -167,6 +167,7 @@ def predict_one_item(query: dict,
             return 'NONPACK'
 
     knn_ans = get_knn_top(sample[knn_features])
+    item = cook_features_one(query, dataframe=False)
 
     algo_ans = get_packed(query)[0][:3]
     knn_algo_union = set(algo_ans) | set(knn_ans)
