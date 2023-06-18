@@ -11,7 +11,6 @@ function FinishPage({ isLoading }) {
   const handleButtonClick = () => {
     if (isValid) {
       navigate('/');
-      window.location.reload();
     }
   };
 
