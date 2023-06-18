@@ -5,7 +5,23 @@ import pickle
 
 
 def prep_json(order: dict) -> tuple:
-    """Get a new dict with right keys names and total items amount"""
+    """Transforms the initial order json(dict) into a 
+    dictionary suitable for the further processing.
+    Doesn't change the initial order dictionary.
+    Also calculates the number of goods order contains.
+
+    Parameters
+    ----------
+    order : dict
+        Initial order dictionary
+        
+
+    Returns
+    -------
+    tuple(dict, int)
+        Transformed order and number of goods
+
+    """
     init_atts = ['sku_id',
                  'sku_wght',
                  'dimension_a',
@@ -31,37 +47,65 @@ def prep_json(order: dict) -> tuple:
 
 
 def cook_features(order: dict) -> np.array:
-    """Get features array for an order"""
+    """Get features array for an order
+    Needed for the orders containing 2-3 goods.
+    The count field is no longer needed since the
+    order list now contains as many of items as
+    the initial order had regardless of recurring ones.
+    A good's volumes are added. Also the item's 
+    dimentions are sorted as well as the goods 
+    are sorted by their volume.
+
+    Parameters
+    ----------
+    order : dict
+        Prepared order dictionary
+
+    Returns
+    -------
+    features: np.array
+        An array of features in right order
+        ready for the classifiers to predict.
+    """
     query = order.copy()
-    # список товаров
     goods = []
-    # в заказе может быть разное количество единиц товаров
     for item in query['items']:
-        # считаю объем
         item['sku_vol'] = round(item['a'] * item['b'] * item['c'], 2)
-        # умножаю товар на его количество чтобы в списке было нужное количество
         goods += [item] * item['count']
 
-    features, all_dims = [], []  # все размеры для поиска минимального и максимального
+    features, all_dims = [], []  
     total_vol, total_wght = 0, 0
-    # фичи каждого товара
     for item in sorted(goods, key=lambda x: x['sku_vol']):
         features.append(item['goods_wght'])
-        total_wght += item['goods_wght']  # общий вес
+        total_wght += item['goods_wght'] 
         dims = sorted([item['a'], item['b'], item['c']],
-                      reverse=True)  # отсортированные размеры
+                      reverse=True)  
         features += dims
         all_dims += dims
         features.append(item['sku_vol'])
-        total_vol += item['sku_vol']  # общий объем
-    # добавляю общие фичи товаров
+        total_vol += item['sku_vol']  
     features += [total_vol, total_wght, min(all_dims), max(all_dims)]
 
     return np.array(features, dtype='float16')
 
 
 def get_cheapest(s:set) -> str:
-    """Get cheapest item from set"""
+    """Get a cheapest pack from multiple packs
+    Based on the packs prices.
+    Also used when the sequence is empty,
+    returns 'NONPACK' then.
+
+    Parameters
+    ----------
+    s : set
+        Can be any iterable sequence of packages
+
+    Returns
+    -------
+    pack: str
+        The cheapest package in a sequence
+
+    """
     if not s:
         return 'NONPACK'
 
