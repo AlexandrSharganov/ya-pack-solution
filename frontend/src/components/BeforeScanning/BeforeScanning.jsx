@@ -19,12 +19,15 @@ function BeforeScanning({ order, scanProduct, removeElement }) {
       );
 
       setMatchingProducts(filteredProducts);
+      console.log(filteredProducts);
 
       if (removeElement) {
         const filteredRemoveProducts = order.skus.filter((item) =>
           removeElement.includes(item.barcode)
         );
         setMatchingProducts(filteredRemoveProducts);
+        console.log(filteredRemoveProducts);
+        filteredRemoveProducts.push(...filteredProducts);
       }
     }
   }, [order.skus, scanProducts, removeElement]);
@@ -60,8 +63,12 @@ function BeforeScanning({ order, scanProduct, removeElement }) {
     return null;
   };
 
+  const loaderColor = {
+    borderTop: '3px solid #3F68F9',
+  };
+
   if (!order.skus) {
-    return <Loader />;
+    return <Loader loaderColor={loaderColor} />;
   }
 
   return (

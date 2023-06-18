@@ -4,7 +4,7 @@
   margin: auto;
   border-radius: 50%;
   display: inline-block;
-  border-top: 3px solid #3f68f9;
+  border-top: 3px solid #393939;
   border-right: 3px solid transparent;
   box-sizing: border-box;
   animation: rotation 1s linear infinite;

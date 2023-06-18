@@ -78,6 +78,7 @@ function Problem({ order }) {
     patchProblem(order.id, orderProblem)
       .then(() => {
         navigate('/');
+        window.location.reload();
       })
       .catch((err) => {
         console.log(err);
