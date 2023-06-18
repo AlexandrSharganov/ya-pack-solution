@@ -14,7 +14,7 @@ def get_data_for_ds(order: OrderReceived) -> dict:
     data = OrderReceivedDsSerializer(order).data
     for sku in data['skus']:
         sku['cargotypes'] = [
-            ctype['cargotype_id'] for ctype in sku['cargotypes']]
+            str(ctype['cargotype_id']) for ctype in sku['cargotypes']]
     return data
 
 

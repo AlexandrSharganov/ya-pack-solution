@@ -40,7 +40,7 @@ def helper(dt: dict,
                 dt[pack]['borders'][0][1]
             ) and
             (
-                [pack]['borders'][1][0] <=
+                dt[pack]['borders'][1][0] <=
                 sorted_abc[1] <=
                 dt[pack]['borders'][1][1]
             ) and
