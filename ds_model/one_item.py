@@ -160,7 +160,6 @@ def predict_one_item(query: dict,
             return 'NONPACK'
         
     knn_ans = get_knn_top(sample[knn_features])
-    item = cook_features_one(query, dataframe=False)
 
     algo_ans = get_packed(query)[0][:3]
     knn_algo_union = set(algo_ans) | set(knn_ans)
@@ -178,7 +177,7 @@ def predict_one_item(query: dict,
                                 if pack in pack_type]))
         if ans: 
             return ans
-        ans = get_cheapest(set([pack for pack in get_packed(item)
+        ans = get_cheapest(set([pack for pack in get_packed(query)
                                 if pack in pack_type]))
         return ans
 
