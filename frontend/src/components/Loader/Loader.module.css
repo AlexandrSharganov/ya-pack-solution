@@ -1,20 +1,20 @@
 .spinner {
-  margin: auto;
-  height: 48px;
   width: 48px;
+  height: 48px;
+  margin: auto;
   border-radius: 50%;
-  border: 5px solid transparent;
-  animation: spin 0.8s linear infinite;
-  background: linear-gradient(#fed42b, #fed42b),
-    conic-gradient(from 0.15turn, #fed42b, #fed42b, #251f07, #000);
-  background-origin: border-box;
-  background-clip: content-box, border-box;
+  display: inline-block;
+  border-top: 3px solid #393939;
+  border-right: 3px solid transparent;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
 }
 
-@keyframes spin {
+@keyframes rotation {
   0% {
     transform: rotate(0deg);
   }
+
   100% {
     transform: rotate(360deg);
   }

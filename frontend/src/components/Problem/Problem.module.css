@@ -1,0 +1,35 @@
+.centerBlock {
+  display: flex;
+  position: fixed;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+  width: 100%;
+  height: calc(100% - 112px - 111px);
+  margin: 112px auto;
+}
+
+.problem {
+  font-weight: 500;
+  font-size: 40px;
+  line-height: 44px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 768px;
+  height: 108px;
+  border: 0;
+  border-radius: 24px;
+  background: #f3f0e9;
+  cursor: pointer;
+}
+
+.problem:hover {
+  background: rgba(222, 222, 222, 0.68);
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.08);
+}
+
+.problem:active {
+  background: #dedede;
+}

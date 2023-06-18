@@ -1,9 +1,10 @@
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './Pages.module.css';
 import Finish from '../components/Finish/Finish';
 import BigButton from '../components/BigButton/BigButton';
 
-function FinishPage() {
+function FinishPage({ isLoading }) {
   const navigate = useNavigate();
   const isValid = true;
 
@@ -20,6 +21,7 @@ function FinishPage() {
         buttonText="Готово"
         isValid={isValid}
         onClick={handleButtonClick}
+        isLoading={isLoading}
       />
     </section>
   );
