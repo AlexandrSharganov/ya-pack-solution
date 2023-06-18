@@ -19,10 +19,10 @@ def helper(dt: dict,
 
     sorted_abc : list
         Sorted linear dimentions of the goods.
-        
+
     total_volume : float
         Goods calculated volume.
-        
+
 
     Returns
     -------
@@ -33,18 +33,35 @@ def helper(dt: dict,
 
     rec_pack = []
     for pack in dt:
-        if ((dt[pack]['borders'][0][0] <= sorted_abc[0] <= dt[pack]['borders'][0][1])
-                and (dt[pack]['borders'][1][0] <= sorted_abc[1] <= dt[pack]['borders'][1][1])
-                and (dt[pack]['borders'][2][0] <= sorted_abc[2] <= dt[pack]['borders'][2][1])
-                and (dt[pack]['vol_borders'][0] <= total_volume <= dt[pack]['vol_borders'][1])):
+        if (
+            (
+                dt[pack]['borders'][0][0] <=
+                sorted_abc[0] <=
+                dt[pack]['borders'][0][1]
+            ) and
+            (
+                [pack]['borders'][1][0] <=
+                sorted_abc[1] <=
+                dt[pack]['borders'][1][1]
+            ) and
+            (
+                dt[pack]['borders'][2][0] <=
+                sorted_abc[2] <=
+                dt[pack]['borders'][2][1]
+            ) and
+            (
+                dt[pack]['vol_borders'][0] <=
+                total_volume <=
+                dt[pack]['vol_borders'][1]
+            )
+        ):
             rec_pack.append(pack)
     return rec_pack
 
 
-def packer(items: list,
-           dt:dict) -> list:
+def packer(items: list, dt: dict) -> list:
     """Imitating a packer function.
-    Rotating and stacking goods accorging 
+    Rotating and stacking goods accorging
     to their linear dimentions. Works with
     several goods and uses a halper function.
 
@@ -52,7 +69,7 @@ def packer(items: list,
     ----------
     items : list
         List of goods
-        
+
     dt : dict
         Borders dictionary to pass to helper
 
@@ -87,8 +104,8 @@ def splitter(base: list,
              data: dict) -> tuple:
     """Find the package for the goods can fit in
     and separate the rest. The continuously repeat
-    the same procedure for the rest untill all groups 
-    of goods have their package to pack in. 
+    the same procedure for the rest untill all groups
+    of goods have their package to pack in.
 
     Parameters
     ----------
@@ -129,8 +146,8 @@ def get_packed(jsn: dict) -> tuple:
     Parameters
     ----------
     jsn : dict
-        Income order dictionary 
-        
+        Income order dictionary
+
 
     Returns
     -------

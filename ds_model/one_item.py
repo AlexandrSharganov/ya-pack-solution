@@ -7,10 +7,10 @@ from packer import get_packed
 
 cb_features = ['goods_wght', 'sku_volume', 'min_sku_dim',
                'max_sku_dim', 'density', 'a', 'b', 'c',
-               '200','290','291','292','320', '340',
-               '360','700', '799']
+               '200', '290', '291', '292', '320', '340',
+               '360', '700', '799']
 
-knn_features = ['goods_wght','a', 'b', 'c','sku_volume',
+knn_features = ['goods_wght', 'a', 'b', 'c', 'sku_volume',
                 'min_sku_dim', 'max_sku_dim', 'density']
 
 boxes = ['YMA', 'YMC', 'YME', 'YMF', 'YMG', 'YMH', 'YMJ',
@@ -20,8 +20,7 @@ boxes = ['YMA', 'YMC', 'YME', 'YMF', 'YMG', 'YMH', 'YMJ',
 packages = ['MYF', 'MYA', 'MYB', 'MYC', 'MYD', 'MYE']
 
 
-def cook_features_one(query: dict,
-                      dataframe:bool = True) -> pd.DataFrame:
+def cook_features_one(query: dict, dataframe: bool = True) -> pd.DataFrame:
     """Prepares the features for models.
     It's different from the one that cook
     features for 2-3 goods since the features are different
@@ -30,7 +29,7 @@ def cook_features_one(query: dict,
     ----------
     query : dict
         Income order dictionary
-        
+
     dataframe : bool
          (Default value = True)
          Return a pandas DataFrame(for a catboost
@@ -41,10 +40,12 @@ def cook_features_one(query: dict,
     -------
     item : pd.DataFrame or dict
         Prepared features for the item
-        
+
 
     """
-    with open(f'{os.getcwd()}/ds_model/models/cargotypes_dict.pkl', 'rb') as handler:
+    with open(
+            f'{os.getcwd()}/ds_model/models/cargotypes_dict.pkl',
+            'rb') as handler:
         cargotype_dict = pickle.load(handler)
 
     cargotypes = list(set(cargotype_dict.values()))
@@ -85,7 +86,7 @@ def get_knn_top(sample: np.array,
     Parameters
     ----------
     sample : np.array
-        
+
     k : int
          (Default value = 3)
          Number of most relevant neighbours
@@ -101,7 +102,9 @@ def get_knn_top(sample: np.array,
         List of recommended packs
 
     """
-    with open(f'{os.getcwd()}/ds_model/models/knn_scaler_dict.pkl', 'rb') as handler:
+    with open(
+            f'{os.getcwd()}/ds_model/models/knn_scaler_dict.pkl',
+            'rb') as handler:
         knn_clf, std_scaler, pack_dict_inv = pickle.load(handler)
 
     sample_for_knn = std_scaler.transform(sample.values)
@@ -119,10 +122,10 @@ def predict_one_item(query: dict,
                      n_goods: int = 1) -> str:
     """Recommends the carton type for sku.
     Using the combination of filtering by cargotypes,
-    binary classification in order to predict if packaging 
-    is needed for the particular good, searching the 
+    binary classification in order to predict if packaging
+    is needed for the particular good, searching the
     nearest neighbours using historical data, post filtering
-    by skus to classify the type of package and finally 
+    by skus to classify the type of package and finally
     algo filtering by using packer module to get all packages
     suitable for the item.
 
@@ -130,7 +133,7 @@ def predict_one_item(query: dict,
     ----------
     query : dict
         Income order dictionary
-        
+
     n_goods : int
          (Default value = 1)
 
@@ -141,31 +144,35 @@ def predict_one_item(query: dict,
 
     """
     item_cargotypes = query['items'][0]['cargotypes']
-    if ('340' in item_cargotypes or
-        '292' in item_cargotypes):
+    if (
+        '340' in item_cargotypes or
+        '292' in item_cargotypes
+    ):
         return 'NONPACK'
     if '360' in item_cargotypes:
         return "STRETCH"
     pack_need = False
 
-    if set(item_cargotypes) & {'950', '700', '460', '310','960', '60'}:
+    if set(item_cargotypes) & {'950', '700', '460', '310', '960', '60'}:
         pack_need = True
     sample = cook_features_one(query)
 
     if not pack_need:
-        with open(f'{os.getcwd()}/ds_model/models/catboost_pack_nonpack.pkl', 'rb') as handler:
+        with open(
+                f'{os.getcwd()}/ds_model/models/catboost_pack_nonpack.pkl',
+                'rb') as handler:
             cb = pickle.load(handler)
         pack_need_cb = cb.predict(sample[cb_features])
         if not pack_need_cb:
             return 'NONPACK'
-        
+
     knn_ans = get_knn_top(sample[knn_features])
 
     algo_ans = get_packed(query)[0][:3]
     knn_algo_union = set(algo_ans) | set(knn_ans)
     if len(knn_algo_union) == 1:
         return list(knn_algo_union)[0]
-    
+
     pack_type = None
     if set(item_cargotypes) & {'310'}:
         pack_type = boxes
@@ -175,7 +182,7 @@ def predict_one_item(query: dict,
     if pack_type:
         ans = get_cheapest(set([pack for pack in knn_algo_union
                                 if pack in pack_type]))
-        if ans: 
+        if ans:
             return ans
         ans = get_cheapest(set([pack for pack in get_packed(item)
                                 if pack in pack_type]))

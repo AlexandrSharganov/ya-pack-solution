@@ -20,27 +20,29 @@ def health():
 
 @app.post("/recommend")
 def recommend_pack(order: Order) -> dict:
-    """Process the income order json 
+    """Process the income order json
     and returns the recommended packages.
 
     Parameters
     ----------
     order : Order
         A json with all order's information
-        
+
 
     Returns
     -------
     packages : dict
-        A dictionary with all recommended packages 
+        A dictionary with all recommended packages
         and it's amounts.
 
     """
     order = order.dict()
 
-    return {"order_key": order["order_key"],
-           "package": predict(order),
-           "status": "in_work"}
+    return {
+        "order_key": order["order_key"],
+        "package": predict(order),
+        "status": "in_work"
+    }
 
 
 if __name__ == '__main__':
