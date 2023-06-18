@@ -9,7 +9,11 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     '127.0.0.1',
+    '127.0.0.1:8080',
     'localhost',
+    '0.0.0.0',
+    '0.0.0.0:8080',
+    'web',
 ]
 
 INSTALLED_APPS = [
@@ -104,6 +108,8 @@ USE_TZ = True
 
 
 STATIC_URL = '/static/'
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 DS_URL = {
     'STATUS': 'http://127.0.0.1:8100/health',

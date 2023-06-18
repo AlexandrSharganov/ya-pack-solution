@@ -182,12 +182,17 @@ class FrontOrderReceivedSerializer(serializers.ModelSerializer):
             'packer',
             'package_match',
             'status',
+            'problem_discription'
         )
 
     def update(self, instance, validated_data):
         instance.package_match = validated_data.get(
                 'package_match', instance.package_match)
         instance.status = validated_data.get('status', instance.status)
+        instance.problem_discription = validated_data.get(
+            'problem_discription',
+            instance.problem_discription
+        )
         packer = validated_data.get('packer', instance.packer)
         packer_num = packer['packer_num']
         new_packer = get_object_or_404(Packer, packer_num=packer_num)

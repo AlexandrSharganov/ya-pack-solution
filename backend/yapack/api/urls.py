@@ -8,7 +8,7 @@ from .views import (
     SkuAmountViewSet,
     ds_order_view,
     front_order_view,
-    front_package_view
+    front_package_view,
 )
 
 app_name = 'api'
