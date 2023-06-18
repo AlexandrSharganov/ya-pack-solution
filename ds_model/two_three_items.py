@@ -4,9 +4,7 @@ import pickle
 import os
 
 
-def ml_two_three(query: dict, 
-                 n_goods: int, 
-                 top_k=3) -> list:
+def ml_two_three(query: dict, n_goods: int, top_k=3) -> list:
     """Get predictions for two or three goods in order
     using a combinations of several catboost classifiers
     pretrained for 2 and 3 (separately) goods in order.
@@ -14,13 +12,13 @@ def ml_two_three(query: dict,
     of packs is more appropriate. At the next step(if its the
     most common group) a few separated classifiers return their
     scores related to each package type. Then the top_k packages
-    with the highest scores are picked. 
+    with the highest scores are picked.
 
     Parameters
     ----------
     query : dict
         Order dictionary
-        
+
     n_goods : int
         Amount of goods order contains
     top_k :
@@ -37,13 +35,15 @@ def ml_two_three(query: dict,
     """
     features = cook_features(query)
     file = "two" if n_goods == 2 else "three"
-    with open(f'{os.getcwd()}/ds_model/models/{file}_goods_models.pkl', 'rb') as handler:
+    with open(
+            f'{os.getcwd()}/ds_model/models/{file}_goods_models.pkl',
+            'rb') as handler:
         tools = pickle.load(handler)
 
     cb, rest_packs = tools[0][0], tools[0][1]
     if cb.predict(features):
         return rest_packs
-    
+
     multiclass_result = []
     for model in tools[1]:
         multiclass_result.append((model[0],
@@ -55,9 +55,7 @@ def ml_two_three(query: dict,
     return [pack[0] for pack in result_packs]
 
 
-def predict_two_three(query: dict, 
-                      top_k: int = 3, 
-                      n_goods: int = 2) -> str:
+def predict_two_three(query: dict, top_k: int = 3, n_goods: int = 2) -> str:
     """Recommend pack for two-three items
     Combination of ml predictions and algo sort
 
@@ -65,7 +63,7 @@ def predict_two_three(query: dict,
     ----------
     query : dict
         Order dictionary
-        
+
     top_k : int
          (Default value = 3)
          Number of packages to take from
@@ -80,14 +78,11 @@ def predict_two_three(query: dict,
         Recommended package for the order
 
     """
-    
-    cargotypes = set([cargo for item in query['items']
-                      for cargo in item['cargotypes']])
 
-    ml_preds = ml_two_three (query, n_goods)
+    ml_preds = ml_two_three(query, n_goods)
     algo_preds = get_packed(query)[0]
 
-    if len(ml_preds)>top_k:
+    if len(ml_preds) > top_k:
         for pack in algo_preds:
             if pack in ml_preds:
                 return pack

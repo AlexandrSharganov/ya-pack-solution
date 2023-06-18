@@ -1,11 +1,10 @@
 import numpy as np
 import os
-import json
 import pickle
 
 
 def prep_json(order: dict) -> tuple:
-    """Transforms the initial order json(dict) into a 
+    """Transforms the initial order json(dict) into a
     dictionary suitable for the further processing.
     Doesn't change the initial order dictionary.
     Also calculates the number of goods order contains.
@@ -14,7 +13,7 @@ def prep_json(order: dict) -> tuple:
     ----------
     order : dict
         Initial order dictionary
-        
+
 
     Returns
     -------
@@ -52,8 +51,8 @@ def cook_features(order: dict) -> np.array:
     The count field is no longer needed since the
     order list now contains as many of items as
     the initial order had regardless of recurring ones.
-    A good's volumes are added. Also the item's 
-    dimentions are sorted as well as the goods 
+    A good's volumes are added. Also the item's
+    dimentions are sorted as well as the goods
     are sorted by their volume.
 
     Parameters
@@ -73,23 +72,23 @@ def cook_features(order: dict) -> np.array:
         item['sku_vol'] = round(item['a'] * item['b'] * item['c'], 2)
         goods += [item] * item['count']
 
-    features, all_dims = [], []  
+    features, all_dims = [], []
     total_vol, total_wght = 0, 0
     for item in sorted(goods, key=lambda x: x['sku_vol']):
         features.append(item['goods_wght'])
-        total_wght += item['goods_wght'] 
+        total_wght += item['goods_wght']
         dims = sorted([item['a'], item['b'], item['c']],
-                      reverse=True)  
+                      reverse=True)
         features += dims
         all_dims += dims
         features.append(item['sku_vol'])
-        total_vol += item['sku_vol']  
+        total_vol += item['sku_vol']
     features += [total_vol, total_wght, min(all_dims), max(all_dims)]
 
     return np.array(features, dtype='float16')
 
 
-def get_cheapest(s:set) -> str:
+def get_cheapest(s: set) -> str:
     """Get a cheapest pack from multiple packs
     Based on the packs prices.
     Also used when the sequence is empty,
@@ -109,7 +108,9 @@ def get_cheapest(s:set) -> str:
     if not s:
         return 'NONPACK'
 
-    with open(f'{os.getcwd()}/ds_model/models/prices_dict.pkl', 'rb') as handler:
+    with open(
+            f'{os.getcwd()}/ds_model/models/prices_dict.pkl',
+            'rb') as handler:
         prices = pickle.load(handler)
 
     return sorted(s, key=lambda x: prices.get(x, 1e10))[0]
