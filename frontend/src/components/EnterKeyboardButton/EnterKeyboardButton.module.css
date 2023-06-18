@@ -16,5 +16,9 @@
 }
 
 .mainButton:hover {
-  background-color: #000;
+  background: rgba(0, 0, 0, 0.68);
+}
+
+.mainButton:active {
+  background: #000000;
 }
