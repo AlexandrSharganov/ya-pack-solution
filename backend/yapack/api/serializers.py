@@ -13,21 +13,19 @@ from orders.models import (
 from users.models import Packer
 
 
-
 class CargotypeSerializer(serializers.ModelSerializer):
-    
+    '''Сериализатор карготипов.'''
     class Meta:
         model = Cargotype
         fields = (
             'cargotype_id',
-            # 'description',
         )
 
 
 class SkuSerializer(serializers.ModelSerializer):
-    
+    '''Сериализатор SKU.'''
     cargotypes = CargotypeSerializer(many=True)
-    
+
     class Meta:
         model = Sku
         fields = (
@@ -38,12 +36,10 @@ class SkuSerializer(serializers.ModelSerializer):
             'sku_wght',
             'cargotypes',
         )
-        
-
 
 
 class OrderReceivedSkuSerializer(serializers.ModelSerializer):
-    
+    '''Сериализатор полученных заказов c SKU.'''
     sku_id = serializers.CharField(source='sku.sku_id')
     dimension_a = serializers.FloatField(source='sku.dimension_a')
     dimension_b = serializers.FloatField(source='sku.dimension_b')
@@ -51,7 +47,7 @@ class OrderReceivedSkuSerializer(serializers.ModelSerializer):
     sku_wght = serializers.FloatField(source='sku.sku_wght')
     cargotypes = CargotypeSerializer(source='sku.cargotypes', many=True)
     barcode = serializers.CharField(source='sku.barcode')
-    
+
     class Meta:
         model = OrderReceivedSku
         fields = (
@@ -66,12 +62,8 @@ class OrderReceivedSkuSerializer(serializers.ModelSerializer):
         )
 
 
-class FrontOrderReceivedSkuSerializer(serializers.ModelSerializer):
-    
-    sku_id = serializers.CharField(source='sku.sku_id')
-    cargotypes = CargotypeSerializer(source='sku.cargotypes', many=True)
-    barcode = serializers.CharField(source='sku.barcode', read_only=True)
-    
+class FrontOrderReceivedSkuSerializer(OrderReceivedSkuSerializer):
+    '''Сериализатор полученных заказов c SKU для фронта.'''
     class Meta:
         model = OrderReceivedSku
         fields = (
@@ -83,16 +75,17 @@ class FrontOrderReceivedSkuSerializer(serializers.ModelSerializer):
 
 
 class PackageSerializer(serializers.ModelSerializer):
-    
+    '''Сериализатор упаковки.'''
     class Meta:
         model = Package
         fields = ('barcode', 'packagetype')
 
 
 class PackageRecommendedSerializer(serializers.ModelSerializer):
-    
+    '''Сериализатор рекомендованной упаковки.'''
     package = serializers.CharField(source='package.packagetype')
     barcode = serializers.CharField(source='package.barcode')
+
     class Meta:
         model = PackageRecommended
         fields = (
@@ -100,12 +93,10 @@ class PackageRecommendedSerializer(serializers.ModelSerializer):
             'amount',
             'barcode'
         )
-        
-        
-class PackageSelectedSerializer(serializers.ModelSerializer):
-    
-    package = serializers.CharField(source='package.packagetype')
-    
+
+
+class PackageSelectedSerializer(PackageRecommendedSerializer):
+    '''Сериализатор выбранной упаковки.'''
     class Meta:
         model = PackageSelected
         fields = (
@@ -113,21 +104,23 @@ class PackageSelectedSerializer(serializers.ModelSerializer):
             'amount'
         )
 
+
 class PackerSerializer(serializers.ModelSerializer):
-    
+    '''Сериализатор упаковщика.'''
     class Meta:
         model = Packer
         fields = ('packer_num',)
 
 
 class OrderReceivedSerializer(serializers.ModelSerializer):
-
+    '''Сериализатор заказов.'''
     skus = OrderReceivedSkuSerializer(
         many=True,
         source='orderreceivedsku_set',
         read_only=True
     )
     packages = PackageRecommendedSerializer(many=True)
+
     class Meta:
         model = OrderReceived
         fields = (
@@ -140,7 +133,8 @@ class OrderReceivedSerializer(serializers.ModelSerializer):
         )
 
     def update(self, instance, validated_data):
-        instance.package_match = validated_data.get('package_match', instance.package_match)
+        instance.package_match = validated_data.get(
+                'package_match', instance.package_match)
         instance.status = validated_data.get('status', instance.status)
         if validated_data.get('packages', None):
             packages = validated_data['packages']
@@ -163,26 +157,20 @@ class OrderReceivedSerializer(serializers.ModelSerializer):
         return instance
 
 
-
-
-
 class FrontOrderReceivedSerializer(serializers.ModelSerializer):
-
+    '''Сериализатор полученных заказов для фронта.'''
     skus = FrontOrderReceivedSkuSerializer(
         many=True,
-        source='orderreceivedsku_set',  
+        source='orderreceivedsku_set',
         read_only=True
     )
     packages = PackageRecommendedSerializer(many=True)
     packages_sel = PackageSelectedSerializer(many=True)
-    # packer = serializers.CharField(
-    #     allow_blank=True,
-    #     source='packer.packer_num'
-    # )
     packer = serializers.CharField(
         source='packer.packer_num',
         allow_null=True
     )
+
     class Meta:
         model = OrderReceived
         fields = (
@@ -197,7 +185,8 @@ class FrontOrderReceivedSerializer(serializers.ModelSerializer):
         )
 
     def update(self, instance, validated_data):
-        instance.package_match = validated_data.get('package_match', instance.package_match)
+        instance.package_match = validated_data.get(
+                'package_match', instance.package_match)
         instance.status = validated_data.get('status', instance.status)
         packer = validated_data.get('packer', instance.packer)
         packer_num = packer['packer_num']

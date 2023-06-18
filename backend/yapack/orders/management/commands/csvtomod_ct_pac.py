@@ -1,5 +1,4 @@
 import csv
-# import os
 
 from django.core.management.base import BaseCommand
 from orders.models import Cargotype, Package
@@ -17,7 +16,7 @@ class Command(BaseCommand):
     help = (
         'Наполняет модель. '
         'Аргументы - имя модели, имя файла csv без расширения. '
-        'Файлы должны находиться в каталоге /yapack/.'
+        'Файлы должны находиться в каталоге запуска.'
     )
 
     def add_arguments(self, parser):
@@ -45,7 +44,6 @@ class Command(BaseCommand):
                 'barcode': [str, getbarcode()],
             }
         }
-        # {os.getcwd()}\\backend\yapack\
         with open(f'{file}.csv', encoding='utf-8') as file:
             rows = csv.DictReader(file)
             for row in rows:

@@ -8,7 +8,7 @@ class Command(BaseCommand):
     '''Наполнение модели OrderReceived из csv.'''
     help = (
         'Наполняет модель. '
-        'Файлы должны находиться в каталоге /yapack/.'
+        'Файлы должны находиться в каталоге запуска.'
     )
 
     def handle(self, *args, **options):

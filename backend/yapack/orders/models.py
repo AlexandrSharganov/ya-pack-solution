@@ -13,13 +13,11 @@ class Cargotype(models.Model):
         unique=True,
         db_index=True,
         blank=False,
-        help_text='id карготипа',
     )
     description = models.CharField(
         verbose_name='Описание карготипа',
         max_length=200,
         blank=False,
-        help_text='Описание',
     )
 
     class Meta:
@@ -40,7 +38,6 @@ class Sku(models.Model):
         unique=True,
         db_index=True,
         blank=False,
-        help_text='id товара',
     )
     dimension_a = models.FloatField(
         validators=[
@@ -50,7 +47,6 @@ class Sku(models.Model):
         ],
         verbose_name='Размер a',
         blank=False,
-        help_text='Размер товара a',
     )
     dimension_b = models.FloatField(
         validators=[
@@ -60,7 +56,6 @@ class Sku(models.Model):
         ],
         verbose_name='Размер b',
         blank=False,
-        help_text='Размер товара b',
     )
     dimension_c = models.FloatField(
         validators=[
@@ -70,7 +65,6 @@ class Sku(models.Model):
         ],
         verbose_name='Размер c',
         blank=False,
-        help_text='Размер товара c',
     )
     sku_wght = models.FloatField(
         validators=[
@@ -80,13 +74,11 @@ class Sku(models.Model):
         ],
         verbose_name='Вес',
         blank=False,
-        help_text='Вес товара',
     )
     cargotypes = models.ManyToManyField(
         Cargotype,
         verbose_name='Карготипы',
         related_name='sku',
-        help_text='Карготипы',
     )
     barcode = models.CharField(
         verbose_name='Штрихкод',
@@ -110,7 +102,7 @@ class Sku(models.Model):
 
 class OrderReceived(models.Model):
     '''Модель заказа полученного из системы.'''
-    
+
     NO_REC = 'no_rec'
     IN_WORK = 'in_work'
     READY = 'ready'
@@ -243,12 +235,6 @@ class PackageRecommended(models.Model):
         db_index=True,
         verbose_name='Рекомендованная упаковка',
     )
-    # sku = models.ForeignKey(
-    #     Sku,
-    #     # related_name='packed',
-    #     on_delete=models.CASCADE,
-    #     verbose_name='SKU',
-    # )
     amount = models.SmallIntegerField(
         blank=False,
         verbose_name='Количество',
@@ -268,13 +254,11 @@ class OrderReceivedSku(models.Model):
 
     order = models.ForeignKey(
         OrderReceived,
-        # related_name='sku',
         on_delete=models.CASCADE,
         verbose_name='Заказ',
     )
     sku = models.ForeignKey(
         Sku,
-        # related_name='order',
         on_delete=models.PROTECT,
         verbose_name='SKU',
     )
@@ -293,7 +277,7 @@ class OrderReceivedSku(models.Model):
 
 
 class PackageSelected(models.Model):
-    
+    '''Выбранная упаковка.'''
     order = models.ForeignKey(
         OrderReceived,
         related_name='packages_sel',
@@ -310,3 +294,11 @@ class PackageSelected(models.Model):
         blank=False,
         verbose_name='Количество',
     )
+
+    class Meta:
+        verbose_name = 'Выбранная упаковка'
+        verbose_name_plural = 'Выбранные упаковки'
+        ordering = ['order', 'package']
+
+    def __str__(self):
+        return f'{self.order} - {self.package}'

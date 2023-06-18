@@ -22,7 +22,6 @@ def worktable_view(request, packer_num):
     Рабочий стол упаковщика.
     Это заглушка. Здесь должна быть обработка api фронта.
     '''
-
     packer = get_object_or_404(Packer, packer_num=packer_num)
     return HttpResponse(
         f'Вы вошли как {packer}.\n'
