@@ -52,17 +52,6 @@ function ProductCard({
 export default ProductCard;
 
 // ДЛЯ РАЗВЕРНУТЬ/СКРЫТЬ
-// import React, { useState } from 'react';
-// import styles from './ProductCard.module.css';
-// import CopyableText from '../CopyableText/CopyableText';
-
-// function ProductCard({ item, setIsCopied, style }) {
-//   const [showMore, setShowMore] = useState(false);
-
-//   const toggleShowMore = () => {
-//     setShowMore(!showMore);
-//   };
-
 //   return (
 //     <div className={styles.card}>
 //       <figure className={styles.figure}>
@@ -114,5 +103,3 @@ export default ProductCard;
 //     </div>
 //   );
 // }
-
-// export default ProductCard;

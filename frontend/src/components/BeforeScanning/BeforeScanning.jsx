@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styles from './BeforeScanning.module.css';
 import ProductCard from '../ProductCard/ProductCard';
 import DoneBlock from '../DoneBlock/DoneBlock';
+import Loader from '../Loader/Loader';
 
 function BeforeScanning({ order, scanProduct, removeElement }) {
   const [isCopied, setIsCopied] = useState(false);
@@ -28,12 +29,6 @@ function BeforeScanning({ order, scanProduct, removeElement }) {
     }
   }, [order.skus, scanProducts, removeElement]);
 
-  // const removeProduct = (barcode) => {
-  //   setMatchingProducts((prevMatchingProducts) =>
-  //     prevMatchingProducts.filter((item) => item.barcode !== barcode)
-  //   );
-  // };
-
   useEffect(() => {
     if (isCopied) {
       const timeout = setTimeout(() => {
@@ -45,22 +40,12 @@ function BeforeScanning({ order, scanProduct, removeElement }) {
     return undefined;
   }, [isCopied]);
 
-  const renderAmount = () => {
-    if (matchingProducts.length !== 0) {
-      return (
-        <span className={styles.amount}>{matchingProducts.length} товара</span>
-      );
-    }
-    return null;
-  };
-
   const renderProductCards = () => (
     <div className={styles.cardList}>
       {matchingProducts.map((item) => (
         <ProductCard
           key={item.barcode}
           item={item}
-          // removeProduct={removeProduct}
           setIsCopied={setIsCopied}
           isAfterScanning={false}
         />
@@ -75,6 +60,10 @@ function BeforeScanning({ order, scanProduct, removeElement }) {
     return null;
   };
 
+  if (!order.skus) {
+    return <Loader />;
+  }
+
   return (
     <section
       className={
@@ -85,7 +74,7 @@ function BeforeScanning({ order, scanProduct, removeElement }) {
         <h1 className={styles.title}>Ячейка B-09</h1>
         <span className={styles.post}>Почта России</span>
       </div>
-      {renderAmount()}
+      <span className={styles.amount}>{matchingProducts.length} товара</span>
       {renderProductCards()}
       {isCopied && <div className={styles.copyCode}>Штрихкод скопирован</div>}
       {renderDone()}

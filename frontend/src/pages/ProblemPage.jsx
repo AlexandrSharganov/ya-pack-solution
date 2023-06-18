@@ -1,13 +1,7 @@
-import styles from './Pages.module.css';
+import Problem from '../components/Problem/Problem';
 
-function ProblemPage() {
-  return (
-    <div className={styles.centerBlock}>
-      <div className={styles.problem}>Нет товара</div>
-      <div className={styles.problem}>Товар бракованный</div>
-      <div className={styles.problem}>Другая проблема</div>
-    </div>
-  );
+function ProblemPage({ order }) {
+  return <Problem order={order} />;
 }
 
 export default ProblemPage;

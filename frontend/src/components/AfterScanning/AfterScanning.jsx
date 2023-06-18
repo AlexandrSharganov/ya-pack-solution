@@ -187,6 +187,7 @@ function AfterScanning({
   scanNotRecommendedPackage,
   removeElement,
   setRemoveElement,
+  isLoading,
 }) {
   const [matchingProducts, setMatchingProducts] = useState([]);
   const [matchingPackage, setMatchingPackage] = useState(new Set());
@@ -318,7 +319,13 @@ function AfterScanning({
   ]);
 
   return (
-    <section className={styles.section}>
+    <section
+      className={
+        matchingProducts.length && order.skus.length
+          ? `${styles.section} ${styles.newWidth}`
+          : styles.section
+      }
+    >
       <h1 className={styles.title}>Посылка</h1>
       <div className={styles.text}>Рекомендованный вид упаковки</div>
       <div className={styles.packages}>
@@ -378,6 +385,7 @@ function AfterScanning({
             isValid
             buttonText="Закрыть посылку"
             onClick={handleButtonClick}
+            isLoading={isLoading}
           />
         )}
     </section>

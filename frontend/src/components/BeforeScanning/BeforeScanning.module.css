@@ -1,12 +1,11 @@
 .section {
   flex: 1;
   max-width: 50%;
-  padding-right: 28px;
 }
 
 .flexNone {
   flex: none;
-  max-width: 28%;
+  max-width: 30%;
 }
 
 .section:last-of-type {
@@ -17,8 +16,8 @@
 .box {
   display: flex;
   align-items: center;
-  gap: 40px;
-  margin: 24px 0 25px;
+  gap: 49px;
+  margin: 24px 0 36px;
   cursor: default;
 }
 
@@ -42,7 +41,7 @@
   display: flex;
   flex-direction: column;
   gap: 25px;
-  margin-top: 48px;
+  margin-top: 36px;
 }
 
 .copyCode {

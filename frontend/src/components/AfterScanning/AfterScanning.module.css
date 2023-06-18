@@ -2,11 +2,12 @@
   flex: 1;
   max-width: 50%;
   margin: 0;
-  padding-left: 25px;
+  padding-left: 19px;
 }
 
 .newWidth {
   max-width: 49%;
+  padding-left: 51px;
 }
 
 .sectionFinish {
@@ -17,12 +18,12 @@
   font-family: 'YS Disp';
   font-size: 28px;
   line-height: 32px;
-  margin: 24px 0 0 8px;
+  margin: 40px 0 0 0;
   cursor: default;
 }
 
 .text {
-  margin: 12px 0 13px 8px;
+  margin: 13px 0;
   font-size: 20px;
   line-height: 25px;
   color: rgba(0, 0, 0, 0.6);
@@ -36,7 +37,6 @@
 .packages {
   display: flex;
   gap: 12px;
-  margin: 0 0 0 8px;
 }
 
 .package {
@@ -45,7 +45,7 @@
   flex: 1;
   justify-content: center;
   align-items: center;
-  padding: 6px 14px;
+  padding: 6px 13px;
   font-weight: 500;
   font-size: 28px;
   line-height: 31px;
@@ -68,7 +68,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 143px 0 0;
+  margin: 148px 0 0;
   gap: 33px;
   font-style: normal;
   font-weight: 500;
@@ -81,14 +81,7 @@
   display: flex;
   flex-direction: column;
   gap: 25px;
-  margin-top: 48px;
-}
-
-.cardList {
-  display: flex;
-  flex-direction: column;
-  gap: 25px;
-  margin-top: 56px;
+  margin-top: 26px;
 }
 
 .notRecButton {
@@ -96,6 +89,6 @@
   background-color: transparent;
   font-size: 20px;
   padding: 0;
-  margin-left: 10px;
+  margin-left: 8px;
   cursor: pointer;
 }

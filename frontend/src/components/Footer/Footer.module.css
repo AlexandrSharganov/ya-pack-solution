@@ -29,6 +29,10 @@
 }
 
 .problemButton:hover {
+  background-color: rgba(222, 222, 222, 0.68);
+}
+
+.problemButton:active {
   background-color: #dedede;
 }
 

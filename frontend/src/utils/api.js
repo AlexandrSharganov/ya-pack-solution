@@ -37,3 +37,14 @@ export const patchOrder = async (id, orderFinish) => {
   });
   return requestResult(res);
 };
+
+export const patchProblem = async (id, orderProblem) => {
+  const res = await fetch(`${BASE_URL}${id}/`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(orderProblem),
+  });
+  return requestResult(res);
+};
