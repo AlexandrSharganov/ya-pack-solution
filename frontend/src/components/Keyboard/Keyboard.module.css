@@ -82,6 +82,10 @@
   border-color: #f5c400;
 }
 
+.inputFieldError {
+  border-color: #ff0000;
+}
+
 .inputError {
   display: flex;
   align-items: center;
@@ -157,9 +161,9 @@
 }
 
 .button:hover {
-  background-color: #dedede;
+  background-color: rgba(222, 222, 222, 0.68);
 }
 
 .button:active {
-  background-color: #b0b0b0;
+  background-color: #dedede;
 }

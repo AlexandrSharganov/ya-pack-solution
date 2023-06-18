@@ -7,9 +7,11 @@ function MainPage({
   scanRecommendedPackage,
   scanNotRecommendedPackage,
   scanProduct,
+  setScanProduct,
   order,
   removeElement,
   setRemoveElement,
+  isLoading,
 }) {
   const hasBigButton = Boolean(
     scanRecommendedPackage.packagetype ||
@@ -28,11 +30,13 @@ function MainPage({
       <AfterScanning
         order={order}
         scanProduct={scanProduct}
+        setScanProduct={setScanProduct}
         scanRecommendedPackage={scanRecommendedPackage}
         scanNotRecommendedPackage={scanNotRecommendedPackage}
         removeElement={removeElement}
         setRemoveElement={setRemoveElement}
         hasBigButton={hasBigButton}
+        isLoading={isLoading}
       />
     </section>
   );

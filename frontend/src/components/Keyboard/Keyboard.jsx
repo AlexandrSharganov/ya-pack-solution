@@ -227,7 +227,9 @@ function Keyboard({ isOpen, onClose, onScanProduct, isLoading }) {
             type="number"
             value={inputValue}
             onChange={handleInputChange}
-            className={styles.inputField}
+            className={`${styles.inputField} ${
+              showError ? styles.inputFieldError : ''
+            }`}
             placeholder="Номер штрихкода"
           />
           <span

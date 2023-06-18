@@ -4,7 +4,7 @@ import FragileImage from '../images/label/fragile.svg';
 import LiquidImage from '../images/label/liquid.svg';
 import PerishableImage from '../images/label/perishable-product.svg';
 import TechniqueImage from '../images/label/technique.svg';
-import Null from '../images/lost.gif';
+import Null from '../images/label/null.svg';
 
 const getImageByCargoType = (cargotypeId) => {
   switch (cargotypeId) {

@@ -4,7 +4,7 @@ import ProductCard from '../ProductCard/ProductCard';
 import DoneBlock from '../DoneBlock/DoneBlock';
 import Loader from '../Loader/Loader';
 
-function BeforeScanning({ order, scanProduct, removeElement, hasBigButton }) {
+function BeforeScanning({ order, scanProduct, removeElement }) {
   const [isCopied, setIsCopied] = useState(false);
   const [matchingProducts, setMatchingProducts] = useState([]);
   const [scanProducts, setScanProducts] = useState([]);
@@ -67,15 +67,9 @@ function BeforeScanning({ order, scanProduct, removeElement, hasBigButton }) {
   return (
     <section
       className={
-        hasBigButton ? `${styles.section} ${styles.flexNone}` : styles.section
+        renderDone() ? `${styles.section} ${styles.flexNone}` : styles.section
       }
     >
-      {/* Старая логика
-      <section
-        className={
-          renderDone() ? `${styles.section} ${styles.flexNone}` : styles.section
-        }
-      > */}
       <div className={styles.box}>
         <h1 className={styles.title}>Ячейка B-09</h1>
         <span className={styles.post}>Почта России</span>

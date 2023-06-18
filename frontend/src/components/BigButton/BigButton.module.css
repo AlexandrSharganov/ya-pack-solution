@@ -27,7 +27,6 @@
 
 .buttonInactive {
   background: #f3f0e9;
-  pointer-events: none;
   user-select: none;
 }
 

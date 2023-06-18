@@ -43,13 +43,13 @@
   display: flex;
   gap: 10px;
   margin-top: 31px;
+  width: 230px;
+  flex-wrap: wrap;
 }
 
 .cargotype {
   width: 50px;
   height: 50px;
-  border-radius: 50%;
-  /* radius удалить потом? */
 }
 
 .amount {
@@ -64,6 +64,7 @@
   text-align: center;
   border-radius: 30px;
   background: #f3f0e980;
+  text-wrap: nowrap;
   cursor: default;
 }
 

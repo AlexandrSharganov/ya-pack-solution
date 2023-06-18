@@ -22,9 +22,14 @@
   border: 0;
   border-radius: 24px;
   background: #f3f0e9;
+  cursor: pointer;
 }
 
 .problem:hover {
-  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.08);
-  cursor: pointer;
+  background: rgba(222, 222, 222, 0.68);
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.08);
+}
+
+.problem:active {
+  background: #dedede;
 }

@@ -178,6 +178,7 @@ import styles from './AfterScanning.module.css';
 import ScanImage from '../../images/scan.svg';
 import ProductCard from '../ProductCard/ProductCard';
 import BigButton from '../BigButton/BigButton';
+import { patchOrder } from '../../utils/api';
 
 function AfterScanning({
   order,
@@ -186,17 +187,44 @@ function AfterScanning({
   scanNotRecommendedPackage,
   removeElement,
   setRemoveElement,
+  isLoading,
 }) {
   const [matchingProducts, setMatchingProducts] = useState([]);
   const [matchingPackage, setMatchingPackage] = useState(new Set());
   const [notMatchingPackages, setNotMatchingPackages] = useState(new Set());
   const uniqueBarcodes = new Set();
+  const [packagesSel, setPackagesSel] = useState([]);
   const navigate = useNavigate();
 
   const handleButtonClick = () => {
     const isValid = true;
+
     if (isValid) {
-      navigate('/finish');
+      console.log(packagesSel);
+
+      const packageSel = packagesSel.map((item) => ({
+        package: item.packagetype,
+        amount: '1',
+      }));
+
+      const orderFinish = {
+        id: order.id,
+        order_key: order.order_key,
+        packer: '0987654321',
+        packages_sel: packageSel,
+        package_match: false,
+        status: 'ready',
+      };
+
+      console.log(orderFinish);
+
+      patchOrder(order.id, orderFinish)
+        .then(() => {
+          navigate('/finish');
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     }
   };
 
@@ -263,6 +291,7 @@ function AfterScanning({
     }
 
     if (scanRecommendedPackage.packagetype) {
+      setPackagesSel((PackageSel) => [...PackageSel, scanRecommendedPackage]);
       setMatchingPackage(
         (prevMatchingPackage) =>
           new Set([...prevMatchingPackage, scanRecommendedPackage.packagetype])
@@ -270,6 +299,10 @@ function AfterScanning({
     }
 
     if (scanNotRecommendedPackage.packagetype) {
+      setPackagesSel((PackageSel) => [
+        ...PackageSel,
+        scanNotRecommendedPackage,
+      ]);
       setNotMatchingPackages(
         (prevNotMatchingPackages) =>
           new Set([
@@ -352,6 +385,7 @@ function AfterScanning({
             isValid
             buttonText="Закрыть посылку"
             onClick={handleButtonClick}
+            isLoading={isLoading}
           />
         )}
     </section>

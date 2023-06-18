@@ -7,8 +7,6 @@ import FinishPage from '../../pages/FinishPage';
 import ProblemPage from '../../pages/ProblemPage';
 import Keyboard from '../Keyboard/Keyboard';
 import { getOrder, getPackage } from '../../utils/api';
-// import items from '../../utils/items';
-// const orderJson = require('../../utils/order.json');
 
 function App() {
   const location = useLocation();
@@ -27,13 +25,9 @@ function App() {
     setIsProductEntryPopupOpen(false);
   };
 
-  // useEffect(() => {
-  //   setOrder(JSON.parse(JSON.stringify(orderJson)));
-  // }, []);
-
   useEffect(() => {
     if (removeElement) {
-      setScanProduct('');
+      console.log(scanProduct);
     }
     getOrder()
       .then((res) => {
@@ -88,15 +82,17 @@ function App() {
             <MainPage
               order={order}
               scanProduct={scanProduct}
+              setScanProduct={setScanProduct}
               scanRecommendedPackage={scanRecommendedPackage}
               scanNotRecommendedPackage={scanNotRecommendedPackage}
               removeElement={removeElement}
               setRemoveElement={setRemoveElement}
+              isLoading={isLoading}
             />
           }
         />
-        <Route path="/finish" element={<FinishPage />} />
-        <Route path="/problem" element={<ProblemPage />} />
+        <Route path="/finish" element={<FinishPage isLoading={isLoading} />} />
+        <Route path="/problem" element={<ProblemPage order={order} />} />
       </Routes>
       {!hideFooter && <Footer onProductEntry={setIsProductEntryPopupOpen} />}
       <Keyboard
