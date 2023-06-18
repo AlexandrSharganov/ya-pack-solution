@@ -220,6 +220,7 @@ function AfterScanning({
       patchOrder(order.id, orderFinish)
         .then(() => {
           navigate('/finish');
+          window.location.reload();
         })
         .catch((err) => {
           console.log(err);
@@ -228,6 +229,15 @@ function AfterScanning({
   };
 
   const removeProduct = (barcode) => {
+    // if (scanProduct) {
+    //   const filteredProducts = matchingProducts.filter(
+    //     (item) => item.barcode !== barcode
+    //   );
+    //   setMatchingProducts((prevMatchingProducts) => [
+    //     ...prevMatchingProducts,
+    //     ...filteredProducts,
+    //   ]);
+    // }
     setMatchingProducts((prevMatchingProduct) =>
       prevMatchingProduct.filter((item) => item.barcode !== barcode)
     );
@@ -279,16 +289,6 @@ function AfterScanning({
   );
 
   useEffect(() => {
-    if (scanProduct) {
-      const filteredProducts = order.skus.filter(
-        (item) => item.barcode === scanProduct
-      );
-      setMatchingProducts((prevMatchingProducts) => [
-        ...prevMatchingProducts,
-        ...filteredProducts,
-      ]);
-    }
-
     if (scanRecommendedPackage.packagetype) {
       setPackagesSel((PackageSel) => [...PackageSel, scanRecommendedPackage]);
       setMatchingPackage(
@@ -296,7 +296,9 @@ function AfterScanning({
           new Set([...prevMatchingPackage, scanRecommendedPackage.packagetype])
       );
     }
+  }, [scanRecommendedPackage]);
 
+  useEffect(() => {
     if (scanNotRecommendedPackage.packagetype) {
       setPackagesSel((PackageSel) => [
         ...PackageSel,
@@ -310,12 +312,19 @@ function AfterScanning({
           ])
       );
     }
-  }, [
-    scanProduct,
-    scanRecommendedPackage,
-    scanNotRecommendedPackage,
-    removeElement,
-  ]);
+  }, [scanNotRecommendedPackage]);
+
+  useEffect(() => {
+    if (scanProduct) {
+      const filteredProducts = order.skus.filter(
+        (item) => item.barcode === scanProduct
+      );
+      setMatchingProducts((prevMatchingProducts) => [
+        ...prevMatchingProducts,
+        ...filteredProducts,
+      ]);
+    }
+  }, [scanProduct, removeElement, order.skus]);
 
   return (
     <section className={styles.section}>
@@ -371,8 +380,7 @@ function AfterScanning({
       {!scanProduct && renderScanInstructions()}
       {scanProduct && renderProductCards()}
       {(matchingPackage.size !== 0 || notMatchingPackages.size !== 0) &&
-        order.skus &&
-        matchingProducts.length > 0 &&
+        order.skus.length === matchingProducts.length &&
         !removeElement && (
           <BigButton
             isValid

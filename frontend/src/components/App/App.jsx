@@ -33,7 +33,7 @@ function App() {
 
   useEffect(() => {
     if (removeElement) {
-      console.log(scanProduct);
+      // setScanProduct('')
     }
     getOrder()
       .then((res) => {
