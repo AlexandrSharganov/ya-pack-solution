@@ -82,10 +82,6 @@
   border-color: #f5c400;
 }
 
-.inputFieldError {
-  border-color: #ff0000;
-}
-
 .inputError {
   display: flex;
   align-items: center;
