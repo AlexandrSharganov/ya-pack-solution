@@ -6,97 +6,167 @@ from utils import get_cheapest
 def helper(dt: dict,
            sorted_abc: list,
            total_volume: float) -> list:
-    """Select packs that fits for the goods"""
+    """Select packs that fits for the goods.
+    Using borders for each pack of the goods have
+    been packed in it from historical data.
+
+    Parameters
+    ----------
+    dt : dict
+        A dictionary with borders dimentions of
+        goods have been packed in each pack based
+        on historical data.
+
+    sorted_abc : list
+        Sorted linear dimentions of the goods.
+
+    total_volume : float
+        Goods calculated volume.
+
+
+    Returns
+    -------
+    rec_pack : list
+        List of packages suitable for the goods.
+
+    """
 
     rec_pack = []
     for pack in dt:
-        if ((dt[pack]['borders'][0][0] <= sorted_abc[0] <= dt[pack]['borders'][0][1])
-                and (dt[pack]['borders'][1][0] <= sorted_abc[1] <= dt[pack]['borders'][1][1])
-                and (dt[pack]['borders'][2][0] <= sorted_abc[2] <= dt[pack]['borders'][2][1])
-                and (dt[pack]['vol_borders'][0] <= total_volume <= dt[pack]['vol_borders'][1])):
+        if (
+            (
+                dt[pack]['borders'][0][0] <=
+                sorted_abc[0] <=
+                dt[pack]['borders'][0][1]
+            ) and
+            (
+                [pack]['borders'][1][0] <=
+                sorted_abc[1] <=
+                dt[pack]['borders'][1][1]
+            ) and
+            (
+                dt[pack]['borders'][2][0] <=
+                sorted_abc[2] <=
+                dt[pack]['borders'][2][1]
+            ) and
+            (
+                dt[pack]['vol_borders'][0] <=
+                total_volume <=
+                dt[pack]['vol_borders'][1]
+            )
+        ):
             rec_pack.append(pack)
     return rec_pack
 
 
-def packer(items: list,
-           dt:dict) -> list:
-    """функция упаковщика"""
+def packer(items: list, dt: dict) -> list:
+    """Imitating a packer function.
+    Rotating and stacking goods accorging
+    to their linear dimentions. Works with
+    several goods and uses a halper function.
 
-    # здесь все по старому
+    Parameters
+    ----------
+    items : list
+        List of goods
+
+    dt : dict
+        Borders dictionary to pass to helper
+
+    Returns
+    -------
+    rec_pack : list
+        List of packages suitable for the goods.
+
+    """
     sorted_abc_temp = []
 
-    # считаю общие размерности
     for sku in range(len(items)):
         sorted_abc_temp.append(sorted([items[sku]['a'],
                                        items[sku]['b'],
                                        items[sku]['c']]))
-        # sorted_abc_temp[sku][0] *= items[sku]['count']#  вот это больше не нужно тк количество все время == 1
 
-    # если не пустой результат – сортирую
     sorted_abc = [] if not sorted_abc_temp else sorted(sorted_abc_temp[0])
 
-    # складываю друг к другу
     for i in range(1, len(sorted_abc_temp)):
         sorted_abc[0] += sorted(sorted_abc_temp[i])[0]
         sorted_abc[1] = max(sorted_abc_temp[i][1], sorted_abc[1])
         sorted_abc[2] = max(sorted_abc_temp[i][2], sorted_abc[2])
 
-    # опять же если не пустой – считаю объем и возвращаю результат найденных упаковок
     if sorted_abc:
         total_volume = sorted_abc[0] * sorted_abc[1] * sorted_abc[2]
         return helper(dt, sorted_abc, total_volume)[:]
 
-    # если считать было нечего – возвращаю пустоту
     return []
 
 
 def splitter(base: list,
              data: dict) -> tuple:
-    """функция разбивает на тех, кому есть упаковка, и кто не влез"""
+    """Find the package for the goods can fit in
+    and separate the rest. The continuously repeat
+    the same procedure for the rest untill all groups
+    of goods have their package to pack in.
 
-    # список для тех кто не влез
+    Parameters
+    ----------
+    base : list
+        List of goods to pack
+
+    data : dict
+        A dictionary with all borders based on
+        historical data. After each split finds the
+        appropriate dict according to the amount
+        of goods left
+
+    Returns
+    -------
+    result : list
+        List of packages to pack the group of goods.
+
+    add_pack : list
+        List of goods left unpacked so far
+
+    """
+
     add_pack = []
     dt = data[4] if len(base) > 4 else data[len(base)]
-    # получаем список подходящих упаковок для данных
     result = packer(base[:], dt)
 
-    # если упаковок не нашлось и еще осталось что перекладывать – начинаем перекладывать
     while (not result) and base:
-        # кладем в список тех что не влезают
         add_pack.append(base.pop())
         dt = data[4] if len(base) > 4 else data[len(base)]
-        # и снова пытаемся найти упаковку оставшимся
         result = packer(base[:], dt)
 
-    # возвращаем полученную упаковку и список тех которые не влезли
     return result[:], add_pack[:]
 
 
 def get_packed(jsn: dict) -> tuple:
-    """функция основная, делает всю работу"""
+    """Main packing function
 
-    # финальный список упаковок
+    Parameters
+    ----------
+    jsn : dict
+        Income order dictionary
+
+
+    Returns
+    -------
+    final : List[list]
+        List of lists of packages for each group of goods
+    """
+
     final = []
-    # вот тут json считываю один раз, но обращаться к нему будем по-разному
     data = json.load(open(f'{os.getcwd()}/ds_model/models/'
                           f'borders_data.json', 'r'))['data']
 
-
-    # получаем список тех, что влезают в одну упаковку
-    # и тех, что не влезли
     items = get_items_list(jsn)
     result, adds = splitter(items[:], data)
 
-    # если в списке есть те, что влезают, добавляем
     if result:
         final.append(result)
 
-    # пока они присутствуют, пытаемся найти упаковки и для тех что не влезли
     while adds:
-        # теперь новым списком упаковок становятся те, что не влезли в предыдущую
-        # с ними проделываем ту же историю
         result, adds = splitter(adds[:], data)
-        # если для них нашлась упаковка, добавляем
         if result:
             final.append(result)
 
@@ -104,8 +174,19 @@ def get_packed(jsn: dict) -> tuple:
 
 
 def get_items_list(jsn: dict) -> list:
-    """Переделываю список товаров в список их же с количеством 1 чтобы выкидывать по одному
-    и дальше работаем только с ним"""
+    """Transforms the order list of items
+    into a list where each item has amount of 1
+
+    Parameters
+    ----------
+    jsn : dict
+        Income order dictionary
+
+    Returns
+    -------
+    items : list[dict]
+        Transformed list of items
+    """
     items = []
     for item in jsn['items'][:]:
         item = item.copy()
@@ -115,6 +196,21 @@ def get_items_list(jsn: dict) -> list:
 
 
 def form_output(jsn: dict) -> list:
+    """Form the correct output for the backend
+    Used when no ml services involved
+
+    Parameters
+    ----------
+    jsn : dict
+        Income order dictionary
+
+    Returns
+    -------
+    package : List[dict]
+        List of dictionaries with package code
+        and amount for each package
+
+    """
 
     result = [get_cheapest(packs) for packs in
               get_packed(jsn.copy())]

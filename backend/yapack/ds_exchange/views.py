@@ -39,7 +39,7 @@ def get_package(orders_num: int):
     '''Получаем упаковку из DS-модели.'''
     url_stat = settings.DS_URL['STATUS']
     url_recommend = settings.DS_URL['RECOMEND']
-    if requests.get(url_stat).json()['status'] != 'ok':
+    if requests.get(url_stat, timeout=3).json()['status'] != 'ok':
         return 'Нет ответа!'
     orders = list()
     for _ in range(orders_num):
@@ -48,7 +48,7 @@ def get_package(orders_num: int):
             request = get_data_for_ds(order)
             try:
                 response = requests.post(
-                    url_recommend, json=request, timeout=3).json()
+                    url_recommend, json=request, timeout=30).json()
             except requests.exceptions.ReadTimeout:
                 orders.append('Упаковка не получена!')
                 order.status = order.IN_WORK
