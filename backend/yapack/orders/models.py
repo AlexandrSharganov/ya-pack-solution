@@ -114,10 +114,12 @@ class OrderReceived(models.Model):
     NO_REC = 'no_rec'
     IN_WORK = 'in_work'
     READY = 'ready'
+    PROBLEM = 'problem'
     STATUS = [
         (NO_REC, 'no_rec'),
         (IN_WORK, 'in_work'),
         (READY, 'ready'),
+        (PROBLEM, 'problem'),
     ]
 
     order_key = models.CharField(
@@ -149,6 +151,13 @@ class OrderReceived(models.Model):
         max_length=max(len(status) for status, _ in STATUS),
         choices=STATUS,
         default=NO_REC,
+    )
+    problem_discription = models.CharField(
+        max_length=200,
+        null=True,
+        blank=True,
+        verbose_name='Описание проблемы',
+        default='no ploblem'
     )
 
     class Meta:
