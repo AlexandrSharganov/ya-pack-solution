@@ -117,6 +117,7 @@ npm start
 - Commitizen
 - Husky
 - В проекте используются шрифты YS Disp и YS Text.
+- Адаптирован под разрешения от 1280px до 1920px.
 #### DATA SCIENCE:
 - FastAPI
 #### BACKEND:
