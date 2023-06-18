@@ -1,177 +1,3 @@
-// import React, { useEffect, useState } from 'react';
-// import { useNavigate } from 'react-router-dom';
-// import styles from './AfterScanning.module.css';
-// import ScanImage from '../../images/scan.svg';
-// import ProductCard from '../ProductCard/ProductCard';
-// import BigButton from '../BigButton/BigButton';
-
-// function AfterScanning({
-//   order,
-//   scanProduct,
-//   scanRecommendedPackage,
-//   scanNotRecommendedPackage,
-// }) {
-//   const [matchingProducts, setMatchingProducts] = useState([]);
-//   const [matchingPackage, setMatchingPackage] = useState(new Set());
-//   const [notMatchingPackages, setNotMatchingPackages] = useState(new Set());
-//   const uniqueBarcodes = new Set();
-//   const navigate = useNavigate();
-
-//   useEffect(() => {
-//     if (order.skus) {
-//       if (scanProduct) {
-//         const filteredProducts = order.skus.filter(
-//           (item) => item.barcode === scanProduct
-//         );
-//         setMatchingProducts((prevMatchingProducts) => [
-//           ...prevMatchingProducts,
-//           ...filteredProducts,
-//         ]);
-//       }
-
-//       if (scanRecommendedPackage.packagetype) {
-//         setMatchingPackage((prevMatchingPackage) =>
-//           prevMatchingPackage.add(scanRecommendedPackage.packagetype)
-//         );
-//       }
-
-//       if (scanNotRecommendedPackage.packagetype) {
-//         setNotMatchingPackages((prevNotMatchingPackages) =>
-//           prevNotMatchingPackages.add(scanNotRecommendedPackage.packagetype)
-//         );
-//       }
-//     }
-//   }, [
-//     order.skus,
-//     scanProduct,
-//     scanRecommendedPackage,
-//     scanNotRecommendedPackage,
-//   ]);
-
-//   const handleButtonClick = () => {
-//     const isValid = true;
-//     if (isValid) {
-//       navigate('/finish');
-//     }
-//   };
-
-//   const removeProduct = (barcode) => {
-//     setMatchingProducts((prevMatchingProducts) =>
-//       prevMatchingProducts.filter((item) => item.barcode !== barcode)
-//     );
-//   };
-
-//   const removeRecommendedPackage = (packageItem) => {
-//     setMatchingPackage(
-//       (prevMatchingPackage) =>
-//         new Set([...prevMatchingPackage].filter((item) => item !== packageItem))
-//     );
-//   };
-
-//   const removeNotRecommendedPackage = (packageItem) => {
-//     setNotMatchingPackages(
-//       (prevNotMatchingPackages) =>
-//         new Set(
-//           [...prevNotMatchingPackages].filter((item) => item !== packageItem)
-//         )
-//     );
-//   };
-
-//   const renderScanInstructions = () => (
-//     <figure className={styles.figure}>
-//       <img src={ScanImage} alt="Сканер" />
-//       <figcaption>Сканируйте товары из ячейки</figcaption>
-//     </figure>
-//   );
-
-//   const renderProductCards = () => (
-//     <div className={styles.cardList}>
-//       {matchingProducts
-//         .filter((item) => {
-//           if (uniqueBarcodes.has(item.barcode)) {
-//             return false;
-//           }
-//           uniqueBarcodes.add(item.barcode);
-//           return true;
-//         })
-//         .map((item) => (
-//           <ProductCard
-//             key={item.barcode}
-//             item={item}
-//             removeProduct={removeProduct}
-//             isAfterScanning
-//           />
-//         ))}
-//     </div>
-//   );
-
-//   return (
-//     <section className={styles.section}>
-//       <h1 className={styles.title}>Посылка</h1>
-//       <div className={styles.text}>Рекомендованный вид упаковки</div>
-//       <div className={styles.packages}>
-//         {order.packages &&
-//           order.packages.map((item) => (
-//             <div key={item.barcode} className={styles.package}>
-//               {item.package}
-//             </div>
-//           ))}
-//       </div>
-//       {(matchingPackage.size !== 0 || notMatchingPackages.size !== 0) && (
-//         <>
-//           <div className={styles.text}>Выбранный вид упаковки</div>
-//           <div className={styles.packages}>
-//             {[...matchingPackage].map((item) => (
-//               <div
-//                 key={item}
-//                 className={`${styles.package} ${styles.packageRecommended}`}
-//               >
-//                 {item}
-//                 <button
-//                   type="button"
-//                   className={styles.notRecButton}
-//                   onClick={() => removeRecommendedPackage(item)}
-//                 >
-//                   ✕
-//                 </button>
-//               </div>
-//             ))}
-//             {[...notMatchingPackages].map((item) => (
-//               <div
-//                 key={item}
-//                 className={`${styles.package} ${styles.packageNotRecommended}`}
-//               >
-//                 {item}
-//                 <button
-//                   type="button"
-//                   className={styles.notRecButton}
-//                   onClick={() => removeNotRecommendedPackage(item)}
-//                 >
-//                   ✕
-//                 </button>
-//               </div>
-//             ))}
-//           </div>
-//         </>
-//       )}
-//       {!scanProduct && renderScanInstructions()}
-//       {scanProduct && renderProductCards()}
-//       {order.skus &&
-//         (matchingPackage.size !== 0 || notMatchingPackages.size !== 0) &&
-//         matchingProducts.length &&
-//         order.skus.length && (
-//           <BigButton
-//             isValid
-//             buttonText="Закрыть посылку"
-//             onClick={handleButtonClick}
-//           />
-//         )}
-//     </section>
-//   );
-// }
-
-// export default AfterScanning;
-
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './AfterScanning.module.css';
@@ -190,21 +16,19 @@ function AfterScanning({
   isLoading,
 }) {
   const [matchingProducts, setMatchingProducts] = useState([]);
-  const [matchingPackage, setMatchingPackage] = useState(new Set());
-  const [notMatchingPackages, setNotMatchingPackages] = useState(new Set());
+  const [matchingPackage, setMatchingPackage] = useState([]);
+  const [notMatchingPackages, setNotMatchingPackages] = useState([]);
   const uniqueBarcodes = new Set();
-  const [packagesSel, setPackagesSel] = useState([]);
   const navigate = useNavigate();
 
   const handleButtonClick = () => {
     const isValid = true;
 
     if (isValid) {
-      console.log(packagesSel);
-
+      const packagesSel = [...matchingPackage, ...notMatchingPackages];
       const packageSel = packagesSel.map((item) => ({
         package: item.packagetype,
-        amount: '1',
+        amount: String(item.count),
       }));
 
       const orderFinish = {
@@ -215,8 +39,6 @@ function AfterScanning({
         package_match: false,
         status: 'ready',
       };
-
-      console.log(orderFinish);
 
       patchOrder(order.id, orderFinish)
         .then(() => {
@@ -230,34 +52,29 @@ function AfterScanning({
   };
 
   const removeProduct = (barcode) => {
-    // if (scanProduct) {
-    //   const filteredProducts = matchingProducts.filter(
-    //     (item) => item.barcode !== barcode
-    //   );
-    //   setMatchingProducts((prevMatchingProducts) => [
-    //     ...prevMatchingProducts,
-    //     ...filteredProducts,
-    //   ]);
-    // }
-    setMatchingProducts((prevMatchingProduct) =>
-      prevMatchingProduct.filter((item) => item.barcode !== barcode)
+    setMatchingProducts((prevMatchingProducts) =>
+      prevMatchingProducts.filter((item) => item.barcode !== barcode)
     );
     setRemoveElement(barcode);
   };
 
   const removeRecommendedPackage = (packageItem) => {
-    setMatchingPackage(
-      (prevMatchingPackage) =>
-        new Set([...prevMatchingPackage].filter((item) => item !== packageItem))
+    setMatchingPackage((prevMatchingPackage) =>
+      prevMatchingPackage.map((item) =>
+        item.packagetype === packageItem.packagetype
+          ? { ...item, count: item.count - 1 }
+          : item
+      )
     );
   };
 
   const removeNotRecommendedPackage = (packageItem) => {
-    setNotMatchingPackages(
-      (prevNotMatchingPackages) =>
-        new Set(
-          [...prevNotMatchingPackages].filter((item) => item !== packageItem)
-        )
+    setNotMatchingPackages((prevNotMatchingPackages) =>
+      prevNotMatchingPackages.map((item) =>
+        item.packagetype === packageItem.packagetype
+          ? { ...item, count: item.count - 1 }
+          : item
+      )
     );
   };
 
@@ -291,27 +108,47 @@ function AfterScanning({
 
   useEffect(() => {
     if (scanRecommendedPackage.packagetype) {
-      setPackagesSel((PackageSel) => [...PackageSel, scanRecommendedPackage]);
-      setMatchingPackage(
-        (prevMatchingPackage) =>
-          new Set([...prevMatchingPackage, scanRecommendedPackage.packagetype])
+      const packageIndex = matchingPackage.findIndex(
+        (item) => item.packagetype === scanRecommendedPackage.packagetype
       );
+      if (packageIndex !== -1) {
+        setMatchingPackage((prevMatchingPackage) =>
+          prevMatchingPackage.map((item, index) =>
+            index === packageIndex ? { ...item, count: item.count + 1 } : item
+          )
+        );
+      } else {
+        setMatchingPackage((prevMatchingPackage) => [
+          ...prevMatchingPackage,
+          {
+            packagetype: scanRecommendedPackage.packagetype,
+            count: 1,
+          },
+        ]);
+      }
     }
   }, [scanRecommendedPackage]);
 
   useEffect(() => {
     if (scanNotRecommendedPackage.packagetype) {
-      setPackagesSel((PackageSel) => [
-        ...PackageSel,
-        scanNotRecommendedPackage,
-      ]);
-      setNotMatchingPackages(
-        (prevNotMatchingPackages) =>
-          new Set([
-            ...prevNotMatchingPackages,
-            scanNotRecommendedPackage.packagetype,
-          ])
+      const packageIndex = notMatchingPackages.findIndex(
+        (item) => item.packagetype === scanNotRecommendedPackage.packagetype
       );
+      if (packageIndex !== -1) {
+        setNotMatchingPackages((prevNotMatchingPackages) =>
+          prevNotMatchingPackages.map((item, index) =>
+            index === packageIndex ? { ...item, count: item.count + 1 } : item
+          )
+        );
+      } else {
+        setNotMatchingPackages((prevNotMatchingPackages) => [
+          ...prevNotMatchingPackages,
+          {
+            packagetype: scanNotRecommendedPackage.packagetype,
+            count: 1,
+          },
+        ]);
+      }
     }
   }, [scanNotRecommendedPackage]);
 
@@ -341,22 +178,22 @@ function AfterScanning({
         {order.packages &&
           order.packages.map((item) => (
             <div key={item.barcode} className={styles.package}>
-              {item.package}
+              {`${item.package} ${item.amount}`}
             </div>
           ))}
       </div>
-      {(matchingPackage.size !== 0 ||
-        notMatchingPackages.size !== 0 ||
+      {(matchingPackage.length !== 0 ||
+        notMatchingPackages.length !== 0 ||
         matchingProducts.length !== 0) && (
         <>
           <div className={styles.text}>Выбранный вид упаковки</div>
           <div className={styles.packages}>
-            {[...matchingPackage].map((item) => (
+            {matchingPackage.map((item) => (
               <div
-                key={item}
+                key={item.packagetype}
                 className={`${styles.package} ${styles.packageRecommended}`}
               >
-                {item}
+                {`${item.packagetype} ${item.count}`}
                 <button
                   type="button"
                   className={styles.notRecButton}
@@ -366,12 +203,12 @@ function AfterScanning({
                 </button>
               </div>
             ))}
-            {[...notMatchingPackages].map((item) => (
+            {notMatchingPackages.map((item) => (
               <div
-                key={item}
+                key={item.packagetype}
                 className={`${styles.package} ${styles.packageNotRecommended}`}
               >
-                {item}
+                {`${item.packagetype} ${item.count}`}
                 <button
                   type="button"
                   className={styles.notRecButton}
@@ -386,7 +223,7 @@ function AfterScanning({
       )}
       {!scanProduct && renderScanInstructions()}
       {scanProduct && renderProductCards()}
-      {(matchingPackage.size !== 0 || notMatchingPackages.size !== 0) &&
+      {(matchingPackage.length !== 0 || notMatchingPackages.length !== 0) &&
         order.skus.length === matchingProducts.length &&
         !removeElement && (
           <BigButton

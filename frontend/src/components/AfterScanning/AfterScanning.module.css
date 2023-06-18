@@ -37,6 +37,7 @@
 .packages {
   display: flex;
   gap: 12px;
+  flex-wrap: wrap;
 }
 
 .package {
@@ -52,6 +53,7 @@
   max-width: fit-content;
   border: 2px solid #000000;
   border-radius: 42px;
+  text-wrap: nowrap;
   margin: 0;
   cursor: default;
 }

@@ -19,14 +19,12 @@ function BeforeScanning({ order, scanProduct, removeElement }) {
       );
 
       setMatchingProducts(filteredProducts);
-      console.log(filteredProducts);
 
       if (removeElement) {
         const filteredRemoveProducts = order.skus.filter((item) =>
           removeElement.includes(item.barcode)
         );
         setMatchingProducts(filteredRemoveProducts);
-        console.log(filteredRemoveProducts);
         filteredRemoveProducts.push(...filteredProducts);
       }
     }
