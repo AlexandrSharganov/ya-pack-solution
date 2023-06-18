@@ -10,11 +10,9 @@
 
 ### 2 Клонировать репозиторий
 
-### 3 Переключиться на ветку backend
+### 3 В окне терминала переключиться на папку backend
 
-### 4 В окне терминала переключиться на папку backend
-
-### 5 Выполнить поочереди следующие комманды
+### 4 Выполнить поочереди следующие комманды
 ```
 python -m venv venv
 
@@ -22,27 +20,14 @@ source venv/Scripts/activate
 
 python -m pip install --upgrade pip
 
-pip install django==3.2
-
-pip install djangorestframework==3.12
-
-pip install drf_yasg
-
-pip install django-cors-headers
+pip install -r requirements.txt
 
 ```
-
-### 6 Перейти в папку yapack в которой есть файл manage.py и выполнить команду
+### 5 Перейти в папку yapack в которой есть файл manage.py и выполнить команду
 ```
 python manage.py runserver
 ```
-
-
-## Не забывайте находясь в папке backend выполнять команду:
-```
-source venv/Scripts/activate
-```
-## Чтобы в терминале рядом с ником юзера была надпись - (venv)
-
-
-### Коммит
+- тестовая база данных уже заполнена и прикреплена, все миграции выполнены
+### Данные админки
+- пользователь: admin
+- пароль: 123
