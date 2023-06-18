@@ -221,6 +221,7 @@ function AfterScanning({
       patchOrder(order.id, orderFinish)
         .then(() => {
           navigate('/finish');
+          window.location.reload();
         })
         .catch((err) => {
           console.log(err);
