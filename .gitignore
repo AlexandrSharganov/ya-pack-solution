@@ -1,4 +1,4 @@
 .vscode
 venv
 frontend
-__pycache__
+*__pycache__/
