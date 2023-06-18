@@ -60,8 +60,12 @@ function BeforeScanning({ order, scanProduct, removeElement }) {
     return null;
   };
 
+  const loaderColor = {
+    borderTop: '3px solid #3F68F9',
+  };
+
   if (!order.skus) {
-    return <Loader />;
+    return <Loader loaderColor={loaderColor} />;
   }
 
   return (
