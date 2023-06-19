@@ -120,6 +120,10 @@ npm start
 - Адаптирован под разрешения от 1280px до 1920px.
 #### DATA SCIENCE:
 - FastAPI
+- Pandas
+- Numpy
+- Catboost
+- Sklearn
 #### BACKEND:
 - django
 - djangorestframework
