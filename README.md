@@ -36,10 +36,10 @@ pip install -r requirements.txt
 ```
 python manage.py runserver
 ```
-### 3 запуск data science составляющей:
+### 3 Запуск data science составляющей:
 Открыть новое окно терминала и в корне репозитория активировать виртуальное окружение командой:
 ```
-python -m venv venv
+source venv/Scripts/activate  #для windows
 ```
 Далее выполнить команду
 ```
