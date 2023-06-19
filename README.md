@@ -107,6 +107,11 @@ npm start
 #### BACKEND:
 - [Александр](https://github.com/AlexandrSharganov)
 - [Владислав](https://github.com/Vladislav-76)
+#### DESIGN:
+- [Валерия]()
+- [Петр](https://github.com/apmfiit)
+#### PRODUCT MANAGER:
+- [Андрей]()
 
 ## Стэк технологий
 
