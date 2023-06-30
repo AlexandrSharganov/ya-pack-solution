@@ -5,7 +5,7 @@ from orders.models import OrderReceived, OrderReceivedSku, Sku
 
 
 class Command(BaseCommand):
-    '''Наполнение модели OrderReceived из csv.'''
+    """Наполнение модели OrderReceived из csv."""
     help = (
         'Наполняет модель. '
         'Файлы должны находиться в каталоге запуска.'

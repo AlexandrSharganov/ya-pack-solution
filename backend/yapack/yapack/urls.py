@@ -12,8 +12,7 @@ schema_view = get_schema_view(
    openapi.Info(
       title="Cats API",
       default_version='v1',
-      description="Документация для приложения cats проекта Kittygram",
-      # terms_of_service="URL страницы с пользовательским соглашением",
+      description="Документация для приложения ya-pack",
       contact=openapi.Contact(email="admin@kittygram.ru"),
       license=openapi.License(name="BSD License"),
    ),

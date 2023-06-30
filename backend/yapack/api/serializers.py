@@ -14,7 +14,7 @@ from users.models import Packer
 
 
 class CargotypeSerializer(serializers.ModelSerializer):
-    '''Сериализатор карготипов.'''
+    """Сериализатор карготипов."""
     class Meta:
         model = Cargotype
         fields = (
@@ -23,7 +23,7 @@ class CargotypeSerializer(serializers.ModelSerializer):
 
 
 class SkuSerializer(serializers.ModelSerializer):
-    '''Сериализатор SKU.'''
+    """Сериализатор SKU."""
     cargotypes = CargotypeSerializer(many=True)
 
     class Meta:
@@ -39,7 +39,7 @@ class SkuSerializer(serializers.ModelSerializer):
 
 
 class OrderReceivedSkuSerializer(serializers.ModelSerializer):
-    '''Сериализатор полученных заказов c SKU.'''
+    """Сериализатор полученных заказов c SKU."""
     sku_id = serializers.CharField(source='sku.sku_id')
     dimension_a = serializers.FloatField(source='sku.dimension_a')
     dimension_b = serializers.FloatField(source='sku.dimension_b')
@@ -63,7 +63,7 @@ class OrderReceivedSkuSerializer(serializers.ModelSerializer):
 
 
 class FrontOrderReceivedSkuSerializer(OrderReceivedSkuSerializer):
-    '''Сериализатор полученных заказов c SKU для фронта.'''
+    """Сериализатор полученных заказов c SKU для фронта."""
     class Meta:
         model = OrderReceivedSku
         fields = (
@@ -75,14 +75,14 @@ class FrontOrderReceivedSkuSerializer(OrderReceivedSkuSerializer):
 
 
 class PackageSerializer(serializers.ModelSerializer):
-    '''Сериализатор упаковки.'''
+    """Сериализатор упаковки."""
     class Meta:
         model = Package
         fields = ('barcode', 'packagetype')
 
 
 class PackageRecommendedSerializer(serializers.ModelSerializer):
-    '''Сериализатор рекомендованной упаковки.'''
+    """Сериализатор рекомендованной упаковки."""
     package = serializers.CharField(source='package.packagetype')
     barcode = serializers.CharField(source='package.barcode')
 
@@ -96,7 +96,7 @@ class PackageRecommendedSerializer(serializers.ModelSerializer):
 
 
 class PackageSelectedSerializer(PackageRecommendedSerializer):
-    '''Сериализатор выбранной упаковки.'''
+    """Сериализатор выбранной упаковки."""
     class Meta:
         model = PackageSelected
         fields = (
@@ -106,14 +106,14 @@ class PackageSelectedSerializer(PackageRecommendedSerializer):
 
 
 class PackerSerializer(serializers.ModelSerializer):
-    '''Сериализатор упаковщика.'''
+    """Сериализатор упаковщика."""
     class Meta:
         model = Packer
         fields = ('packer_num',)
 
 
 class OrderReceivedSerializer(serializers.ModelSerializer):
-    '''Сериализатор заказов.'''
+    """Сериализатор заказов."""
     skus = OrderReceivedSkuSerializer(
         many=True,
         source='orderreceivedsku_set',
@@ -158,7 +158,7 @@ class OrderReceivedSerializer(serializers.ModelSerializer):
 
 
 class FrontOrderReceivedSerializer(serializers.ModelSerializer):
-    '''Сериализатор полученных заказов для фронта.'''
+    """Сериализатор полученных заказов для фронта."""
     skus = FrontOrderReceivedSkuSerializer(
         many=True,
         source='orderreceivedsku_set',

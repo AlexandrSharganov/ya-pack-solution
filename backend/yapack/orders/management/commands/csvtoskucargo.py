@@ -5,7 +5,7 @@ from orders.models import Cargotype, Sku
 
 
 class Command(BaseCommand):
-    '''Заполнение связей sku и карготипов из csv.'''
+    """Заполнение связей sku и карготипов из csv."""
     help = (
         'Наполняет модель. '
         'Файлы должны находиться в каталоге запуска.'

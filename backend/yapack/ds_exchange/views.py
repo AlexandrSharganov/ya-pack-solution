@@ -10,7 +10,7 @@ from orders.models import (
 
 
 def get_data_for_ds(order: OrderReceived) -> dict:
-    '''Формируем данные для json в правильную структуру.'''
+    """Формируем данные для json в правильную структуру."""
     data = OrderReceivedDsSerializer(order).data
     for sku in data['skus']:
         sku['cargotypes'] = [
@@ -19,7 +19,7 @@ def get_data_for_ds(order: OrderReceived) -> dict:
 
 
 def filling_models(data):
-    '''Заполняем БД исходя из полученных данных.'''
+    """Заполняем БД исходя из полученных данных."""
     order = OrderReceived.objects.get_or_create(
                             order_key=data['order_key'])[0]
     for package_recomend in data['package']:
@@ -36,7 +36,7 @@ def filling_models(data):
 
 
 def get_package(orders_num: int):
-    '''Получаем упаковку из DS-модели.'''
+    """Получаем упаковку из DS-модели."""
     url_stat = settings.DS_URL['STATUS']
     url_recommend = settings.DS_URL['RECOMEND']
     if requests.get(url_stat, timeout=3).json()['status'] != 'ok':
@@ -62,7 +62,7 @@ def get_package(orders_num: int):
 
 
 def get_orders_num_view(request):
-    '''Получаем количество заказов для обработки.'''
+    """Получаем количество заказов для обработки."""
     form = OrdersNumForm
     if request.method == 'POST':
         form = form(request.POST)
