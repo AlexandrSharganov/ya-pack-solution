@@ -31,3 +31,5 @@ python manage.py runserver
 ### Данные админки
 - пользователь: admin
 - пароль: 123
+
+
