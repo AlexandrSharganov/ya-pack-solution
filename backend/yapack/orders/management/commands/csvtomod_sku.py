@@ -48,4 +48,3 @@ class Command(BaseCommand):
                 if not Sku.objects.filter(
                         sku_id=objectvalues['sku_id']).exists():
                     Sku.objects.create(**objectvalues)
-                    print(Sku.objects.get(**objectvalues))

@@ -17,11 +17,9 @@ class Command(BaseCommand):
             for row in rows:
                 order = OrderReceived.objects.get_or_create(
                     order_key=row['order_key'])[0]
-                print(type(order))
                 sku = Sku.objects.get(sku_id=row['sku_id'])
                 OrderReceivedSku.objects.get_or_create(
                     order=order,
                     sku=sku,
                     amount=row['amount']
                 )
-                print(OrderReceivedSku.objects.filter(order=order, sku=sku))

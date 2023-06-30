@@ -1,9 +1,15 @@
 import os
+from pathlib import Path
+from dotenv import load_dotenv
+
+
+PATH_TO_DOTENV = Path.cwd().parent.parent.joinpath("w_infra").joinpath(".env")
+
+load_dotenv(dotenv_path=PATH_TO_DOTENV)
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
-SECRET_KEY = 'f36_ne2qlb=$_4u*7-(f9i*$_uz%#5vf2@#ieyw#ag!4my_%8%'
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 DEBUG = True
 

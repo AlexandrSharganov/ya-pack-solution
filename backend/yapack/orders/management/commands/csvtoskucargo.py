@@ -19,4 +19,3 @@ class Command(BaseCommand):
                 cargotype = Cargotype.objects.get_or_create(
                     cargotype_id=row['cargotype_id'])[0]
                 sku.cargotypes.add(cargotype)
-                print(sku.cargotypes.all())

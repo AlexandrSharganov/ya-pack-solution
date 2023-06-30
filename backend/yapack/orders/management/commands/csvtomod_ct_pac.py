@@ -66,4 +66,3 @@ class Command(BaseCommand):
                         if barcode:
                             object_values['barcode'] = barcode
                         models[model].objects.get_or_create(**object_values)
-                    print(models[model].objects.get(**object_values))
