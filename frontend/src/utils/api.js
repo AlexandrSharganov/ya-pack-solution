@@ -1,4 +1,6 @@
-export const BASE_URL = 'http://127.0.0.1:8000/api/order/';
+import Cookies from 'js-cookie';
+
+export const BASE_URL = 'http://127.0.0.1/api/order/';
 
 function requestResult(res) {
   if (res.ok) {
@@ -8,6 +10,12 @@ function requestResult(res) {
   const error = new Error(`Request failed with status code ${res.status}`);
   return Promise.reject(error);
 }
+
+// function getCookie(string) {
+//    return string.split('csrftoken=')[1]
+// }
+
+export const csrf = Cookies.get('csrftoken');
 
 export const getOrder = async () => {
   const res = await fetch(`${BASE_URL}front/`, {
@@ -32,6 +40,7 @@ export const patchOrder = async (id, orderFinish) => {
     method: 'PATCH',
     headers: {
       'Content-Type': 'application/json',
+      'X-CSRFToken': csrf,
     },
     body: JSON.stringify(orderFinish),
   });
@@ -43,6 +52,7 @@ export const patchProblem = async (id, orderProblem) => {
     method: 'PATCH',
     headers: {
       'Content-Type': 'application/json',
+      'X-CSRFToken': csrf,
     },
     body: JSON.stringify(orderProblem),
   });

@@ -10,10 +10,10 @@ from drf_yasg import openapi
 
 schema_view = get_schema_view(
    openapi.Info(
-      title="Cats API",
+      title="ya-pack API",
       default_version='v1',
       description="Документация для приложения ya-pack",
-      contact=openapi.Contact(email="admin@kittygram.ru"),
+      contact=openapi.Contact(email="admin@admin.ru"),
       license=openapi.License(name="BSD License"),
    ),
    public=True,

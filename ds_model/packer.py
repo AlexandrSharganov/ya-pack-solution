@@ -156,7 +156,7 @@ def get_packed(jsn: dict) -> tuple:
     """
 
     final = []
-    data = json.load(open(f'{os.getcwd()}/ds_model/models/'
+    data = json.load(open(f'{os.getcwd()}/models/'
                           f'borders_data.json', 'r'))['data']
 
     items = get_items_list(jsn)

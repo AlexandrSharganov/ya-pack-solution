@@ -12,13 +12,13 @@ def index():
     return {"team_7": "ds_model"}
 
 
-@app.get("/health")
+@app.get("/health/")
 def health():
     """Health check"""
     return {"status": "ok"}
 
 
-@app.post("/recommend")
+@app.post("/recommend/")
 def recommend_pack(order: Order) -> dict:
     """Process the income order json
     and returns the recommended packages.

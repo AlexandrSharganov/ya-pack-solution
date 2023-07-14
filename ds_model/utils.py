@@ -109,7 +109,7 @@ def get_cheapest(s: set) -> str:
         return 'NONPACK'
 
     with open(
-            f'{os.getcwd()}/ds_model/models/prices_dict.pkl',
+            f'{os.getcwd()}/models/prices_dict.pkl',
             'rb') as handler:
         prices = pickle.load(handler)
 
