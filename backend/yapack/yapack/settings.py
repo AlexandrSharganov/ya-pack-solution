@@ -1,19 +1,25 @@
 import os
+import mimetypes
+from pathlib import Path
+from dotenv import load_dotenv
+
+
+PATH_TO_DOTENV = Path.cwd().parent.parent.joinpath("w_infra").joinpath(".env")
+
+load_dotenv(dotenv_path=PATH_TO_DOTENV)
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
-SECRET_KEY = 'f36_ne2qlb=$_4u*7-(f9i*$_uz%#5vf2@#ieyw#ag!4my_%8%'
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 DEBUG = True
 
 ALLOWED_HOSTS = [
     '127.0.0.1',
-    '127.0.0.1:8080',
     'localhost',
+    'backend',
+    'ds_model',
     '0.0.0.0',
-    '0.0.0.0:8080',
-    'web',
 ]
 
 INSTALLED_APPS = [
@@ -26,9 +32,9 @@ INSTALLED_APPS = [
     'corsheaders',
     'drf_yasg',
     'rest_framework',
-    'users.apps.UsersConfig',
     'orders.apps.OrdersConfig',
     'api.apps.ApiConfig',
+    'users.apps.UsersConfig',
     'ds_exchange.apps.DsExchangeConfig',
 
 ]
@@ -36,6 +42,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -48,8 +55,8 @@ CORS_ORIGIN_ALLOW_ALL = True
 
 CORS_ORIGIN_WHITELIST = (
     'http://127.0.0.1',
-    'http://localhost:8000',
-    'http://localhost:3000',
+    'http://0.0.0.0',
+    'http://localhost',
 )
 
 ROOT_URLCONF = 'yapack.urls'
@@ -111,7 +118,11 @@ STATIC_URL = '/static/'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
+MEDIA_URL = '/media/'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 DS_URL = {
-    'STATUS': 'http://127.0.0.1:8100/health',
-    'RECOMEND': 'http://127.0.0.1:8100/recommend',
+    'STATUS': 'http://nginx/ds_model/health/',
+    'RECOMEND': 'http://nginx/ds_model/recommend/',
 }

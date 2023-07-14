@@ -6,7 +6,7 @@ from users.models import Packer
 
 
 class Cargotype(models.Model):
-    '''Модель карготипа.'''
+    """Модель карготипа."""
 
     cargotype_id = models.IntegerField(
         verbose_name='id карготипа',
@@ -30,7 +30,7 @@ class Cargotype(models.Model):
 
 
 class Sku(models.Model):
-    '''Модель товарной позиции.'''
+    """Модель товарной позиции."""
 
     sku_id = models.CharField(
         verbose_name='id товара',
@@ -101,7 +101,7 @@ class Sku(models.Model):
 
 
 class OrderReceived(models.Model):
-    '''Модель заказа полученного из системы.'''
+    """Модель заказа полученного из системы."""
 
     NO_REC = 'no_rec'
     IN_WORK = 'in_work'
@@ -162,7 +162,7 @@ class OrderReceived(models.Model):
 
 
 class Package(models.Model):
-    '''Модель упаковки.'''
+    """Модель упаковки."""
 
     packagetype = models.CharField(
         max_length=50,
@@ -228,7 +228,7 @@ class Package(models.Model):
 
 
 class PackageRecommended(models.Model):
-    '''Рекомендованная моделью упаковка.'''
+    """Рекомендованная моделью упаковка."""
 
     order = models.ForeignKey(
         OrderReceived,
@@ -259,7 +259,7 @@ class PackageRecommended(models.Model):
 
 
 class OrderReceivedSku(models.Model):
-    '''Модель перечня SKU в заказе.'''
+    """Модель перечня SKU в заказе."""
 
     order = models.ForeignKey(
         OrderReceived,
@@ -286,7 +286,7 @@ class OrderReceivedSku(models.Model):
 
 
 class PackageSelected(models.Model):
-    '''Выбранная упаковка.'''
+    """Выбранная упаковка."""
     order = models.ForeignKey(
         OrderReceived,
         related_name='packages_sel',

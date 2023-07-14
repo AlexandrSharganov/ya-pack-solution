@@ -2,7 +2,7 @@ from django.db import models
 
 
 class Packer(models.Model):
-    '''Модель пользователя - упаковщика.'''
+    """Модель пользователя - упаковщика."""
     first_name = models.CharField(
         max_length=150,
         verbose_name='Имя',

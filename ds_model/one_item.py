@@ -44,7 +44,7 @@ def cook_features_one(query: dict, dataframe: bool = True) -> pd.DataFrame:
 
     """
     with open(
-            f'{os.getcwd()}/ds_model/models/cargotypes_dict.pkl',
+            f'{os.getcwd()}/models/cargotypes_dict.pkl',
             'rb') as handler:
         cargotype_dict = pickle.load(handler)
 
@@ -103,7 +103,7 @@ def get_knn_top(sample: np.array,
 
     """
     with open(
-            f'{os.getcwd()}/ds_model/models/knn_scaler_dict.pkl',
+            f'{os.getcwd()}/models/knn_scaler_dict.pkl',
             'rb') as handler:
         knn_clf, std_scaler, pack_dict_inv = pickle.load(handler)
 
@@ -159,7 +159,7 @@ def predict_one_item(query: dict,
 
     if not pack_need:
         with open(
-                f'{os.getcwd()}/ds_model/models/catboost_pack_nonpack.pkl',
+                f'{os.getcwd()}/models/catboost_pack_nonpack.pkl',
                 'rb') as handler:
             cb = pickle.load(handler)
         pack_need_cb = cb.predict(sample[cb_features])

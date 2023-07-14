@@ -3,7 +3,7 @@ from .models import Packer
 
 
 class PackerForm(forms.Form):
-    '''Форма регистрации упаковщика'''
+    """Форма регистрации упаковщика."""
     packer_num = forms.CharField(
         max_length=15,
         label='Номер упаковщика',

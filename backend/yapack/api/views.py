@@ -21,7 +21,7 @@ from .serializers import (
 
 
 class PackageViewSet(viewsets.ReadOnlyModelViewSet):
-    '''Вьюсет упаковки.'''
+    """Вьюсет упаковки."""
     queryset = Package.objects.all()
     serializer_class = PackageSerializer
 
@@ -32,7 +32,7 @@ class OrderViewSet(
     RetrieveModelMixin,
     ListModelMixin
 ):
-    '''Вьюсет заказов.'''
+    """Вьюсет заказов."""
     queryset = OrderReceived.objects.all()
     serializer_class = FrontOrderReceivedSerializer
 
@@ -43,13 +43,13 @@ class OrderViewSet(
 
 
 class SkuViewSet(viewsets.ReadOnlyModelViewSet):
-    '''Вьюсет SKU.'''
+    """Вьюсет SKU."""
     queryset = Sku.objects.all()
     serializer_class = SkuSerializer
 
 
 class SkuAmountViewSet(viewsets.ReadOnlyModelViewSet):
-    '''Вьюсет заказа.'''
+    """Вьюсет заказа."""
     queryset = OrderReceivedSku.objects.all()
     serializer_class = OrderReceivedSkuSerializer
 
@@ -57,7 +57,6 @@ class SkuAmountViewSet(viewsets.ReadOnlyModelViewSet):
 @api_view(['GET'])
 def ds_order_view(request):
     order = get_list_or_404(OrderReceived, status='no_rec')[0]
-    # order = OrderReceived.objects.filter(order_is_packed=False).first()
     serializer = OrderReceivedSerializer(order)
     return Response(serializer.data)
 

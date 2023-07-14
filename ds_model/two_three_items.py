@@ -36,7 +36,7 @@ def ml_two_three(query: dict, n_goods: int, top_k=3) -> list:
     features = cook_features(query)
     file = "two" if n_goods == 2 else "three"
     with open(
-            f'{os.getcwd()}/ds_model/models/{file}_goods_models.pkl',
+            f'{os.getcwd()}/models/{file}_goods_models.pkl',
             'rb') as handler:
         tools = pickle.load(handler)
 
