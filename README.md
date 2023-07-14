@@ -9,6 +9,10 @@
 
 
 ## Установка и запуск в Docker:
+0. Добавьте в папку w_infra файл .env и поместите в него SECRET_KEY от вашего django, например:
+```
+SECRET_KEY='Your$ecrEtKey'
+```
 1. Перейдите в папку w_infra и выполните команды:
 ```
 docker-compose up -d --build
